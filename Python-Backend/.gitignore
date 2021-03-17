@@ -1,0 +1,8 @@
+# .pkl Files
+*.pkl
+
+# Data Base File
+*.db
+
+# Jupyter Checkpoints
+.ipynb_checkpoints/

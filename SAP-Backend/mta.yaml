@@ -1,0 +1,38 @@
+ID: SAP-Backend
+_schema-version: "2.1"
+version: 0.0.1
+modules:
+  - name: SAP-Backend-db
+    type: hdb
+    path: db
+    parameters:
+      memory: 256M
+      disk-quota: 512M
+    requires:
+      - name: SAP-Backend-db-hdi-container
+  - name: SAP-Backend-srv
+    type: nodejs
+    path: srv
+    parameters:
+      memory: 512M
+      disk-quota: 512M
+    provides:
+      - name: srv_api
+        properties:
+          url: ${default-url}
+    requires:
+      - name: SAP-Backend-db-hdi-container
+      - name: SAP-Backend-uaa
+resources:
+  - name: SAP-Backend-db-hdi-container
+    type: com.sap.xs.hdi-container
+    properties:
+      hdi-container-name: ${service-name}
+  - name: SAP-Backend-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: default
+      service: xsuaa
+      config:
+        xsappname: SAP-Backend
+        tenant-mode: dedicated

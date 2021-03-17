@@ -1,0 +1,18 @@
+
+  <mat-toolbar>
+    <a id="mainLogo" routerLink="/home" style="padding: 0px 5px 0px 5px" (click)="activeLink($event)">
+      <img src="assets/main-logo.svg" style="margin:10px 5px 0px -5px;height:45px;">
+    </a>
+    <a routerLink="/home" (click)="activeLink($event)" class="active">Home</a>
+    <a routerLink="/data-visualization" (click)="activeLink($event)">Data Visualization</a>
+    <a routerLink="/sap" (click)="activeLink($event)">SAP</a>
+    <a routerLink="/python" (click)="activeLink($event)">Python</a>
+    <a routerLink="/text-analysis" (click)="activeLink($event)">Text Analysis</a>
+    <span class="example-spacer" (click)="activeLink($event)"></span>
+    <!--<a id="gitLogo" href="https://github.com/pukanszkypeter/angular-tour-of-heroes.git">
+      <img id="git" src="assets/github-icon-white.jpg">
+    </a>-->
+    <!--<a href="https://github.com/pukanszkypeter/angular-tour-of-heroes.git" style="padding: 6px 5px 6px 5px">GitHub</a>-->
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+

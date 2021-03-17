@@ -1,0 +1,44 @@
+mat-toolbar {
+  background-color: #1E90FF;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px 6px 10px;
+  font-size: 17px;
+  margin-right: 10px;
+}
+
+a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: rgb(255,255,255,0.15);
+  border-radius: 4px;
+}
+
+.active {
+  background-color: rgb(255,255,255,0.15);
+  border-radius: 4px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+a#mainLogo:hover {
+  background-color: transparent;
+}
+
+/*a#gitLogo {
+  padding: 0px;
+  background-color: transparent;
+}
+
+img#git {
+  width: 37px;
+  margin-top: 8px;
+}*/

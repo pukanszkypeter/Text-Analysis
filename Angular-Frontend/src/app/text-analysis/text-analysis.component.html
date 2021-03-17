@@ -1,0 +1,113 @@
+<mat-list>
+  <mat-list-item>
+    <div class="navbar">
+      <h1>Full Category Prediction</h1>
+    </div>
+  </mat-list-item>
+  <div class="container">
+    <mat-card>
+      <h3>Leave a comment bellow to see your podcast category prediction</h3>
+      <!-- INPUT -->
+      <form>
+        <mat-form-field appearance="outline">
+          <mat-label>Comment</mat-label>
+          <input matInput #message maxlength="256" [formControl]="fullFormControl">
+          <mat-error *ngIf="fullFormControl.hasError('required')">
+            Comment is <strong>required</strong>
+          </mat-error>
+          <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+        </mat-form-field>
+      </form>
+      <!-- BUTTON -->
+      <button mat-raised-button id="fullcatpredbtn" (click)="fullCatPred(message)">Predict</button>
+      <!-- OUTPUT -->
+      <div id="spacer">
+        <mat-chip-list>
+          <mat-chip *ngIf="fullOutput"
+                    [ngClass]="{ 'chip-error': fullOutput === 'error' }">{{fullOutput | uppercase}}</mat-chip>
+        </mat-chip-list>
+        <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="spinning"></mat-spinner>
+      </div>
+      <div id="infoPanel">
+        <mat-icon id="fullIcon" svgIcon="info" (click)="fullInfoPanel()"></mat-icon>
+      </div>
+      <!-- CATEGORIES -->
+      <div id="overlay">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Possible categories
+              </mat-panel-title>
+              <mat-panel-description>
+                These categories could be predicted.
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ul id="categories">
+              <li *ngFor="let category of categories">{{category}}</li>
+            </ul>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-card>
+  </div>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <div class="navbar">
+      <h1>Partial Category Prediction</h1>
+    </div>
+  </mat-list-item>
+  <div class="container">
+    <mat-card id="partialCard">
+      <h3>1. Choose some category and train your model</h3>
+      <ul id="partialCategories">
+        <li *ngFor="let category of categories" id="partialCategory"><mat-checkbox>{{category}}</mat-checkbox></li>
+      </ul>
+      <div class="errorMessagePanel" *ngIf="errorA">
+        <p class="errorMessage">Error! You need to choose min. 2 category!</p>
+      </div>
+      <div class="errorMessagePanel" *ngIf="errorB">
+        <p class="errorMessage">Error! You can only choose max. 5 category!</p>
+      </div>
+      <div class="errorMessagePanel" *ngIf="successA" style="background-color: #00FF99">
+        <p class="errorMessage">{{trainOutput}}</p>
+      </div>
+      <div class="errorMessagePanel" *ngIf="training" style="background-color: transparent">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+      <button mat-raised-button id="trainbtn" (click)="trainModel()" [disabled]="training">Train Model</button>
+      <h3>2. And now leave a comment to test your model</h3>
+      <form>
+        <mat-form-field appearance="outline">
+          <mat-label>Comment</mat-label>
+          <input matInput #messageB maxlength="256" [formControl]="partialFormControl">
+          <mat-error *ngIf="partialFormControl.hasError('required')">
+            Comment is <strong>required</strong>
+          </mat-error>
+          <mat-hint align="end">{{messageB.value.length}} / 256</mat-hint>
+        </mat-form-field>
+      </form>
+      <button mat-raised-button id="partialcatpredbtn" (click)="partialCatPred(messageB)" [disabled]="modelTrained">Predict</button>
+      <div id="partialspacer">
+        <mat-chip-list>
+          <mat-chip *ngIf="partialOutput"
+                    [ngClass]="{ 'chip-error': partialOutput === 'error' }">{{partialOutput | uppercase}}</mat-chip>
+        </mat-chip-list>
+        <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="partialspinning"></mat-spinner>
+      </div>
+      <div id="partialinfoPanel">
+        <mat-icon id="partialIcon" svgIcon="info" (click)="partialInfoPanel()"></mat-icon>
+      </div>
+    </mat-card>
+  </div>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <div class="navbar">
+      <h1>Sentiment Analysis</h1>
+    </div>
+  </mat-list-item>
+  <div class="container">
+    <mat-card><p>ASD</p></mat-card>
+  </div>
+</mat-list>
+
