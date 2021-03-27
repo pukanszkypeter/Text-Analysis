@@ -2,13 +2,16 @@
 from flask import Flask, jsonify, request
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
-# Text Analysis
+# Database
 import sqlite3
+# Models
 import pickle
+# Text Analysis
 import pandas as pd
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import make_pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
+
 
 # http://localhost:5000
 HOST = '0.0.0.0'
@@ -41,7 +44,7 @@ def full_cat_pred():
     # Output
     return jsonify({'output': output})
 
-# POST: Partial Category Prediction Train
+# POST: Partial Category Prediction - Train
 @app.route("/api/python/partial-category-predict/train", methods=['POST'])
 def partial_cat_pred_train():
     # Input for Train
@@ -67,7 +70,7 @@ def partial_cat_pred_train():
     pickle.dump(model, open('partialcatpred.pkl','wb'))
     return jsonify({'output': "Model Trained"})
 
-# POST: Partial Category Prediction
+# POST: Partial Category - Prediction
 @app.route("/api/python/partial-category-predict/predict", methods=['POST'])
 def partial_cat_pred_pred():
     # Input
@@ -78,6 +81,28 @@ def partial_cat_pred_pred():
     output = predict_category(parameters['input'], partialcatpred)[0]
     # Output
     return jsonify({'output': output})
+
+
+# POST: Sentiment Analysis
+@app.route("/api/python/sentiment-analysis", methods=['POST'])
+def sentiment_analysis():
+    
+    # Input
+    parameters = request.get_json()
+    new_comment = parameters['input']
+    tfidf = pickle.load(open('tfidf.pkl', 'rb'))
+    new_comment = tfidf.transform([new_comment])
+
+    # Analyze
+    textclassifier = pickle.load(open('textclassifier.pkl', 'rb'))
+    output = textclassifier.predict(new_comment)[0]
+
+    #Output
+    if (output == 1):
+        return jsonify({'output': "Positive"})
+    else:
+        return jsonify({'output': "Negative"})
+
 
 # GET: Podcast Categories
 @app.route("/api/python/categories")
