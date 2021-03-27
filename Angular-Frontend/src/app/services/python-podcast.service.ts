@@ -8,20 +8,30 @@ import {Observable} from 'rxjs';
 export class PythonPodcastService {
 
   constructor(private http: HttpClient) { }
+
   // Get Podcast Categories
   getCategories(): Observable<any> {
     return this.http.get<any>('http://localhost:4200/api/python/categories');
   }
+
   // Full Category Prediction
   fullCategoryPredict(input: string): Observable<any> {
     return this.http.post<any>('http://localhost:4200/api/python/full-category-predict', JSON.parse(input));
   }
-  // Partial Cat. Pred. Model Train
-  partialTrain(categories: string): Observable<any> {
+
+  // Partial Category Prediction - Train
+  trainModel(categories: string): Observable<any> {
     return this.http.post<any>('http://localhost:4200/api/python/partial-category-predict/train', JSON.parse(categories));
   }
-  // Partial Category Prediction
+
+  // Partial Category Prediction - Predict
   partialCategoryPredict(input: string): Observable<any> {
     return this.http.post<any>('http://localhost:4200/api/python/partial-category-predict/predict', JSON.parse(input));
   }
+
+  // Sentiment Analysis
+  sentimentAnalysis(input: string): Observable<any> {
+    return this.http.post<any>('http://localhost:4200/api/python/sentiment-analysis', JSON.parse(input));
+  }
+
 }

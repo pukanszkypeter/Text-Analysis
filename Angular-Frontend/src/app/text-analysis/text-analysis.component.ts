@@ -8,30 +8,45 @@ import {FormControl, Validators} from '@angular/forms';
   templateUrl: './text-analysis.component.html',
   styleUrls: ['./text-analysis.component.css']
 })
+
 export class TextAnalysisComponent implements OnInit {
 
-  joker: any;
+  joker: any; // -> DTO
   categories: string[];
+
+  // FULL CATEGORY PREDICTION - DATA
   fullOutput: string;
-  spinning: boolean;
+  fullSpinner: boolean;
   fullFormControl = new FormControl('', [
     Validators.required
   ]);
-  training = false;
-  errorA = false;
-  errorB = false;
-  successA = false;
+
+  // PARTIAL CATEGORY PREDICTION - DATA
+  partialA = false;
+  partialB = false;
+  partialC = false;
+  partialD = false;
   trainOutput: string;
+  modelTrained = true;
+  partialOutput: string;
+  partialSpinner: boolean;
   partialFormControl = new FormControl('', [
     Validators.required
   ]);
-  partialOutput: string;
-  partialspinning: boolean;
-  modelTrained = true;
+
+  // SENTIMENT ANALYSIS - DATA
+  sentimentOutput: string;
+  sentimentSpinner: boolean;
+  sentimentFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+
   constructor(private pythonPodcastService: PythonPodcastService) {
   }
 
   ngOnInit(): void {
+    // Get podcast categories
     this.pythonPodcastService.getCategories().subscribe(res => {
       this.joker = res;
       this.categories = this.joker.categories;
@@ -40,9 +55,10 @@ export class TextAnalysisComponent implements OnInit {
     });
   }
 
-  fullCatPred(input: HTMLInputElement): void {
-    if (!this.partialFormControl.touched) {
-      this.partialFormControl.markAllAsTouched();
+  // FULL CATEGORY PREDICTION - LOGIC
+  fullCategoryPredict(input: HTMLInputElement): void {
+    if (!this.fullFormControl.touched) {
+      this.fullFormControl.markAllAsTouched();
     }
     if (this.fullOutput !== '' && this.fullFormControl.valid) {
       this.fullOutput = '';
@@ -51,32 +67,36 @@ export class TextAnalysisComponent implements OnInit {
       return;
     }
     if (input.value !== '') {
-      this.spinning = true;
+      this.fullSpinner = true;
       this.pythonPodcastService.fullCategoryPredict(`{ "input": "${input.value}" }`).subscribe(res => {
         this.joker = res;
         this.fullOutput = this.joker.output;
-        this.spinning = false;
+        this.fullSpinner = false;
       }, err => {
-        this.spinning = false;
+        this.fullSpinner = false;
         this.fullOutput = 'error';
       });
     }
   }
+
+  // FULL CATEGORY PREDICTION - INFO
   fullInfoPanel(): void {
     // TODO
-    console.log('asd');
+    console.log('Coming soon...');
   }
+
+  // PARTIAL CATEGORY PREDICTION - TRAIN
   trainModel(): void {
     this.modelTrained = true;
-    if (this.successA) { this.successA = false; }
+    if (this.partialA) { this.partialA = false; }
     const length = document.getElementsByClassName('mat-checkbox-checked').length;
     if (length < 2 ) {
-      if (this.errorB) { this.errorB = false; }
-      this.errorA = true;
+      if (this.partialB) { this.partialB = false; }
+      this.partialA = true;
     } else if (2 <= length  && length <= 5) {
-      this.training = true;
-      this.errorA = false;
-      this.errorB = false;
+      this.partialD = true;
+      this.partialA = false;
+      this.partialB = false;
       const elems = document.getElementsByClassName('mat-checkbox-checked');
       let input = '{ "categories": [';
       for (let i = 0; i < length; i++) {
@@ -89,21 +109,23 @@ export class TextAnalysisComponent implements OnInit {
         }
       }
       input += '] }';
-      this.pythonPodcastService.partialTrain(input).subscribe( res => {
-        this.training = false;
+      this.pythonPodcastService.trainModel(input).subscribe( res => {
+        this.partialD = false;
         this.joker = res;
         this.trainOutput = this.joker.output;
-        this.successA = true;
+        this.partialC = true;
         this.modelTrained = false;
       }, err => {
         console.log(err);
       });
     } else {
-      if (this.errorA) { this.errorA = false; }
-      this.errorB = true;
+      if (this.partialA) { this.partialA = false; }
+      this.partialB = true;
     }
   }
-  partialCatPred(input: HTMLInputElement): void {
+
+  // PARTIAL CATEGORY PREDICTION - PREDICT
+  partialCategoryPredict(input: HTMLInputElement): void {
     if (!this.partialFormControl.touched) {
       this.partialFormControl.markAllAsTouched();
     }
@@ -114,19 +136,52 @@ export class TextAnalysisComponent implements OnInit {
       return;
     }
     if (input.value !== '') {
-      this.partialspinning = true;
+      this.partialSpinner = true;
       this.pythonPodcastService.partialCategoryPredict(`{ "input": "${input.value}" }`).subscribe(res => {
         this.joker = res;
         this.partialOutput = this.joker.output;
-        this.partialspinning = false;
+        this.partialSpinner = false;
       }, err => {
-        this.partialspinning = false;
+        this.partialSpinner = false;
         this.partialOutput = 'error';
       });
     }
   }
+
+  // PARTIAL CATEGORY PREDICTION - INFO
   partialInfoPanel(): void {
-    console.log('asd');
+    // TODO
+    console.log('Coming soon...');
+  }
+
+  // SENTIMENT ANALYSIS
+  sentimentAnalysis(input: HTMLInputElement): void {
+    if (!this.sentimentFormControl.touched) {
+      this.sentimentFormControl.markAllAsTouched();
+    }
+    if (this.sentimentOutput !== '' && this.sentimentFormControl.valid) {
+      this.sentimentOutput = '';
+    }
+    else if (this.sentimentOutput !== '' && !this.sentimentFormControl.valid) {
+      return;
+    }
+    if (input.value !== '') {
+      this.sentimentSpinner = true;
+      this.pythonPodcastService.sentimentAnalysis(`{ "input": "${input.value}" }`).subscribe(res => {
+        this.joker = res;
+        this.sentimentOutput = this.joker.output;
+        this.sentimentSpinner = false;
+      }, err => {
+        this.sentimentSpinner = false;
+        this.sentimentOutput = 'error';
+      });
+    }
+  }
+
+  // SENTIMENT ANALYSIS - INFO
+  sentimentInfoPanel(): void {
+    // TODO
+    console.log('Coming soon...');
   }
 
 }

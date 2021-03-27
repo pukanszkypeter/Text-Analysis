@@ -1,3 +1,5 @@
+/* COMMON STYLES */
+
 mat-list-item {
   margin: 20px 0px 20px 0px;
 }
@@ -5,10 +7,6 @@ mat-list-item {
 .navbar {
   width: 100%;
   text-align: center;
-}
-
-h1 {
-  text-shadow: 2px 2px #1E90FF;
 }
 
 .container {
@@ -32,6 +30,10 @@ mat-divider {
   background-color: #1E90FF;
 }
 
+h1 {
+  text-shadow: 2px 2px #1E90FF;
+}
+
 h3 {
   padding-top: 20px;
 }
@@ -53,14 +55,20 @@ mat-hint {
   color: black;
 }
 
-button#fullcatpredbtn {
+.predictButton {
   width: 20%;
   height: 50px;
   margin-bottom: 20px;
   background-color: #1E90FF;
 }
 
-ul#categories {
+.icons {
+  float: right;
+}
+
+/* FULL CATEGORY PREDICTION STYLES */
+
+ul#fullCategories {
   height: 100px;
   font-size: 15px;
   overflow: hidden;
@@ -72,10 +80,10 @@ div#overlay {
   position: relative;
 }
 
-div#spacer {
+div#fullSpacer {
   position: absolute;
   margin-top: 105px;
-  width: 95%;
+  width: 96%;
 }
 
 .mat-chip {
@@ -96,19 +104,13 @@ div#spacer {
   stroke: #1E90FF!important;
 }
 
-div#spinner-center {
-  justify-content: center;
-}
-
-div#infoPanel {
+div#fullInfoPanel {
   position: absolute;
   width: 96%;
   margin-top: 200px;
 }
 
-.mat-icon#fullIcon {
-  float: right;
-}
+/* PARTIAL CATEGORY PREDICTION STYLES */
 
 .mat-card#partialCard {
   height: 800px;
@@ -135,7 +137,7 @@ li#partialCategory {
   border-color: black;
 }
 
-button#trainbtn {
+button#trainButton {
   position: relative;
   width: 20%;
   height: 50px;
@@ -173,26 +175,35 @@ button#trainbtn {
   border-radius: 2px;
 }
 
-button#partialcatpredbtn {
+#partialButton {
   width: 20%;
   height: 50px;
   margin-bottom: 20px;
   background-color: #1E90FF;
 }
 
-div#partialspacer {
+div#partialSpacer {
   position: absolute;
   margin-top: 20px;
-  width: 95%;
+  width: 96%;
 }
 
-div#partialinfoPanel {
+div#partialInfoPanel {
   position: absolute;
   width: 96%;
   margin-top: 95px;
 }
 
-.mat-icon#partialIcon {
-  float: right;
+/* SENTIMENT ANALYSIS STYLES */
+
+div#sentimentSpacer {
+  position: absolute;
+  margin-top: 20px;
+  width: 96%;
 }
 
+div#sentimentInfoPanel {
+  position: absolute;
+  width: 96%;
+  margin-top: 165px;
+}

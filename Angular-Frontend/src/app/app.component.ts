@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
 import {icons} from './Icons';
@@ -8,13 +8,17 @@ import {icons} from './Icons';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
+
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    // Loading Icons
     for (const icon of icons) {
       iconRegistry.addSvgIcon(icon.selector,
         sanitizer.bypassSecurityTrustResourceUrl(icon.path));
     }
   }
+
   // Active Link
   activeLink(event): void {
     const current = document.getElementsByClassName('active');
@@ -25,4 +29,5 @@ export class AppComponent {
       event.target.className += 'active';
     }
   }
+
 }

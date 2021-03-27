@@ -1,9 +1,12 @@
 <mat-list>
+
+  <!-- FULL CATEGORY PREDICTION -->
   <mat-list-item>
     <div class="navbar">
       <h1>Full Category Prediction</h1>
     </div>
   </mat-list-item>
+
   <div class="container">
     <mat-card>
       <h3>Leave a comment bellow to see your podcast category prediction</h3>
@@ -11,25 +14,26 @@
       <form>
         <mat-form-field appearance="outline">
           <mat-label>Comment</mat-label>
-          <input matInput #message maxlength="256" [formControl]="fullFormControl">
+          <input matInput #commentA maxlength="256" [formControl]="fullFormControl">
           <mat-error *ngIf="fullFormControl.hasError('required')">
             Comment is <strong>required</strong>
           </mat-error>
-          <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+          <mat-hint align="end">{{commentA.value.length}} / 256</mat-hint>
         </mat-form-field>
       </form>
       <!-- BUTTON -->
-      <button mat-raised-button id="fullcatpredbtn" (click)="fullCatPred(message)">Predict</button>
+      <button mat-raised-button class="predictButton" (click)="fullCategoryPredict(commentA)">Predict</button>
       <!-- OUTPUT -->
-      <div id="spacer">
+      <div id="fullSpacer">
         <mat-chip-list>
           <mat-chip *ngIf="fullOutput"
                     [ngClass]="{ 'chip-error': fullOutput === 'error' }">{{fullOutput | uppercase}}</mat-chip>
         </mat-chip-list>
-        <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="spinning"></mat-spinner>
+        <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="fullSpinner"></mat-spinner>
       </div>
-      <div id="infoPanel">
-        <mat-icon id="fullIcon" svgIcon="info" (click)="fullInfoPanel()"></mat-icon>
+      <!-- INFO PANEL -->
+      <div id="fullInfoPanel">
+        <mat-icon class="icons" svgIcon="info" (click)="fullInfoPanel()"></mat-icon>
       </div>
       <!-- CATEGORIES -->
       <div id="overlay">
@@ -43,7 +47,7 @@
                 These categories could be predicted.
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <ul id="categories">
+            <ul id="fullCategories">
               <li *ngFor="let category of categories">{{category}}</li>
             </ul>
           </mat-expansion-panel>
@@ -51,63 +55,109 @@
       </div>
     </mat-card>
   </div>
+
   <mat-divider></mat-divider>
+
+  <!-- PARTIAL CATEGORY PREDICTION -->
   <mat-list-item>
     <div class="navbar">
       <h1>Partial Category Prediction</h1>
     </div>
   </mat-list-item>
+
   <div class="container">
     <mat-card id="partialCard">
       <h3>1. Choose some category and train your model</h3>
+      <!-- CATEGORIES -->
       <ul id="partialCategories">
-        <li *ngFor="let category of categories" id="partialCategory"><mat-checkbox>{{category}}</mat-checkbox></li>
+        <li *ngFor="let category of categories" id="partialCategory">
+          <mat-checkbox>{{category}}</mat-checkbox>
+        </li>
       </ul>
-      <div class="errorMessagePanel" *ngIf="errorA">
+      <div class="errorMessagePanel" *ngIf="partialA">
         <p class="errorMessage">Error! You need to choose min. 2 category!</p>
       </div>
-      <div class="errorMessagePanel" *ngIf="errorB">
+      <div class="errorMessagePanel" *ngIf="partialB">
         <p class="errorMessage">Error! You can only choose max. 5 category!</p>
       </div>
-      <div class="errorMessagePanel" *ngIf="successA" style="background-color: #00FF99">
+      <div class="errorMessagePanel" *ngIf="partialC" style="background-color: #00FF99">
         <p class="errorMessage">{{trainOutput}}</p>
       </div>
-      <div class="errorMessagePanel" *ngIf="training" style="background-color: transparent">
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      <div class="errorMessagePanel" *ngIf="partialD" style="background-color: transparent">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
       </div>
-      <button mat-raised-button id="trainbtn" (click)="trainModel()" [disabled]="training">Train Model</button>
-      <h3>2. And now leave a comment to test your model</h3>
+      <!-- TRAIN BUTTON -->
+      <button mat-raised-button id="trainButton" (click)="trainModel()" [disabled]="partialD">Train Model</button>
+      <h3>2. And now write a comment to test your model</h3>
+      <!-- INPUT -->
       <form>
         <mat-form-field appearance="outline">
           <mat-label>Comment</mat-label>
-          <input matInput #messageB maxlength="256" [formControl]="partialFormControl">
+          <input matInput #commentB maxlength="256" [formControl]="partialFormControl">
           <mat-error *ngIf="partialFormControl.hasError('required')">
             Comment is <strong>required</strong>
           </mat-error>
-          <mat-hint align="end">{{messageB.value.length}} / 256</mat-hint>
+          <mat-hint align="end">{{commentB.value.length}} / 256</mat-hint>
         </mat-form-field>
       </form>
-      <button mat-raised-button id="partialcatpredbtn" (click)="partialCatPred(messageB)" [disabled]="modelTrained">Predict</button>
-      <div id="partialspacer">
+      <!-- BUTTON -->
+      <button mat-raised-button id="partialButton" (click)="partialCategoryPredict(commentB)" [disabled]="modelTrained">
+        Predict
+      </button>
+      <!-- OUTPUT -->
+      <div id="partialSpacer">
         <mat-chip-list>
           <mat-chip *ngIf="partialOutput"
                     [ngClass]="{ 'chip-error': partialOutput === 'error' }">{{partialOutput | uppercase}}</mat-chip>
         </mat-chip-list>
-        <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="partialspinning"></mat-spinner>
+        <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="partialSpinner"></mat-spinner>
       </div>
-      <div id="partialinfoPanel">
-        <mat-icon id="partialIcon" svgIcon="info" (click)="partialInfoPanel()"></mat-icon>
+      <!-- INFO PANEL -->
+      <div id="partialInfoPanel">
+        <mat-icon class="icons" svgIcon="info" (click)="partialInfoPanel()"></mat-icon>
       </div>
     </mat-card>
   </div>
+
   <mat-divider></mat-divider>
+
+  <!-- SENTIMENT ANALYSIS -->
   <mat-list-item>
     <div class="navbar">
       <h1>Sentiment Analysis</h1>
     </div>
   </mat-list-item>
+
   <div class="container">
-    <mat-card><p>ASD</p></mat-card>
+    <mat-card>
+      <h3 style="margin-top: 10px;">Do you want to analyze your feelings? Give some feedback and see your emotions.</h3>
+      <!-- INPUT -->
+      <form style="margin-top: 40px;">
+        <mat-form-field appearance="outline">
+          <mat-label>Comment</mat-label>
+          <input matInput #commentC maxlength="256" [formControl]="sentimentFormControl">
+          <mat-error *ngIf="sentimentFormControl.hasError('required')">
+            Comment is <strong>required</strong>
+          </mat-error>
+          <mat-hint align="end">{{commentC.value.length}} / 256</mat-hint>
+        </mat-form-field>
+      </form>
+      <!-- BUTTON -->
+      <button mat-raised-button class="predictButton" (click)="sentimentAnalysis(commentC)">Predict</button>
+      <!-- OUTPUT -->
+      <div id="sentimentSpacer">
+        <mat-chip-list>
+          <mat-chip *ngIf="sentimentOutput"
+                    [ngClass]="{ 'chip-error': sentimentOutput === 'error' }">{{sentimentOutput | uppercase}}</mat-chip>
+        </mat-chip-list>
+        <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="sentimentSpinner"></mat-spinner>
+      </div>
+      <!-- INFO PANEL -->
+      <div id="sentimentInfoPanel">
+        <mat-icon class="icons" svgIcon="info" (click)="sentimentInfoPanel()"></mat-icon>
+      </div>
+    </mat-card>
   </div>
+
 </mat-list>
 
