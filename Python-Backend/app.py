@@ -1,5 +1,6 @@
 # Webserver
 from flask import Flask, jsonify, request
+import json
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 # Database
@@ -32,6 +33,7 @@ def decision_maker(subject, categories):
             x = True  
     return x
 
+
 # POST: Full Category Prediction
 @app.route("/api/python/full-category-predict", methods=['POST'])
 def full_cat_pred():
@@ -43,6 +45,7 @@ def full_cat_pred():
     output = predict_category(parameters['input'], fullcatpred)[0]
     # Output
     return jsonify({'output': output})
+
 
 # POST: Partial Category Prediction - Train
 @app.route("/api/python/partial-category-predict/train", methods=['POST'])
@@ -69,6 +72,7 @@ def partial_cat_pred_train():
     # Dump Model
     pickle.dump(model, open('partialcatpred.pkl','wb'))
     return jsonify({'output': "Model Trained"})
+
 
 # POST: Partial Category - Prediction
 @app.route("/api/python/partial-category-predict/predict", methods=['POST'])
@@ -104,9 +108,9 @@ def sentiment_analysis():
         return jsonify({'output': "Negative"})
 
 
-# GET: Podcast Categories
-@app.route("/api/python/categories")
-def categories():
+# GET: Categories Distinct
+@app.route("/api/python/categories/distinct")
+def categories_distinct():
     # Database Connection
     connection = sqlite3.connect("podcasts.db")
     categories = pd.read_sql("select distinct category from categories", connection)
@@ -116,6 +120,57 @@ def categories():
     flat_list = [item for sublist in categories_list for item in sublist]
 
     return jsonify({'categories': flat_list})
+
+
+# GET: Categories Table
+@app.route("/api/python/categories")
+def categories():
+    # Database Connection
+    connection = sqlite3.connect("podcasts.db")
+    categories = pd.read_sql("select * from categories group by category", connection)
+
+    categories_list = categories.values.tolist()
+
+    return jsonify({'categories': categories_list})
+
+
+# GET: Podcast Table
+@app.route("/api/python/podcasts")
+def podcasts():
+    # Database Connection
+    connection = sqlite3.connect("podcasts.db")
+    podcasts = pd.read_sql("select * from podcasts", connection)
+    podcasts = podcasts.head(1000)
+
+    podcasts_list = podcasts.values.tolist()
+
+    return jsonify({'podcasts': podcasts_list})
+
+
+# GET: Reviews Table
+@app.route("/api/python/reviews")
+def reviews():
+    # Database Connection
+    connection = sqlite3.connect("podcasts.db")
+    reviews = pd.read_sql("select * from reviews group by podcast_id", connection)
+    reviews = reviews.head(1000)
+
+    reviews_list = reviews.values.tolist()
+
+    return jsonify({'reviews': reviews_list})
+
+
+# GET: Runs Table
+@app.route("/api/python/runs")
+def runs():
+    # Database Connection
+    connection = sqlite3.connect("podcasts.db")
+    runs = pd.read_sql("select * from runs", connection)
+
+    runs_list = runs.values.tolist()
+
+    return jsonify({'runs': runs_list})
+
 
 if __name__ == '__main__':
     app.run(host=HOST,debug=True,port=PORT)

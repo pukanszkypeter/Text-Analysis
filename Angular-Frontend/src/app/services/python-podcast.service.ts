@@ -10,8 +10,28 @@ export class PythonPodcastService {
   constructor(private http: HttpClient) { }
 
   // Get Podcast Categories
+  getCategoriesDistinct(): Observable<any> {
+    return this.http.get<any>('http://localhost:4200/api/python/categories/distinct');
+  }
+
+  // Get Categories Table
   getCategories(): Observable<any> {
     return this.http.get<any>('http://localhost:4200/api/python/categories');
+  }
+
+  // Get Podcasts Table
+  getPodcasts(): Observable<any> {
+    return this.http.get<any>('http://localhost:4200/api/python/podcasts');
+  }
+
+  // Get Reviews Table
+  getReviews(): Observable<any> {
+    return this.http.get<any>('http://localhost:4200/api/python/reviews');
+  }
+
+  // Get Runs Table
+  getRuns(): Observable<any> {
+    return this.http.get<any>('http://localhost:4200/api/python/runs');
   }
 
   // Full Category Prediction

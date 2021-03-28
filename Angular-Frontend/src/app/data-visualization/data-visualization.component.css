@@ -1,0 +1,62 @@
+/* COMMON STYLES */
+.container {
+  width: 80%;
+  height: 150%;
+  margin-left: 10%;
+}
+
+.headers {
+  margin-left: 20px;
+  margin-right: 300px;
+  color: white;
+}
+
+p {
+  line-height: 25px;
+}
+
+a {
+  text-decoration: none;
+  color: #ffdb4d;
+}
+
+::ng-deep .mat-ink-bar {
+  background-color: #ffdb4d !important;
+}
+
+mat-spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  margin-left: -50px;
+  margin-top: -125px;
+}
+
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #ffdb4d!important;
+}
+
+/* TABLES SECTION */
+.tablesContainer {
+  margin-top: 50px;
+  width: 100%;
+  height: 700px;
+  border: 1px solid hsla(0,0%,100%,.2);
+  border-radius: 4px;
+}
+
+.tablesContent {
+  width: 95%;
+  margin-left: 2.5%;
+}
+
+.tableContainer {
+  overflow: auto;
+  height: 350px;
+}
+
+.tableDescription {
+  margin-right: 200px;
+  color: white;
+}

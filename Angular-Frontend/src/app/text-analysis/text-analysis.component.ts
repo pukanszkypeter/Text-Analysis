@@ -47,7 +47,7 @@ export class TextAnalysisComponent implements OnInit {
 
   ngOnInit(): void {
     // Get podcast categories
-    this.pythonPodcastService.getCategories().subscribe(res => {
+    this.pythonPodcastService.getCategoriesDistinct().subscribe(res => {
       this.joker = res;
       this.categories = this.joker.categories;
     }, err => {
