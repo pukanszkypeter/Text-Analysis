@@ -1,7 +1,7 @@
 /* COMMON STYLES */
 .container {
   width: 80%;
-  height: 150%;
+  height: 200%;
   margin-left: 10%;
 }
 
@@ -82,3 +82,17 @@ tr.element-row:not(.expanded-row):active {
   padding: 20px;
 }
 
+/* WORLD CLOUD SECTION */
+.wordCloud {
+  margin-top: 50px;
+  width: 100%;
+  height: 800px;
+  border: 1px solid hsla(0,0%,100%,.2);
+  border-radius: 4px;
+}
+
+.wc-card {
+  width: 95%;
+  height: 90%;
+  padding-bottom: 30px;
+}

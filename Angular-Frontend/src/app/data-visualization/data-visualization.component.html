@@ -177,4 +177,46 @@
     </div>
   </div>
 
+  <!-- Word Clouds -->
+  <div class="wordCloud">
+    <div class="headers" style="width: 90%">
+      <h2>Word Clouds</h2>
+      <p>Word clouds are an excellent form of visualizing text data.
+        They can identify the most used words within a document.
+        I used it in this case for sentiment analysis, where I took measurements on a two-dimensional scale, more specifically <strong>positive and negative</strong> feelings.
+        I did the calculations in a Jupyter Notebook, based on the following link: <a href="https://www.kaggle.com/ngyptr/python-nltk-sentiment-analysis" target="_blank">Python NLTK sentiment analysis</a>, and then saved the results in the form of an image, which you can see below.</p>
+    </div>
+    <mat-grid-list cols="2" rowHeight="640px" style="margin-top: -15px">
+      <mat-grid-tile>
+        <mat-card class="wc-card">
+          <mat-card-header>
+            <mat-card-title>Positive Words</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image width="100%" height="475px" src="assets/positive_words.png" alt="Positive Words">
+          <mat-card-content>
+            <p>
+              It seems to be the most used keywords: podcast, listen, love, episode, etc ...
+              It can be even more interesting to observe better we can also find words like friend, informative, best, entertaining, good, fun.
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-card class="wc-card">
+          <mat-card-header>
+            <mat-card-title>Negative Words</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image width="100%" height="475px" src="assets/negative_words.png" alt="Negative Words">
+          <mat-card-content>
+            <p>
+              Unfortunately, due to the imbalance of the classes, there are a lot of words that can be observed in the positive cloud as well.
+              But if we look more closely at the cloud, we can also find negative words like annoying, politics, terrible, etc...
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  </div>
+
 </div>
