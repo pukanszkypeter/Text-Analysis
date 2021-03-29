@@ -3,12 +3,12 @@
     <a id="mainLogo" routerLink="/home" style="padding: 0px 5px 0px 5px" (click)="activeLink($event)">
       <img src="assets/main-logo.svg" style="margin:10px 5px 0px -5px;height:45px;">
     </a>
-    <a routerLink="/home" (click)="activeLink($event)" class="active">Home</a>
-    <a routerLink="/data-visualization" (click)="activeLink($event)">Data Visualization</a>
-    <a routerLink="/sap" (click)="activeLink($event)">SAP</a>
-    <a routerLink="/python" (click)="activeLink($event)">Python</a>
-    <a routerLink="/text-analysis" (click)="activeLink($event)">Text Analysis</a>
-    <span class="example-spacer" (click)="activeLink($event)"></span>
+    <a id=home routerLink="/home" (click)="activeLink($event)">Home</a>
+    <a id=data-visualization routerLink="/data-visualization" (click)="activeLink($event)">Data Visualization</a>
+    <a id=sap routerLink="/sap" (click)="activeLink($event)">SAP</a>
+    <a id=python routerLink="/python" (click)="activeLink($event)">Python</a>
+    <a id=text-analysis routerLink="/text-analysis" (click)="activeLink($event)">Text Analysis</a>
+    <span class="example-spacer"></span>
   </mat-toolbar>
   <router-outlet></router-outlet>
 

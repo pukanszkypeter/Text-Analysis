@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sap',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SapComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+
+    const site = document.getElementById(this.router.url.substring(1));
+    site.classList.add('active');
+
   }
 
 }

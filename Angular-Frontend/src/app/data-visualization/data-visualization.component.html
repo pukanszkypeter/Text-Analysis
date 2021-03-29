@@ -60,7 +60,7 @@
             <!-- Itunes URL Column -->
             <ng-container matColumnDef="itunesUrl">
               <th mat-header-cell *matHeaderCellDef style="width: 10%;"> iTunes URL </th>
-              <td mat-cell *matCellDef="let element" style="width: 10%;"><a href="{{element.itunesUrl}}" target="_blank">Link</a></td>
+              <td mat-cell *matCellDef="let element" style="width: 10%;"><a href="{{element.itunesUrl}}" target="_blank"><mat-icon svgIcon="link"></mat-icon></a></td>
             </ng-container>
             <!-- Itunes ID Column -->
             <ng-container matColumnDef="itunesId">
@@ -88,9 +88,89 @@
       <!-- Reviews -->
       <mat-tab label="Reviews" [disabled]="tablesLoading">
 
+        <div class="tableContainer">
+          <table mat-table [dataSource]="reviewsSource" multiTemplateDataRows class="mat-elevation-z8" style="width: 100%">
+            <!-- Podcast ID Column -->
+            <ng-container matColumnDef="podcastId">
+              <th mat-header-cell *matHeaderCellDef style="width: 25%;"> Podcast ID </th>
+              <td mat-cell *matCellDef="let element" style="width: 25%;"> {{element.podcastId}} </td>
+            </ng-container>
+            <!-- Title Column -->
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef style="width: 30%;">  Title </th>
+              <td mat-cell *matCellDef="let element" style="width: 30%;"> {{element.title}} </td>
+            </ng-container>
+            <!-- Rating Column -->
+            <ng-container matColumnDef="rating">
+              <th mat-header-cell *matHeaderCellDef style="width: 20%;"> Rating </th>
+              <td mat-cell *matCellDef="let element" style="width: 20%;">
+                <span *ngIf="element.rating == 5" style="color: green"><mat-icon svgIcon="star"></mat-icon><mat-icon svgIcon="star"></mat-icon><mat-icon svgIcon="star"></mat-icon><mat-icon svgIcon="star"></mat-icon><mat-icon svgIcon="star"></mat-icon></span>
+                <span *ngIf="element.rating == 4" style="color: blue"><mat-icon svgIcon="star"></mat-icon><mat-icon svgIcon="star"></mat-icon><mat-icon svgIcon="star"></mat-icon><mat-icon svgIcon="star"></mat-icon></span>
+                <span *ngIf="element.rating == 3" style="color: yellow"><mat-icon svgIcon="star"></mat-icon><mat-icon svgIcon="star"></mat-icon><mat-icon svgIcon="star"></mat-icon></span>
+                <span *ngIf="element.rating == 2" style="color: orange"><mat-icon svgIcon="star"></mat-icon><mat-icon svgIcon="star"></mat-icon></span>
+                <span *ngIf="element.rating == 1" style="color: red"><mat-icon svgIcon="star"></mat-icon></span>
+              </td>
+            </ng-container>
+            <!-- Created At Column -->
+            <ng-container matColumnDef="createdAt">
+              <th mat-header-cell *matHeaderCellDef style="width: 25%;"> Created At </th>
+              <td mat-cell *matCellDef="let element" style="width: 25%;"> {{element.createdAt}} </td>
+            </ng-container>
+            <!-- Expanded Content Column -->
+            <ng-container matColumnDef="content">
+              <td mat-cell *matCellDef="let element" [attr.colspan]="reviewsColumns.length">
+                <div class="element-content" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                  <div class="content"> "{{element.content}}" </div>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="reviewsColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: reviewsColumns;" class="element-row" [class.expanded-row]="expandedElement === row"
+            (click)="expandedElement = expandedElement === row ? null : row"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['content']" style="height: 0"></tr>
+          </table>
+        </div>
+        <mat-paginator #reviewsPaginator [length]="reviewsLength" [pageSize]="50" showFirstLastButtons></mat-paginator>
+        <div class="tableDescription">
+          <p>The reviews table contains the most data, with exactly <strong>1.148.214</strong> rows.
+            This includes (feedbacks / reviews) from iTunes Podcast users about each podcast channel.
+            One row consists the <strong>podcast ID</strong>, the <strong>title and content</strong> of the review, the <strong>5-star rating</strong> and the <strong>creation date</strong>.
+            For performance reasons we only loaded the first 1000 rows of the data set. Have fun reading the reviews by clicking on
+            each row in the table.</p>
+        </div>
+
       </mat-tab>
       <!-- Runs -->
       <mat-tab label="Runs" [disabled]="tablesLoading">
+
+        <div class="tableContainer">
+          <table mat-table [dataSource]="runsSource" class="mat-elevation-z8" style="width: 100%">
+            <!-- Run At Column -->
+            <ng-container matColumnDef="runAt">
+              <th mat-header-cell *matHeaderCellDef style="width: 33.3%;"> Run At </th>
+              <td mat-cell *matCellDef="let element" style="width: 33.3%;"> {{element.runAt}} </td>
+            </ng-container>
+            <!-- Max Rowid Column -->
+            <ng-container matColumnDef="maxRowid">
+              <th mat-header-cell *matHeaderCellDef style="width: 33.3%;"> Max Rowid </th>
+              <td mat-cell *matCellDef="let element" style="width: 33.3%;"> {{element.maxRowid}} </td>
+            </ng-container>
+            <!-- Reviews Added Column -->
+            <ng-container matColumnDef="reviewsAdded">
+              <th mat-header-cell *matHeaderCellDef style="width: 33.3%;"> Reviews Added </th>
+              <td mat-cell *matCellDef="let element" style="width: 33.3%;"> {{element.reviewsAdded}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="runsColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: runsColumns;"></tr>
+          </table>
+        </div>
+        <mat-paginator #runsPaginator [disabled]="tablesLoading" [length]="runsLength" [pageSize]="10" showFirstLastButtons></mat-paginator>
+        <div class="tableDescription">
+          <p>The runs table shows us at what times the publicly available data set was updated with additional data.
+            You can see that the last modification date is January 2021, and I am using that state of the database.
+            Newer versions may already exist, but they can be solved with a simple replacement.
+            It may be interesting to look at the <strong>reviews added</strong> column and add the rows to get the number of reviews in the dataset.</p>
+        </div>
 
       </mat-tab>
     </mat-tab-group>

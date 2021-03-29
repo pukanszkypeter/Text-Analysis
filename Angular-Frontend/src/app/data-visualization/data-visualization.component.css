@@ -60,3 +60,25 @@ mat-spinner {
   margin-right: 200px;
   color: white;
 }
+
+tr.element-row:not(.expanded-row):hover {
+  background: rgb(245,245,245,0.2);
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: rgb(245,245,245,0.2);
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-content {
+  overflow: hidden;
+  display: flex;
+}
+
+.content {
+  padding: 20px;
+}
+

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PythonPodcastService} from '../services/python-podcast.service';
 import {FormControl, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -42,10 +43,14 @@ export class TextAnalysisComponent implements OnInit {
   ]);
 
 
-  constructor(private pythonPodcastService: PythonPodcastService) {
+  constructor(private pythonPodcastService: PythonPodcastService, private router: Router) {
   }
 
   ngOnInit(): void {
+
+    const site = document.getElementById(this.router.url.substring(1));
+    site.classList.add('active');
+
     // Get podcast categories
     this.pythonPodcastService.getCategoriesDistinct().subscribe(res => {
       this.joker = res;
@@ -53,6 +58,7 @@ export class TextAnalysisComponent implements OnInit {
     }, err => {
       this.categories = ['Could not reach the API and load categories.'];
     });
+
   }
 
   // FULL CATEGORY PREDICTION - LOGIC

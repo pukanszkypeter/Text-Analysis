@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PythonPodcastService} from '../services/python-podcast.service';
+import {Router} from '@angular/router';
 // Data
 import {Category} from '../data/Category';
 import {Podcast} from '../data/Podcast';
@@ -8,12 +9,20 @@ import {Run} from '../data/Run';
 // Mat Modules
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 
 @Component({
   selector: 'app-data-visualization',
   templateUrl: './data-visualization.component.html',
-  styleUrls: ['./data-visualization.component.css']
+  styleUrls: ['./data-visualization.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class DataVisualizationComponent implements OnInit {
 
@@ -31,14 +40,74 @@ export class DataVisualizationComponent implements OnInit {
   podcastsColumns: string[] = ['title', 'slug', 'itunesUrl', 'itunesId', 'podcastId'];
   podcastsSource: MatTableDataSource<Podcast>;
 
+  reviews: Review[] = [];
+  reviewsLength: number;
+  reviewsColumns: string[] = ['podcastId', 'title', 'rating', 'createdAt'];
+  reviewsSource: MatTableDataSource<Review>;
+  expandedElement: Review | null;
+
+  runs: Run[] = [];
+  runsLength: number;
+  runsColumns: string[] = ['runAt', 'maxRowid', 'reviewsAdded'];
+  runsSource: MatTableDataSource<Run>;
+
   @ViewChild('categoriesPaginator') categoriesPaginator: MatPaginator;
   @ViewChild('podcastsPaginator') podcastsPaginator: MatPaginator;
+  @ViewChild('reviewsPaginator') reviewsPaginator: MatPaginator;
+  @ViewChild('runsPaginator') runsPaginator: MatPaginator;
 
-  constructor(private pythonPodcastService: PythonPodcastService) { }
+  constructor(private pythonPodcastService: PythonPodcastService, private router: Router) { }
 
   ngOnInit(): void {
 
+    const site = document.getElementById(this.router.url.substring(1));
+    site.classList.add('active');
+
     this.tablesLoading = true;
+
+    // Runs on Init
+    this.pythonPodcastService.getRuns().subscribe(res => {
+      this.joker = res;
+      this.runsLength = 0;
+      this.runsLength = this.joker.runs.length;
+      this.runs = [];
+      for (let i = 0; i < this.runsLength; i++) {
+        const run = new Run();
+        run.runAt = this.joker.runs[i][0];
+        run.maxRowid = this.joker.runs[i][1];
+        run.reviewsAdded = this.joker.runs[i][2];
+        this.runs.push(run);
+      }
+      this.runsSource = new MatTableDataSource<Run>(this.runs);
+      setTimeout(() => {
+        this.runsSource.paginator = this.runsPaginator;
+      });
+    }, error => {
+      console.log('Coming soon...');
+    });
+
+    // Reviews on Init
+    this.pythonPodcastService.getReviews().subscribe(res => {
+      this.joker = res;
+      this.reviewsLength = 0;
+      this.reviewsLength = this.joker.reviews.length;
+      this.reviews = [];
+      for (let i = 0; i < this.reviewsLength; i++) {
+        const review = new Review();
+        review.podcastId = this.joker.reviews[i][0];
+        review.title = this.joker.reviews[i][1];
+        review.content = this.joker.reviews[i][2];
+        review.rating = this.joker.reviews[i][3];
+        review.createdAt = this.joker.reviews[i][4];
+        this.reviews.push(review);
+      }
+      this.reviewsSource = new MatTableDataSource<Review>(this.reviews);
+      setTimeout(() => {
+        this.reviewsSource.paginator = this.reviewsPaginator;
+      });
+    }, error => {
+      console.log('Coming soon...');
+    });
 
     // Podcasts on Init
     this.pythonPodcastService.getPodcasts().subscribe(res => {
@@ -84,7 +153,7 @@ export class DataVisualizationComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.tablesLoading = false;
+    this.tablesLoading = false;
     }, 2000);
 
   }
