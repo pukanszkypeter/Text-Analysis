@@ -28,6 +28,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSelectModule} from '@angular/material/select';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatTableModule,
     MatPaginatorModule,
     MatGridListModule,
+    MatSelectModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [AppComponent]

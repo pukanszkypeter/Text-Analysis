@@ -36,3 +36,36 @@ a {
   font-size: 0.9vw;
   text-align: center;
 }
+
+ul {
+  list-style: none;
+}
+
+ul li:before {
+  content: "\2022";
+  color: #1E90FF;
+  display: inline-block;
+  font-weight: bold;
+  width: 1em;
+  margin-left: -1em;
+  padding-bottom: 2px;
+}
+
+#homeTwo {
+  width: 100%;
+  height: auto;
+}
+
+.listDescription li:before {
+  color: #ffdb4d;
+}
+
+#homeThree {
+  width: 100%;
+  height: auto;
+}
+
+#homeFour {
+  width: 100%;
+  height: auto;
+}

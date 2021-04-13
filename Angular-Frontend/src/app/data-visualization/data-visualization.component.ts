@@ -10,6 +10,7 @@ import {Run} from '../data/Run';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -56,7 +57,18 @@ export class DataVisualizationComponent implements OnInit {
   @ViewChild('reviewsPaginator') reviewsPaginator: MatPaginator;
   @ViewChild('runsPaginator') runsPaginator: MatPaginator;
 
-  constructor(private pythonPodcastService: PythonPodcastService, private router: Router) { }
+  // Podcasts Data
+  firstFormGroup: FormGroup;
+  filterResultLength: number;
+  filterResult: string[] = [];
+  searchResult: Podcast = new Podcast();
+  searchCategoriesLength: number;
+  searchCategories: string[] = [];
+  searchReviewsLength: number;
+  searchReviews: Review[] = [];
+
+  // tslint:disable-next-line:variable-name
+  constructor(private pythonPodcastService: PythonPodcastService, private router: Router, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -156,6 +168,52 @@ export class DataVisualizationComponent implements OnInit {
     this.tablesLoading = false;
     }, 2000);
 
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+
+  }
+
+  filter(input: HTMLInputElement): void {
+    this.pythonPodcastService.filter( `{ "input": "${input.value}" }` ).subscribe(res => {
+      this.joker = res;
+      this.filterResultLength = this.joker.output.length;
+      for (let i = 0; i < this.filterResultLength; i++) {
+        this.filterResult.push(this.joker.output[i]);
+      }
+    });
+  }
+
+  search(): void {
+    const input = document.getElementById('title').innerHTML;
+    this.pythonPodcastService.search( `{ "input": "${input}" }` ).subscribe(res => {
+      this.joker = res;
+      this.searchResult.podcastId = this.joker.output[0][0];
+      this.searchResult.itunsId = this.joker.output[0][1];
+      this.searchResult.slug = this.joker.output[0][2];
+      this.searchResult.itunesUrl = this.joker.output[0][3];
+      this.searchResult.title = this.joker.output[0][4];
+      this.pythonPodcastService.searchCategories(`{ "input": "${this.searchResult.podcastId}" }`).subscribe(tes => {
+        this.joker = tes;
+        this.searchCategoriesLength = this.joker.output.length;
+        for (let i = 0; i < this.searchCategoriesLength; i++) {
+          this.searchCategories.push(this.joker.output[i]);
+        }
+      });
+      this.pythonPodcastService.searchReviews(`{ "input": "${this.searchResult.podcastId}" }`).subscribe(zes => {
+        this.joker = zes;
+        this.searchReviewsLength = this.joker.output.length;
+        for (let i = 0; i < this.searchReviewsLength; i++) {
+          const review = new Review();
+          review.podcastId = this.joker.output[i][0];
+          review.title = this.joker.output[i][1];
+          review.content = this.joker.output[i][2];
+          review.rating = this.joker.output[i][3];
+          review.createdAt = this.joker.output[i][4];
+          this.searchReviews.push(review);
+        }
+      });
+    });
   }
 
 }

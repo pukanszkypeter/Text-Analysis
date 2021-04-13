@@ -54,4 +54,24 @@ export class PythonPodcastService {
     return this.http.post<any>('http://localhost:4200/api/python/sentiment-analysis', JSON.parse(input));
   }
 
+  // Filter Podcasts By Title
+  filter(input: string): Observable<any> {
+    return this.http.post<any>('http://localhost:4200/api/python/filter', JSON.parse(input));
+  }
+
+  // Search Podcasts By Title
+  search(input: string): Observable<any> {
+    return this.http.post<any>('http://localhost:4200/api/python/search', JSON.parse(input));
+  }
+
+  // Search Podcasts By Title
+  searchCategories(input: string): Observable<any> {
+    return this.http.post<any>('http://localhost:4200/api/python/search/categories', JSON.parse(input));
+  }
+
+  // Search Podcasts By Title
+  searchReviews(input: string): Observable<any> {
+    return this.http.post<any>('http://localhost:4200/api/python/search/reviews', JSON.parse(input));
+  }
+
 }

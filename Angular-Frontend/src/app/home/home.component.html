@@ -21,56 +21,151 @@
 <div class="contentContainer">
   <h2>What is Text Analysis?</h2>
   <img id="homeOne" src="assets/home_01.png" alt="What is Text Analysis?"/>
-  <p>Text analysis is a machine learning technique that allows us to extract specific information from a text, such as keywords, names, or company information.
+  <p>Text analysis is a <span style="background-color: cornflowerblue;padding-left: 2px;padding-right: 2px;">machine learning technique</span> that allows us to extract specific information from a text, such as keywords, names, or company information.
     We can even use it to categorize different emails or comments by topic or sentiment.</p>
   <p>This method provides qualitative results, so it identifies important information from the text itself.
     Take, for example, the database that the application uses.
     We can categorize comments received for podcast channels based on words with positive or negative emotion.
-    Basically, the challenge in text analysis is decoding the ambiguity of human language.</p>
+    Basically, the challenge in text analysis is <span style="background-color: lightcoral;padding-left: 2px;padding-right: 2px;">decoding the ambiguity of human language.</span></p>
   <div class="quote"><i>"If you torture the data long enough, it will confess to anything."</i> - Ronald H. Coase</div>
 </div>
 <mat-divider></mat-divider>
 <div class="contentContainer">
   <h2>Why Text Analysis?</h2>
-  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  <p>Nowadays, words like data science, big data and AI are becoming more and more popular and trendy.
+    That’s why it’s worth getting to know and learn a little more about such technologies.
+    Text analysis is an extremely spectacular and playful way to learn about these.
   </p>
+  <ul>
+  <li>
+    It has a very <span style="background-color: darkred;padding-left: 2px;padding-right: 2px;">wide range of possibilities</span> in case of analyzing whole documents, single sentences or even sub-sentences.
+  </li>
+  <li>
+    It is <span style="background-color: coral;padding-left: 2px;padding-right: 2px;">scalable</span>, because these tools allows us to structure vast quantities of information in seconds and redirect extra resources to more important tasks.
+  </li>
+  <li>
+    It happens in <span style="background-color: green;padding-left: 2px;padding-right: 2px;">real-time</span> and with perfectly parameterized models we can detect urgent issues from customer feedbacks and take action rather sooner then later.
+  </li>
+  <li>
+    It delivers <span style="background-color: darkorchid;padding-left: 2px;padding-right: 2px;">consistent criteria</span> because they work more accurately than humans ever could.
+  </li>
+  </ul>
 </div>
 <mat-divider></mat-divider>
 <div class="contentContainer">
   <h2>Methods & Techniques</h2>
-  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  <p>There are basic and more advanced text analysis techniques, each used for different purposes. (See the list down below.)
+    In this case we will focus on the text classification, more precisely on sentiment and topic analysis part.
   </p>
+  <ul>
+    <li>Word Frequency</li>
+    <li>Collocation</li>
+    <li>Concordance</li>
+    <li>Text Classification (<span style="background-color: cornflowerblue;padding-left: 2px;padding-right: 2px;">Topic Analysis</span>,
+      <span style="background-color: lightcoral;padding-left: 2px;padding-right: 2px;">Sentiment Analysis</span>, Intent Detection)</li>
+    <li>Text Extraction (Keyword Extraction, Named Entity Recognition)</li>
+    <li>Word Sense Disambiguation</li>
+    <li>Clustering</li>
+  </ul>
+  <h4>Topic Analysis</h4>
+  <p>It can automatically organize text by subject or theme. Take the application database, for example.
+    Podcast channels can be categorized, so we can already tag incoming comments based on those categories.</p>
+  <p>Let's see the comment: <i>"Very useful podcast, I can only recommend. I learned a lot about cryptocurrencies and bitcoin mining."</i></p>
+  <p>The expected categories would probably be: business, finance, technology, fintech</p>
+  <h4>Sentiment Analysis</h4>
+  <p>It uses powerful machine learning algorithms to automatically read and classify for opinion polarity (positive, negative, neutral)
+    and beyond, into the feelings and emotions of the writer, even context and sarcasm.</p>
+  <p>For example the input: <i>"I love this podcast, great quality, nice people, many laughs."</i></p>
+  <p>And the expected output: positive</p>
 </div>
 <mat-divider></mat-divider>
 <div class="contentContainer">
   <h2>How does it work?</h2>
-  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  <img id="homeTwo" src="assets/home_02.png" alt="How does it work?"/>
+  <p>Although there are quite a few explanations for understanding AI and data science processes, we have chosen two interesting paths for interpretation.
+    First, let’s look at the OSEMN model, which is extremely similar to cooking processes. (Try replacing the word data with food.)
   </p>
+  <ul>
+    <li>Obtain</li>
+    <ul class="listDescription">
+      <li>This is the phase when we collect the data we want to analyze from some source.</li>
+    </ul>
+    <li>Scrub</li>
+    <ul class="listDescription">
+      <li>Here we prepare the data for further processes. We clean them of missing data, false values, bad formats, etc...</li>
+    </ul>
+    <li>Explore</li>
+    <ul class="listDescription">
+      <li>In this case, we interpret the data set to be processed, create visualizations and statistics.</li>
+    </ul>
+    <li>Model</li>
+    <ul class="listDescription">
+      <li>This is the main phase, the part when we produce the model whether clustering, classification or regression, etc. by.</li>
+    </ul>
+    <li>iNterpret</li>
+    <ul class="listDescription">
+      <li>The last part is when we draw conclusions from the data and evaluate and communicate the results.</li>
+    </ul>
+  </ul>
+  <p>Another approach might be this quote:</p>
+  <div class="quote"><i>"A computer program is said to learn to perform a task T from experience E".</i> - Tom Mitchell</div>
+  <p>In other words, if we want text analysis software to perform desired tasks,
+    we need to teach machine learning algorithms how to analyze, understand and derive meaning from text.
+    It's very similar to the way humans learn how to differentiate between topics, objects, and emotions.</p>
 </div>
 <mat-divider></mat-divider>
 <div class="contentContainer">
   <h2>Usecases</h2>
-  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  <img id="homeThree" src="assets/home_03.png" alt="Usecases"/>
+  <p>About 80% of business data is textual. It is present everywhere, from business processes to product feedback to online customer interactions.
+    Automated, real-time text analysis can help us maximize efficiency, reduce repetitive tasks, and better understand customer intentions.
+    It is widely used in these areas:
   </p>
+  <ul>
+    <li>Social Media Monitoring</li>
+    <li>Brand Monitoring</li>
+    <li>Customer Service</li>
+    <li>Voice of Customer (VoC) & Customer Feedback</li>
+    <li>Business Intelligence</li>
+    <li>Sales and Marketing</li>
+    <li>Product Analytics</li>
+  </ul>
 </div>
 <mat-divider></mat-divider>
 <div class="contentContainer">
   <h2>Resources</h2>
-  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  <img id="homeFour" src="assets/home_04.png" alt="Resources"/>
+  <p>There are a number of valuable resources out there to help you get started with all that text analysis has to offer.
   </p>
+  <h4>Text Analysis APIs</h4>
+  <p>You can use open-source libraries or SaaS APIs to build a text analysis solution that fits your needs.
+    Open-source libraries require a lot of time and technical know-how, while SaaS tools can often be put to work right away and require little to no coding experience.</p>
+  <p>Open Source Libraries</p>
+  <ul>
+    <li>Python</li>
+    <li>NLTK</li>
+    <li>SpaCy</li>
+    <li>Scikit-learn</li>
+    <li>TensorFlow</li>
+    <li>PyTorch</li>
+    <li>Keras</li>
+    <li>R</li>
+    <li>Caret</li>
+    <li>mlr</li>
+    <li>Java</li>
+    <li>CoreNLP</li>
+    <li>OpenNLP</li>
+    <li>Weka</li>
+  </ul>
+  <p>SaaS APIs</p>
+  <ul>
+    <li>MonkeyLearn</li>
+    <li>Google Cloud NLP</li>
+    <li>IBM Watson</li>
+    <li>Lexalytics</li>
+    <li>MeaningCloud</li>
+    <li>Amazon Comprehend</li>
+    <li>Aylien</li>
+  </ul>
 </div>
+<mat-divider></mat-divider>

@@ -140,7 +140,7 @@ def podcasts():
     # Database Connection
     connection = sqlite3.connect("podcasts.db")
     podcasts = pd.read_sql("select * from podcasts", connection)
-    podcasts = podcasts.head(1000)
+    podcasts = podcasts.head(100)
 
     podcasts_list = podcasts.values.tolist()
 
@@ -153,7 +153,7 @@ def reviews():
     # Database Connection
     connection = sqlite3.connect("podcasts.db")
     reviews = pd.read_sql("select * from reviews group by podcast_id", connection)
-    reviews = reviews.head(1000)
+    reviews = reviews.head(100)
 
     reviews_list = reviews.values.tolist()
 
@@ -170,6 +170,80 @@ def runs():
     runs_list = runs.values.tolist()
 
     return jsonify({'runs': runs_list})
+
+
+# POST: Filter Podcast By Title
+@app.route("/api/python/filter", methods=['POST'])
+def filter():
+    
+    # Input
+    parameters = request.get_json()
+    word = parameters['input']
+    regex = "'%" + word + "%'"
+    query = "select title from podcasts where title like " + regex
+    
+    # Database Connection
+    connection = sqlite3.connect("podcasts.db")
+    result = pd.read_sql(query, connection)
+
+    result_list = result.values.tolist()
+
+    return jsonify({'output': result_list})
+    
+
+# POST: Search Podcast By Title
+@app.route("/api/python/search", methods=['POST'])
+def search():
+
+    # Input
+    parameters = request.get_json()
+    title = parameters['input']
+    regex = "'" + title + "'"
+    query = "select * from podcasts where title like " + regex
+
+    # Database Connection
+    connection = sqlite3.connect("podcasts.db")
+    result = pd.read_sql(query, connection)
+
+    result_list = result.values.tolist()
+
+    return jsonify({'output': result_list})
+
+# POST: Search Categories To Podcast
+@app.route("/api/python/search/categories", methods=['POST'])
+def search_categories():
+
+    # Input
+    parameters = request.get_json()
+    title = parameters['input']
+    regex = "'" + title + "'"
+    query = "select category from categories where podcast_id like " + regex
+
+    # Database Connection
+    connection = sqlite3.connect("podcasts.db")
+    result = pd.read_sql(query, connection)
+
+    result_list = result.values.tolist()
+
+    return jsonify({'output': result_list})
+
+# POST: Search Reviews To Podcast
+@app.route("/api/python/search/reviews", methods=['POST'])
+def search_reviews():
+
+    # Input
+    parameters = request.get_json()
+    title = parameters['input']
+    regex = "'" + title + "'"
+    query = "select * from reviews where podcast_id like " + regex
+
+    # Database Connection
+    connection = sqlite3.connect("podcasts.db")
+    result = pd.read_sql(query, connection)
+
+    result_list = result.values.tolist()
+
+    return jsonify({'output': result_list})
 
 
 if __name__ == '__main__':
