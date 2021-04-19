@@ -1,5 +1,7 @@
 #homeBanner {
-  width: 100%;
+  margin-top: 5vh;
+  margin-left: 10%;
+  width: 80%;
   height: auto;
 }
 
@@ -39,6 +41,26 @@ a {
 
 ul {
   list-style: none;
+}
+
+.mat-raised-button {
+  background-color: #1E90FF;
+  line-height: 30px;
+  min-width: 50px;
+  margin-left: 5px;
+}
+
+.predictResult {
+  margin-left: 45%;
+  width: 10%;
+  text-align: center;
+  background-color: #1E90FF;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+::ng-deep .mat-progress-bar-background {
+  fill: #1E90FF !important;
 }
 
 ul li:before {

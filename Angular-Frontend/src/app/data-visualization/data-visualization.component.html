@@ -215,7 +215,7 @@
             <input matInput #title formControlName="firstCtrl" placeholder="Search for a title..." required>
           </mat-form-field>
         </form>
-        <button [disabled]="firstFormGroup" mat-icon-button (click)="filter(title)" matStepperNext>
+        <button [disabled]="!firstFormGroup.valid" mat-icon-button (click)="filter(title)" matStepperNext>
           <mat-icon class="iconWhite" >search</mat-icon>
         </button>
       </mat-step>

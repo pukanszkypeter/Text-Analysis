@@ -32,3 +32,16 @@ a:hover {
 a#mainLogo:hover {
   background-color: transparent;
 }
+
+.footer {
+  width: 100%;
+  background-color: #1E90FF;
+
+  margin-top: 10vh;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+
+  color: white;
+  font-size: 0.85vw;
+  text-align: center;
+}

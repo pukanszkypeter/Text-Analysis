@@ -1,25 +1,18 @@
-# CAP
-_out
-.cds_gen.log
-*.db
-connection.properties
-default-*.json
+.che/
+.gen/
 gen/
+mta_archives/
 node_modules/
 target/
 
-# Web IDE, App Studio
-.che/
-.gen/
-
-# MTA
-*_mta_build_tmp
-*.mtar
-mta_archives/
-
-# Other
+.cds_gen.log
+connection.properties
+*.db
 .DS_Store
 *.orig
+_out
+default-*.json
+package-lock.json
 
 fioriHtmlRunner.html
 .*/fioriHtmlRunner.html

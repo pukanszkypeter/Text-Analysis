@@ -1,14 +1,15 @@
 {
-    "name": "SAP-Backend-srv",
+    "name": "SAP_Backend-srv",
     "description": "Generated from ../package.json, do not change!",
     "version": "1.0.0",
     "dependencies": {
-        "@sap/cds": "^4.5.3",
+        "@sap/cds": "^3.18.1",
         "express": "^4.17.1",
-        "@sap/hana-client": "^2.7.23"
+        "hdb": "^0.18.3"
     },
     "engines": {
-        "node": "^10 || ^12"
+        "node": "^8.9",
+        "npm": "^6"
     },
     "devDependencies": {},
     "scripts": {

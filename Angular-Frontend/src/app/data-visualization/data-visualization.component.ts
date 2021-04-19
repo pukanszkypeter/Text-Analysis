@@ -166,7 +166,7 @@ export class DataVisualizationComponent implements OnInit {
 
     setTimeout(() => {
     this.tablesLoading = false;
-    }, 2000);
+    }, 1000);
 
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
