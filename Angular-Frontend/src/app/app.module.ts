@@ -30,6 +30,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatPaginatorModule,
     MatGridListModule,
     MatSelectModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

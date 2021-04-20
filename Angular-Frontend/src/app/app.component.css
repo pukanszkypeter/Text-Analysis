@@ -1,47 +1,72 @@
-mat-toolbar {
-  background-color: #1E90FF;
+.container-fluid {
+  padding: 0;
+}
+
+.navbar-brand {
+  margin-left: 1vw;
+  background-color: transparent !important;
 }
 
 a {
-  color: white;
-  text-decoration: none;
-  padding: 6px 10px 6px 10px;
-  font-size: 17px;
-  margin-right: 10px;
-}
-
-a:visited {
-  color: white;
-  text-decoration: none;
+  color: white !important;
 }
 
 a:hover {
+  color: #ffdb4d !important;
   background-color: rgb(255,255,255,0.15);
-  border-radius: 4px;
+  border-radius: 5px;
+}
+
+.dropdown-color {
+  color: black !important;
+}
+
+.dropdown-color:hover {
+  color: black !important;
+  background-color: rgb(0,0,0,0.05);
+  border-radius: 0px;
 }
 
 .active {
-  background-color: rgb(255,255,255,0.15);
-  border-radius: 4px;
+  color: #ffdb4d !important;
+  font-weight: bolder;
 }
 
-.example-spacer {
-  flex: 1 1 auto;
+mat-slider {
+  margin: 0vw 0.2vw 0vw 0.2vw;
 }
 
-a#mainLogo:hover {
-  background-color: transparent;
+::ng-deep .mat-slider.mat-slider-horizontal {
+  min-width: 5vw;
 }
 
-.footer {
-  width: 100%;
-  background-color: #1E90FF;
+::ng-deep .mat-slider-thumb {
+  background-color: #ffdb4d !important;
+}
 
-  margin-top: 10vh;
-  padding-top: 4vh;
-  padding-bottom: 4vh;
+::ng-deep .mat-accent .mat-slider-track-fill {
+  background-color: #ffdb4d !important;
+}
 
-  color: white;
-  font-size: 0.85vw;
+#gitLogo {
+  margin-right: 1vw;
+  background-color: transparent !important;
+}
+
+/*
+ * Footer
+ */
+.blog-footer {
+  padding: 2vh 0;
+  color: #727272;
   text-align: center;
+  background-color: #f9f9f9;
+  border-top: .05rem solid #e5e5e5;
+}
+.blog-footer p:last-child {
+  margin-bottom: 0;
+}
+
+.footer-link {
+  color: #ffdb4d !important;
 }

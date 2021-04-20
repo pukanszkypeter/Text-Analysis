@@ -1,15 +1,49 @@
-
-  <mat-toolbar>
-    <a id="mainLogo" routerLink="/home" style="padding: 0px 5px 0px 5px" (click)="activeLink($event)">
-      <img src="assets/main-logo.svg" style="margin:10px 5px 0px -5px;height:45px;">
-    </a>
-    <a id=home routerLink="/home" (click)="activeLink($event)">Home</a>
-    <a id=data-visualization routerLink="/data-visualization" (click)="activeLink($event)">Data Visualization</a>
-    <a id=sap routerLink="/sap" (click)="activeLink($event)">SAP</a>
-    <a id=python routerLink="/python" (click)="activeLink($event)">Python</a>
-    <a id=text-analysis routerLink="/text-analysis" (click)="activeLink($event)">Text Analysis</a>
-    <span class="example-spacer"></span>
-  </mat-toolbar>
+<div class="container-fluid">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #1E90FF">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/home" (click)="activeLink($event)"><img src="assets/main-logo.svg" alt="Main Logo" width="35" height="35"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" id="home" routerLink="/home" (click)="activeLink($event)">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="data-visualization" routerLink="/data-visualization" (click)="activeLink($event)">Data Visualization</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+            id="environments" (click)="activeLink($event)">
+              Environments
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item dropdown-color" routerLink="/sap">SAP</a></li>
+              <li><a class="dropdown-item dropdown-color" routerLink="/python">Python</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item dropdown-color">Conclusion</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="text-analysis" routerLink="/text-analysis" (click)="activeLink($event)">Text Analysis</a>
+          </li>
+        </ul>
+        <div class="d-flex flex-row align-items-center">
+          <img src="assets/sun.svg" width="25" height="25"/>
+          <mat-slider id="slider" min="0" max="30" step="1" [value]="bgColorShade" (change)="changeColor($event)"></mat-slider>
+          <a id=gitLogo target="_blank" href="https://github.com/"><img src="assets/github.svg" alt="GitHub Logo" width="33" height="33"></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
   <router-outlet></router-outlet>
-  <div class="footer">@Pukánszky Péter</div>
-
+  </div>
+  <footer class="blog-footer">
+    <p>Text Analysis Blog built for <a class="footer-link" target="_blank" href="https://www.inf.elte.hu/">ELTE-IK</a> bachelor's thesis by <a class="footer-link" target="_blank" href="https://github.com/pukanszkypeter/">@pukanszkypeter</a>.</p>
+    <p>
+      <a class="footer-link" href="javascript:window.location.href=window.location.href">Back to top</a>
+    </p>
+  </footer>
+</div>

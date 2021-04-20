@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
 import {PythonPodcastService} from '../services/python-podcast.service';
 
 @Component({
@@ -21,11 +20,23 @@ export class HomeComponent implements OnInit {
   negativeInput = 'Terrible podcast, don\'t listen to this. Lots of politics, annoying guests and false information.';
   negativeLoading = false;
 
-  constructor(private pythonPodcastService: PythonPodcastService, private router: Router) { }
+  constructor(private pythonPodcastService: PythonPodcastService) { }
 
   ngOnInit(): void {
-    const site = document.getElementById(this.router.url.substring(1));
-    site.classList.add('active');
+
+    const link = document.getElementById('home');
+    link.classList.add('active');
+
+  }
+
+  activeLink(event): void {
+    const current = document.getElementsByClassName('active');
+    current.item(0).classList.remove('active');
+    if (event.target.tagName === 'IMG') {
+      document.querySelectorAll('a').item(1).classList.add('active');
+    } else {
+      event.target.classList.add('active');
+    }
   }
 
   categoryPredict(): void {

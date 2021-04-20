@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PythonPodcastService} from '../services/python-podcast.service';
-import {Router} from '@angular/router';
 // Data
 import {Category} from '../data/Category';
 import {Podcast} from '../data/Podcast';
@@ -68,12 +67,12 @@ export class DataVisualizationComponent implements OnInit {
   searchReviews: Review[] = [];
 
   // tslint:disable-next-line:variable-name
-  constructor(private pythonPodcastService: PythonPodcastService, private router: Router, private _formBuilder: FormBuilder) { }
+  constructor(private pythonPodcastService: PythonPodcastService, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
-    const site = document.getElementById(this.router.url.substring(1));
-    site.classList.add('active');
+    const link = document.getElementById('data-visualization');
+    link.classList.add('active');
 
     this.tablesLoading = true;
 
