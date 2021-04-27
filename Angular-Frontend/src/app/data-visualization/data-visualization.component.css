@@ -1,66 +1,75 @@
-/* COMMON STYLES */
-.container {
-  width: 80%;
-  margin-left: 10%;
-}
-
-.headers {
-  margin-left: 20px;
-  margin-right: 300px;
+.chip {
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
   color: white;
 }
 
-p {
-  line-height: 25px;
-  font-size: 0.85vw;
+h1, h2, h3, h4, h5, h6, i {
+  font-family: 'Playfair Display', serif;
 }
 
 a {
   text-decoration: none;
+}
+
+a:hover {
   color: #ffdb4d;
 }
 
-::ng-deep .mat-ink-bar {
-  background-color: #ffdb4d !important;
+ul {
+  list-style: none;
 }
 
-mat-spinner {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-
-  margin-left: -50px;
-  margin-top: -125px;
+ul li:before {
+  content: "\2022";
+  color: #0d6efd;
+  display: inline-block;
+  font-weight: bold;
+  width: 1em;
+  margin-left: -1em;
+  padding-bottom: 2px;
 }
 
-::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
-  stroke: #ffdb4d!important;
+li {
+  background-color: transparent;
 }
 
-/* TABLES SECTION */
-.tablesContainer {
-  margin-top: 50px;
-  width: 100%;
-  height: 700px;
-  border: 1px solid hsla(0,0%,100%,.2);
-  border-radius: 4px;
+/* Source Data */
+::ng-deep .mat-tab-label {
+  color: black!important;
 }
 
-.tablesContent {
-  width: 95%;
-  margin-left: 2.5%;
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: #0d6efd!important;
 }
 
-.tableContainer {
+::ng-deep .mat-tab-body-wrapper {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+  background-color: #0d6efd;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+  background: white;
+}
+
+.table-container {
+  max-height: 350px;
   overflow: auto;
-  height: 350px;
 }
 
-.tableDescription {
-  margin-right: 200px;
+.mat-table, .mat-paginator {
+  background: #212529;
+}
+
+th, td {
   color: white;
 }
-
+/* Detail Table Row */
 tr.element-row:not(.expanded-row):hover {
   background: rgb(245,245,245,0.2);
 }
@@ -82,53 +91,68 @@ tr.element-row:not(.expanded-row):active {
   padding: 20px;
 }
 
-/* WORLD CLOUD SECTION */
-.wordCloud {
-  margin-top: 50px;
-  width: 100%;
-  height: 800px;
-  border: 1px solid hsla(0,0%,100%,.2);
-  border-radius: 4px;
+/* Podcasts */
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #0d6efd!important;
+  color: white!important;
 }
 
-.wc-card {
-  width: 95%;
-  height: 90%;
-  padding-bottom: 30px;
+::ng-deep .mat-step-header .mat-step-label.mat-step-label-active {
+  color: black!important;
 }
 
-/* PODCASTS */
-.podcastViewer {
-  margin-top: 50px;
-  width: 100%;
-  height: 800px;
-  border: 1px solid hsla(0,0%,100%,.2);
-  border-radius: 4px;
+::ng-deep .mat-step-header .mat-step-label {
+  color: black!important;
 }
 
-mat-horizontal-stepper {
-  width: 95%;
-  margin-left: 2.5%;
+::ng-deep .mat-stepper-horizontal-line {
+  border-top-color: grey;
+}
+
+::ng-deep .mat-step-header .mat-step-icon {
+  color: black;
+  background-color: lightgrey;
+}
+
+.mat-stepper-horizontal {
+  background-color: white
+}
+
+.step-container {
+  height: 450px;
+}
+
+::ng-deep .mat-form-field-label {
+  color: black !important;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  color: white;
+  color: black;
 }
 
-mat-label {
-  color: white;
+::ng-deep .mat-focused .mat-form-field-label {
+  color: black !important;
 }
 
-input {
-  color: white;
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: #0d6efd!important;
 }
 
-.iconWhite {
-  color: white;
+::ng-deep mat-selection-list {
+  height: 350px;
+  overflow: auto;
 }
 
-mat-selection-list {
-  max-height: 450px;
-  overflow-y: auto;
+::ng-deep mat-list-option {
+  color: black !important;
 }
 
+::ng-deep .mat-list-option:hover {
+  background: rgb(245,245,245,0.8)!important;
+}
+
+.review-table-container {
+  height: 300px;
+  overflow: auto;
+  margin-bottom: 5px;
+}

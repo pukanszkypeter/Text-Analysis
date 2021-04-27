@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PythonPodcastService} from '../services/python-podcast.service';
+import {SapPodcastService} from '../services/sap-podcast.service';
+
 // Data
 import {Category} from '../data/Category';
 import {Podcast} from '../data/Podcast';
@@ -10,6 +12,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -28,28 +31,34 @@ export class DataVisualizationComponent implements OnInit {
 
   joker: any; // -> DTO
   tablesLoading: boolean;
+  // Snack Bar
+  serverRT: number;
 
   // Tables Data
   categories: Category[] = [];
   categoriesLength: number;
   categoriesColumns: string[] = ['podcastId', 'category'];
   categoriesSource: MatTableDataSource<Category>;
+  categoriesTableActive = true;
 
   podcasts: Podcast[] = [];
   podcastsLength: number;
   podcastsColumns: string[] = ['title', 'slug', 'itunesUrl', 'itunesId', 'podcastId'];
   podcastsSource: MatTableDataSource<Podcast>;
+  podcastsTableActive = false;
 
   reviews: Review[] = [];
   reviewsLength: number;
   reviewsColumns: string[] = ['podcastId', 'title', 'rating', 'createdAt'];
   reviewsSource: MatTableDataSource<Review>;
   expandedElement: Review | null;
+  reviewsTableActive = false;
 
   runs: Run[] = [];
   runsLength: number;
   runsColumns: string[] = ['runAt', 'maxRowid', 'reviewsAdded'];
   runsSource: MatTableDataSource<Run>;
+  runsTableActive = false;
 
   @ViewChild('categoriesPaginator') categoriesPaginator: MatPaginator;
   @ViewChild('podcastsPaginator') podcastsPaginator: MatPaginator;
@@ -66,17 +75,59 @@ export class DataVisualizationComponent implements OnInit {
   searchReviewsLength: number;
   searchReviews: Review[] = [];
 
-  // tslint:disable-next-line:variable-name
-  constructor(private pythonPodcastService: PythonPodcastService, private _formBuilder: FormBuilder) { }
+  // Statistics
+  statisticsLoading = false;
+  sumCategories = [];
+  showSumCategories = false;
+  sumRatings = [];
+  showSumRatings = false;
+  avgRatingsPerYear = [];
+  showAvgRatingsPerYear = false;
+  bestCategories = [];
+  showBestCategories = false;
+
+  // Word Clouds
+  positiveCloud = false;
+  negativeCloud = false;
+  commonCloud = false;
+  rarestCloud = false;
+
+  // Articles
+  showArticle01 = false;
+  showArticle02 = false;
+  showArticle03 = false;
+  showArticle04 = false;
+
+  // tslint:disable-next-line:variable-name max-line-length
+  constructor(private pythonPodcastService: PythonPodcastService, private sapPodcastService: SapPodcastService, private _formBuilder: FormBuilder, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
     const link = document.getElementById('data-visualization');
     link.classList.add('active');
 
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+
+  }
+
+  openSnackBar(): void {
+    this._snackBar.open('Server Respone Time: ' + this.serverRT.toFixed(2).toString() + ' sec', 'Close', {
+      duration: 5000,
+      horizontalPosition: 'end',
+      verticalPosition: 'bottom'
+    });
+  }
+
+  loadTables(): void {
+
+    const startTime = new Date().getTime() / 1000;
+    this.showArticle01 = !this.showArticle01;
+
     this.tablesLoading = true;
 
-    // Runs on Init
+    // Runs
     this.pythonPodcastService.getRuns().subscribe(res => {
       this.joker = res;
       this.runsLength = 0;
@@ -97,7 +148,7 @@ export class DataVisualizationComponent implements OnInit {
       console.log('Coming soon...');
     });
 
-    // Reviews on Init
+    // Reviews
     this.pythonPodcastService.getReviews().subscribe(res => {
       this.joker = res;
       this.reviewsLength = 0;
@@ -120,7 +171,7 @@ export class DataVisualizationComponent implements OnInit {
       console.log('Coming soon...');
     });
 
-    // Podcasts on Init
+    // Podcasts
     this.pythonPodcastService.getPodcasts().subscribe(res => {
       this.joker = res;
       this.podcastsLength = 0;
@@ -143,7 +194,7 @@ export class DataVisualizationComponent implements OnInit {
       console.log('Coming soon...');
     });
 
-    // Categories on Init
+    // Categories
     this.pythonPodcastService.getCategories().subscribe(res => {
       this.joker = res;
       this.categoriesLength = 0;
@@ -164,26 +215,54 @@ export class DataVisualizationComponent implements OnInit {
     });
 
     setTimeout(() => {
-    this.tablesLoading = false;
+      this.tablesLoading = false;
+      const endTime = new Date().getTime() / 1000;
+      this.serverRT = (endTime - startTime);
+      this.openSnackBar();
     }, 1000);
 
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
+  }
 
+  activeLink(): void {
+    const current = document.getElementsByClassName('active');
+    current.item(0).classList.remove('active');
+    document.getElementById('home').classList.add('active');
+  }
+
+  getActiveMatTab(): void {
+    const activeTab = document.getElementsByClassName('mat-tab-label-active').
+    item(0).getElementsByClassName('mat-tab-label-content').item(0).textContent;
+    if (activeTab === 'Categories') {
+      this.categoriesTableActive = true; this.podcastsTableActive = false; this.reviewsTableActive = false; this.runsTableActive = false;
+    } else if (activeTab === 'Podcasts') {
+      this.categoriesTableActive = false; this.podcastsTableActive = true; this.reviewsTableActive = false; this.runsTableActive = false;
+    } else if (activeTab === 'Reviews') {
+      this.categoriesTableActive = false; this.podcastsTableActive = false; this.reviewsTableActive = true; this.runsTableActive = false;
+    } else if (activeTab === 'Runs') {
+      this.categoriesTableActive = false; this.podcastsTableActive = false; this.reviewsTableActive = false; this.runsTableActive = true;
+    }
   }
 
   filter(input: HTMLInputElement): void {
-    this.pythonPodcastService.filter( `{ "input": "${input.value}" }` ).subscribe(res => {
-      this.joker = res;
-      this.filterResultLength = this.joker.output.length;
-      for (let i = 0; i < this.filterResultLength; i++) {
-        this.filterResult.push(this.joker.output[i]);
-      }
-    });
+    this.filterResult = [];
+    this.searchResult = new Podcast();
+    this.searchCategories = [];
+    this.searchReviews = [];
+    if (input.value !== '') {
+      this.pythonPodcastService.filter(`{ "input": "${input.value}" }`).subscribe(res => {
+        this.joker = res;
+        this.filterResultLength = this.joker.output.length;
+        for (let i = 0; i < this.filterResultLength; i++) {
+          this.filterResult.push(this.joker.output[i]);
+        }
+      });
+    }
   }
 
   search(): void {
+    this.searchResult = new Podcast();
+    this.searchCategories = [];
+    this.searchReviews = [];
     const input = document.getElementById('title').innerHTML;
     this.pythonPodcastService.search( `{ "input": "${input}" }` ).subscribe(res => {
       this.joker = res;
@@ -213,6 +292,102 @@ export class DataVisualizationComponent implements OnInit {
         }
       });
     });
+  }
+
+  loadSumCategories(): void {
+    const startTime = new Date().getTime() / 1000;
+    this.statisticsLoading = true;
+    this.showSumCategories = true; this.showSumRatings = false; this.showAvgRatingsPerYear = false; this.showBestCategories = false;
+    this.sumCategories = [];
+    this.pythonPodcastService.getSumCategories().subscribe(res => {
+      // tslint:disable-next-line:prefer-for-of
+      for ( let i = 0; i < res.statistics.length; i++ ) {
+        this.sumCategories.push(res.statistics[i]);
+      }
+      this.statisticsLoading = false;
+      const endTime = new Date().getTime() / 1000;
+      this.serverRT = (endTime - startTime);
+      this.openSnackBar();
+    });
+  }
+
+  loadSumRatings(): void {
+    const startTime = new Date().getTime() / 1000;
+    this.statisticsLoading = true;
+    this.showSumCategories = false; this.showSumRatings = true; this.showAvgRatingsPerYear = false; this.showBestCategories = false;
+    this.sumRatings = [];
+    this.pythonPodcastService.getSumRatings().subscribe(res => {
+      // tslint:disable-next-line:prefer-for-of
+      for ( let i = 0; i < res.statistics.length; i++ ) {
+        this.sumRatings.push(res.statistics[i]);
+      }
+      this.statisticsLoading = false;
+      const endTime = new Date().getTime() / 1000;
+      this.serverRT = (endTime - startTime);
+      this.openSnackBar();
+    });
+  }
+
+  loadAvgRatingsPerYear(): void {
+    const startTime = new Date().getTime() / 1000;
+    this.statisticsLoading = true;
+    this.showSumCategories = false; this.showSumRatings = false; this.showAvgRatingsPerYear = true; this.showBestCategories = false;
+    this.avgRatingsPerYear = [];
+    this.pythonPodcastService.getRatingsPerYear().subscribe(res => {
+      // tslint:disable-next-line:prefer-for-of
+      for ( let i = 0; i < res.statistics.length; i++ ) {
+        this.avgRatingsPerYear.push(res.statistics[i]);
+      }
+      this.statisticsLoading = false;
+      const endTime = new Date().getTime() / 1000;
+      this.serverRT = (endTime - startTime);
+      this.openSnackBar();
+    });
+  }
+
+  loadBestCategories(): void {
+    const startTime = new Date().getTime() / 1000;
+    this.statisticsLoading = true;
+    this.showSumCategories = false; this.showSumRatings = false; this.showAvgRatingsPerYear = false; this.showBestCategories = true;
+    this.bestCategories = [];
+    this.pythonPodcastService.getBestCategories().subscribe(res => {
+      // tslint:disable-next-line:prefer-for-of
+      for ( let i = 0; i < res.statistics.length; i++ ) {
+        this.bestCategories.push(res.statistics[i]);
+      }
+      this.statisticsLoading = false;
+      const endTime = new Date().getTime() / 1000;
+      this.serverRT = (endTime - startTime);
+      this.openSnackBar();
+    });
+  }
+
+  showCloud(x: number): void {
+    if ( x === 0 ) {
+      if ( this.positiveCloud ) {
+        this.positiveCloud = false;
+      } else {
+        this.positiveCloud = true; this.negativeCloud = false; this.commonCloud = false; this.rarestCloud = false;
+      }
+    } else if ( x === 1 ) {
+      if ( this.negativeCloud ) {
+        this.negativeCloud = false;
+      } else {
+        this.positiveCloud = false; this.negativeCloud = true; this.commonCloud = false; this.rarestCloud = false;
+      }
+    } else if ( x === 2 ) {
+      if ( this.commonCloud ) {
+        this.commonCloud = false;
+      } else {
+        this.positiveCloud = false; this.negativeCloud = false; this.commonCloud = true; this.rarestCloud = false;
+      }
+    } else if ( x === 3 ) {
+      if ( this.rarestCloud ) {
+        this.rarestCloud = false;
+      } else {
+        this.positiveCloud = false; this.negativeCloud = false; this.commonCloud = false; this.rarestCloud = true;
+      }
+    }
   }
 
 }

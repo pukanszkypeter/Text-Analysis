@@ -6,7 +6,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 // Components
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import {HomeComponent} from './home/home.component';
 import { PythonComponent } from './python/python.component';
 import { SapComponent } from './sap/sap.component';
 import { TextAnalysisComponent } from './text-analysis/text-analysis.component';
@@ -31,6 +31,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatGridListModule,
     MatSelectModule,
     MatStepperModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

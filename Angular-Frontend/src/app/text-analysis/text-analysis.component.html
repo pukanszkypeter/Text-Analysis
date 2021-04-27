@@ -1,163 +1,326 @@
-<mat-list>
+<!-- BANNER -->
+<div class="p-4 p-md-5 mb-4 text-white rounded bg-dark" style="margin-top: 3vh">
+  <div class="col-md-10 px-0">
+    <h1 class="display-4 fst-italic">Predictive Analytics</h1>
+    <p class="lead my-3">Predictive analytics encompasses a variety of statistical techniques from <span class="chip"
+                                                                                                         style="background-color: darkorchid">data mining</span>,
+      <span class="chip" style="background-color: darkcyan">predictive modelling</span>, and <span class="chip"
+                                                                                                   style="background-color: crimson">machine learning</span>
+      that analyze current and historical
+      facts to make predictions about future or otherwise unknown events.</p>
+  </div>
+</div>
 
-  <!-- FULL CATEGORY PREDICTION -->
-  <mat-list-item>
-    <div class="navbar">
-      <h1>Full Category Prediction</h1>
-    </div>
-  </mat-list-item>
+<!-- Home Button -->
+<div class="row mb-4">
+  <div class="col-md-12">
+    <a routerLink="/home" type="button" class="btn btn-outline-primary btn-sm" (click)="activeLink()"><i
+      class="bi bi-arrow-left"></i> Back to Home</a>
+  </div>
+</div>
 
-  <div class="container">
-    <mat-card>
-      <h3>Leave a comment bellow to see your podcast category prediction</h3>
-      <!-- INPUT -->
-      <form>
-        <mat-form-field appearance="outline">
-          <mat-label>Comment</mat-label>
-          <input matInput #commentA maxlength="256" [formControl]="fullFormControl">
-          <mat-error *ngIf="fullFormControl.hasError('required')">
-            Comment is <strong>required</strong>
-          </mat-error>
-          <mat-hint align="end">{{commentA.value.length}} / 256</mat-hint>
-        </mat-form-field>
-      </form>
-      <!-- BUTTON -->
-      <button mat-raised-button class="predictButton" (click)="fullCategoryPredict(commentA)">Predict</button>
-      <!-- OUTPUT -->
-      <div id="fullSpacer">
-        <mat-chip-list>
-          <mat-chip *ngIf="fullOutput"
-                    [ngClass]="{ 'chip-error': fullOutput === 'error' }">{{fullOutput | uppercase}}</mat-chip>
-        </mat-chip-list>
-        <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="fullSpinner"></mat-spinner>
+<div class="row mb-4">
+
+  <div class="col-md-9 mb-5">
+
+    <h3 class="pb-4 mb-4 fst-italic border-bottom">Predictive Analytics</h3>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="full">Full Category Prediction</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> March 21, 2021</p>
+      <p *ngIf="!showArticle01">Full category prediction works based on a classification algorithm.</p>
+      <p *ngIf="!showArticle01">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle01 = !showArticle01"><i
+          class="bi bi-arrow-90deg-down"></i> Continue reading
+        </button>
+      </p>
+      <div *ngIf="showArticle01">
+        <p></p>
+        <p>Full category prediction works based on a <span style="background-color: coral;" class="chip">classification algorithm</span>. I used the <span class="chip" style="background-color: dodgerblue">Naive Bayes</span> classification,
+          which is based on Bayes theorem.
+          This makes it easy to categorize incoming reviews. Take the application database, for example, where each
+          podcast channel can belong to more than one category
+          and we already have feedback on the channels. This way, our algorithm can learn which feedback belongs to
+          which category and then classify future comments based on it.
+          Have a look at the possible categories, then try the trained algorithm and predict some results.</p>
+        <h4>Possible Categories</h4>
+        <p></p>
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Podcast Categories #26
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                 data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <ul class="list-group list-group-flush" style="height: 250px;overflow: auto">
+                  <li class="list-group-item list-group-item-action text-center"
+                      *ngFor="let category of categories">{{category}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p></p>
+        <h4>The Algorithm</h4>
+        <p>After looking at all the possible categories, try the algorithm below. Simply write a comment and then click
+          the Predict button.</p>
+        <div class="row mt-4 mb-4">
+          <div class="col text-center">
+            <form>
+              <mat-form-field>
+                <mat-label>Comment</mat-label>
+                <input matInput #commentA maxlength="256" [formControl]="fullFormControl">
+                <mat-error *ngIf="fullFormControl.hasError('required')">
+                  Comment is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="end">{{commentA.value.length}} / 256</mat-hint>
+              </mat-form-field>
+            </form>
+          </div>
+        </div>
+        <div class="d-grid col-2 mx-auto mb-4">
+          <button class="btn btn-outline-dark btn-sm" type="button" (click)="fullCategoryPredict(commentA)"
+                  [disabled]="fullSpinner || partialD || partialSpinner || sentimentSpinner">Predict <i
+            class="bi bi-arrow-down"></i></button>
+        </div>
+        <div class="d-grid col-6 mx-auto">
+          <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="fullSpinner"></mat-spinner>
+          <div *ngIf="fullSuccess" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            {{fullOutput | uppercase}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <div *ngIf="fullError" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+            Server Error
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+        <p style="text-align: right;">
+          <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle01 = !showArticle01"><i
+            class="bi bi-arrow-90deg-up"></i> Close
+          </button>
+        </p>
       </div>
-      <!-- INFO PANEL -->
-      <div id="fullInfoPanel">
-        <mat-icon class="icons" svgIcon="info" (click)="fullInfoPanel()"></mat-icon>
+    </article><!-- Full Category Prediction -->
+
+    <hr>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="partial">Partial Category Prediction</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> April 28, 2021</p>
+      <p *ngIf="!showArticle02">Partial category prediction works similarly to the algorithm above.</p>
+      <p *ngIf="!showArticle02">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle02 = !showArticle02"><i
+          class="bi bi-arrow-90deg-down"></i> Continue reading
+        </button>
+      </p>
+      <div *ngIf="showArticle02">
+        <p></p>
+        <p>Partial category prediction works similarly to the algorithm above, with the difference that you can
+          <span class="chip" style="background-color: darkorchid">teach the algorithm</span> to click on.
+          You can find the same categories below, with the difference that now you have to select a few pieces based on
+          which the algorithm should learn.
+          Keep in mind that you can select a <b>minimum of 2 but a maximum of 5</b> categories in order for the application
+          server to continue to operate stably.</p>
+        <h4>1. Choose categories</h4>
+        <p></p>
+        <div class="accordion mb-4 mt-4" id="accordionList">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingList">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
+                Podcast Categories #26
+              </button>
+            </h2>
+            <div id="collapseList" class="accordion-collapse collapse" aria-labelledby="headingList"
+                 data-bs-parent="#accordionList">
+              <div class="accordion-body">
+                <mat-selection-list #genres>
+                  <mat-list-option *ngFor="let category of categories">
+                    {{category}}
+                  </mat-list-option>
+                </mat-selection-list>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>
+          Podcast selected: {{genres.selectedOptions.selected.length}}
+        </p>
+        <div class="d-grid col-2 mx-auto mb-4">
+          <button class="btn btn-outline-dark btn-sm" type="button" (click)="trainModel(genres)"
+                  [disabled]="fullSpinner || partialD || partialSpinner || sentimentSpinner">Train Model <i
+            class="bi bi-arrow-repeat"></i></button>
+        </div>
+        <div class="d-grid col-6 mx-auto">
+          <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="partialD"></mat-spinner>
+          <div *ngIf="partialC" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            {{trainOutput}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <div *ngIf="partialA" class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+            You need to choose min. 2 category!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <div *ngIf="partialB" class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+            You can only choose max. 5 category!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <div *ngIf="partialE" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+            Server Error
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+        <p></p>
+        <h4>2. Predict comment</h4>
+        <p>
+          After training your own model leave a comment down below to see your results.
+        </p>
+        <div class="row mt-4 mb-4">
+          <div class="col text-center">
+            <form>
+              <mat-form-field>
+                <mat-label>Comment</mat-label>
+                <input matInput #commentB maxlength="256" [formControl]="partialFormControl">
+                <mat-error *ngIf="partialFormControl.hasError('required')">
+                  Comment is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="end">{{commentB.value.length}} / 256</mat-hint>
+              </mat-form-field>
+            </form>
+          </div>
+        </div>
+        <div class="d-grid col-2 mx-auto mb-4">
+          <button class="btn btn-outline-dark btn-sm" type="button" (click)="partialCategoryPredict(commentB)"
+                  [disabled]="fullSpinner || partialD || partialSpinner || sentimentSpinner || !modelTrained">Predict <i
+            class="bi bi-arrow-down"></i></button>
+        </div>
+        <div class="d-grid col-6 mx-auto">
+          <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="partialSpinner"></mat-spinner>
+          <div *ngIf="partialSuccess" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            {{partialOutput | uppercase}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <div *ngIf="partialError" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+            Server Error
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+        <p style="text-align: right;">
+          <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle02 = !showArticle02"><i
+            class="bi bi-arrow-90deg-up"></i> Close
+          </button>
+        </p>
       </div>
-      <!-- CATEGORIES -->
-      <div id="overlay">
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Possible categories
-              </mat-panel-title>
-              <mat-panel-description>
-                These categories could be predicted.
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <ul id="fullCategories">
-              <li *ngFor="let category of categories">{{category}}</li>
-            </ul>
-          </mat-expansion-panel>
-        </mat-accordion>
+    </article><!-- Partial Category Prediction -->
+
+    <hr>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="sentiment">Sentiment Analysis</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> May 04, 2021</p>
+      <p *ngIf="!showArticle03">Sentiment analysis is the use of natural language processing.</p>
+      <p *ngIf="!showArticle03">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle03 = !showArticle03"><i
+          class="bi bi-arrow-90deg-down"></i> Continue reading
+        </button>
+      </p>
+      <div *ngIf="showArticle03">
+        <p></p>
+        <p>Sentiment analysis (also known as <span class="chip" style="background-color: coral">opinion mining</span> or <span class="chip" style="background-color: royalblue">emotion AI</span>) is the use of natural language processing,
+          text analysis, computational linguistics, and biometrics to systematically identify, extract, quantify,
+          and study affective states and subjective information. Sentiment analysis is widely applied to <span class="chip" style="background-color: brown;">voice of the customer</span>
+          materials such as reviews and survey responses, online and social media, and healthcare materials for applications
+          that range from marketing to customer service to clinical medicine.</p>
+        <p>I personally used the <span class="chip" style="background-color: green;">Random Forest</span> classification algorithm to teach a model on a two-dimensional scale
+          <b>(positive / negative)</b>.
+          In this case, since the podcast reviews had star ratings, it could easily be categorized by sentiment.
+          Because the data set contained a lot of 5-star ratings, we rated all 5 and 4-star ratings as positive
+          sentiment
+          and all under 4 stars as negative.</p>
+        <h4>The Algorithm</h4>
+        <p>Leave a comment down below and see your results.</p>
+        <p></p>
+        <div class="row mt-4 mb-4">
+          <div class="col text-center">
+            <form>
+              <mat-form-field>
+                <mat-label>Comment</mat-label>
+                <input matInput #commentC maxlength="256" [formControl]="sentimentFormControl">
+                <mat-error *ngIf="sentimentFormControl.hasError('required')">
+                  Comment is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="end">{{commentC.value.length}} / 256</mat-hint>
+              </mat-form-field>
+            </form>
+          </div>
+        </div>
+        <div class="d-grid col-2 mx-auto mb-4">
+          <button class="btn btn-outline-dark btn-sm" type="button" (click)="sentimentAnalysis(commentC)"
+                  [disabled]="fullSpinner || partialD || partialSpinner || sentimentSpinner">Predict <i
+            class="bi bi-arrow-down"></i></button>
+        </div>
+        <div class="d-grid col-6 mx-auto">
+          <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="sentimentSpinner"></mat-spinner>
+          <div *ngIf="sentimentSuccess" class="alert alert-success alert-dismissible fade show text-center"
+               role="alert">
+            {{sentimentOutput | uppercase}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <div *ngIf="sentimentError" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+            Server Error
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+        <p style="text-align: right;">
+          <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle03 = !showArticle03"><i
+            class="bi bi-arrow-90deg-up"></i> Close
+          </button>
+        </p>
       </div>
-    </mat-card>
+    </article><!-- Sentiment Analysis -->
+
   </div>
 
-  <mat-divider></mat-divider>
+  <div class="col-md-3 mb-5">
 
-  <!-- PARTIAL CATEGORY PREDICTION -->
-  <mat-list-item>
-    <div class="navbar">
-      <h1>Partial Category Prediction</h1>
+    <!-- Logo -->
+    <p class="text-center"><img src="assets/home/cards/text-analysis-card.jpg" class="img-fluid rounded" width="250"
+                                height="350"/></p>
+
+    <!-- Posts -->
+    <div class="p-4 mb-3 border rounded">
+      <h4 class="fst-italic"><i class="bi bi-stickies-fill"></i> Posts</h4>
+      <ol class="list-unstyled mb-0">
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/predictive-analytics#full"> Full
+          Category Prediction</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/predictive-analytics#partial"> Partial
+          Category Prediction</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/predictive-analytics#sentiment">
+          Sentiment Analysis</a></li>
+      </ol>
     </div>
-  </mat-list-item>
 
-  <div class="container">
-    <mat-card id="partialCard">
-      <h3>1. Choose some category and train your model</h3>
-      <!-- CATEGORIES -->
-      <ul id="partialCategories">
-        <li *ngFor="let category of categories" id="partialCategory">
-          <mat-checkbox>{{category}}</mat-checkbox>
-        </li>
-      </ul>
-      <div class="errorMessagePanel" *ngIf="partialA">
-        <p class="errorMessage">Error! You need to choose min. 2 category!</p>
-      </div>
-      <div class="errorMessagePanel" *ngIf="partialB">
-        <p class="errorMessage">Error! You can only choose max. 5 category!</p>
-      </div>
-      <div class="errorMessagePanel" *ngIf="partialC" style="background-color: #00FF99">
-        <p class="errorMessage">{{trainOutput}}</p>
-      </div>
-      <div class="errorMessagePanel" *ngIf="partialD" style="background-color: transparent">
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-      </div>
-      <!-- TRAIN BUTTON -->
-      <button mat-raised-button id="trainButton" (click)="trainModel()" [disabled]="partialD">Train Model</button>
-      <h3>2. And now write a comment to test your model</h3>
-      <!-- INPUT -->
-      <form>
-        <mat-form-field appearance="outline">
-          <mat-label>Comment</mat-label>
-          <input matInput #commentB maxlength="256" [formControl]="partialFormControl">
-          <mat-error *ngIf="partialFormControl.hasError('required')">
-            Comment is <strong>required</strong>
-          </mat-error>
-          <mat-hint align="end">{{commentB.value.length}} / 256</mat-hint>
-        </mat-form-field>
-      </form>
-      <!-- BUTTON -->
-      <button mat-raised-button id="partialButton" (click)="partialCategoryPredict(commentB)" [disabled]="modelTrained">
-        Predict
-      </button>
-      <!-- OUTPUT -->
-      <div id="partialSpacer">
-        <mat-chip-list>
-          <mat-chip *ngIf="partialOutput"
-                    [ngClass]="{ 'chip-error': partialOutput === 'error' }">{{partialOutput | uppercase}}</mat-chip>
-        </mat-chip-list>
-        <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="partialSpinner"></mat-spinner>
-      </div>
-      <!-- INFO PANEL -->
-      <div id="partialInfoPanel">
-        <mat-icon class="icons" svgIcon="info" (click)="partialInfoPanel()"></mat-icon>
-      </div>
-    </mat-card>
+    <!-- Useful Links -->
+    <div class="p-4 mb-3 border rounded">
+      <h4 class="fst-italic"><i class="bi bi-link-45deg"></i> Useful Links</h4>
+      <ol class="list-unstyled mb-0">
+        <li><i class="bi bi-arrow-right-short"></i><a
+          href="https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html"
+          target="_blank"> Multinomial Naive Bayes</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a
+          href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html"
+          target="_blank"> Random Forest Classifier</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/data-visualization"> Data
+          Visualization</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/sap"> SAP Environment</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/python"> Python Environment</a></li>
+      </ol>
+    </div>
+
   </div>
 
-  <mat-divider></mat-divider>
-
-  <!-- SENTIMENT ANALYSIS -->
-  <mat-list-item>
-    <div class="navbar">
-      <h1>Sentiment Analysis</h1>
-    </div>
-  </mat-list-item>
-
-  <div class="container">
-    <mat-card>
-      <h3 style="margin-top: 10px;">Do you want to analyze your feelings? Give some feedback and see your emotions.</h3>
-      <!-- INPUT -->
-      <form style="margin-top: 40px;">
-        <mat-form-field appearance="outline">
-          <mat-label>Comment</mat-label>
-          <input matInput #commentC maxlength="256" [formControl]="sentimentFormControl">
-          <mat-error *ngIf="sentimentFormControl.hasError('required')">
-            Comment is <strong>required</strong>
-          </mat-error>
-          <mat-hint align="end">{{commentC.value.length}} / 256</mat-hint>
-        </mat-form-field>
-      </form>
-      <!-- BUTTON -->
-      <button mat-raised-button class="predictButton" (click)="sentimentAnalysis(commentC)">Predict</button>
-      <!-- OUTPUT -->
-      <div id="sentimentSpacer">
-        <mat-chip-list>
-          <mat-chip *ngIf="sentimentOutput"
-                    [ngClass]="{ 'chip-error': sentimentOutput === 'error' }">{{sentimentOutput | uppercase}}</mat-chip>
-        </mat-chip-list>
-        <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="sentimentSpinner"></mat-spinner>
-      </div>
-      <!-- INFO PANEL -->
-      <div id="sentimentInfoPanel">
-        <mat-icon class="icons" svgIcon="info" (click)="sentimentInfoPanel()"></mat-icon>
-      </div>
-    </mat-card>
-  </div>
-
-</mat-list>
-
+</div>

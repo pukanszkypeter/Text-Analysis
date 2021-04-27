@@ -2,74 +2,24 @@
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 5px;
+  color: white;
 }
 
 .site-link {
   width: 150px;
 }
 
-#homeBanner {
-  margin-top: 5vh;
-  width: 100%;
-  height: auto;
-}
-
-mat-divider {
-  width: 80%;
-  margin-left: 10%;
-  background-color: #1E90FF;
-}
-
-.contentContainer {
-  width: 50%;
-  margin-left: 25%;
-
-  margin-top: 5vh;
-  margin-bottom: 5vh;
-
-  color: white;
-  font-size: 0.85vw;
-}
-
-#homeOne {
-  width: 100%;
-  height: auto;
-}
-
-.quote {
-  width: 100%;
-  margin-top: 5vh;
-  font-size: 0.9vw;
-  text-align: center;
+h1, h2, h3, h4, h5, h6, i {
+  font-family: 'Playfair Display', serif;
 }
 
 ul {
   list-style: none;
 }
 
-.mat-raised-button {
-  background-color: #1E90FF;
-  line-height: 30px;
-  min-width: 50px;
-  margin-left: 5px;
-}
-
-.predictResult {
-  margin-left: 45%;
-  width: 10%;
-  text-align: center;
-  background-color: #1E90FF;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-::ng-deep .mat-progress-bar-background {
-  fill: #1E90FF !important;
-}
-
 ul li:before {
   content: "\2022";
-  color: #1E90FF;
+  color: #0d6efd;
   display: inline-block;
   font-weight: bold;
   width: 1em;
@@ -77,21 +27,25 @@ ul li:before {
   padding-bottom: 2px;
 }
 
-#homeTwo {
-  width: 100%;
-  height: auto;
-}
-
 .listDescription li:before {
   color: #ffdb4d;
 }
 
-#homeThree {
-  width: 100%;
-  height: auto;
+.mat-raised-button {
+  background-color: #0d6efd;
+  line-height: 25px;
+  min-width: 40px;
+  margin-left: 5px;
 }
 
-#homeFour {
-  width: 100%;
-  height: auto;
+::ng-deep .mat-progress-bar-background {
+  fill: #0d6efd !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffdb4d;
 }

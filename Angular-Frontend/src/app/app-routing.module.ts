@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'data-visualization', component: DataVisualizationComponent },
   { path: 'sap', component: SapComponent },
   { path: 'python', component: PythonComponent },
-  { path: 'text-analysis', component: TextAnalysisComponent },
+  { path: 'predictive-analytics', component: TextAnalysisComponent },
 ];
 
 @NgModule({

@@ -1,0 +1,476 @@
+<!-- Banner -->
+<div class="p-4 p-md-5 mb-4 text-white rounded bg-dark" style="margin-top: 3vh">
+  <div class="col-md-10 px-0">
+    <h1 class="display-4 fst-italic">SAP HANA 2.0</h1>
+    <p class="lead my-3">SAP HANA is an <span class="chip" style="background-color: royalblue">in-memory</span>,
+      <span class="chip" style="background-color: brown">column-oriented</span>, <span class="chip" style="background-color: blueviolet;">relational database</span> management system developed and marketed by SAP SE.
+      Its primary function as the software running a database server is to store and retrieve data as requested by the applications.</p>
+  </div>
+</div>
+
+<!-- Home Button -->
+<div class="row mb-4">
+  <div class="col-md-12">
+    <a routerLink="/home" type="button" class="btn btn-outline-primary btn-sm" (click)="activeLink()"><i
+      class="bi bi-arrow-left"></i> Back to Home</a>
+  </div>
+</div>
+
+<div class="row mb-4">
+
+  <div class="col-md-9 mb-5">
+
+    <h3 class="pb-4 mb-4 fst-italic border-bottom">SAP HANA</h3>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="introduction">Introduction</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> February 28, 2021</p>
+      <p *ngIf="!articleIntroduction">SAP HANA (high-performance analytic appliance) is an in-memory, column-oriented,
+        relational database management system.</p>
+      <p *ngIf="!articleIntroduction"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleIntroduction = !articleIntroduction"><i class="bi bi-arrow-90deg-down"></i> Continue reading</button></p>
+      <div *ngIf="articleIntroduction">
+      <p></p>
+        <p>SAP HANA (high-performance analytic appliance) is an <span class="chip" style="background-color: royalblue">in-memory</span>,
+          <span class="chip" style="background-color: brown">column-oriented</span>,
+          <span class="chip" style="background-color: blueviolet;">relational database</span> management system developed and marketed by SAP SE.
+        Its primary function as the software running a database server is to store and retrieve data as requested by the applications.
+        In addition, it performs advanced analytics (predictive analytics, spatial data processing,
+        text analytics, text search, streaming analytics, graph data processing) and includes extract,
+        transform, load (ETL) capabilities as well as an application server.</p>
+      <div class="d-flex justify-content-center mb-4"><img class="img-fluid img-thumbnail" src="assets/sap/logo.png" width="350" height="175"/></div>
+      <h4>Role in the Blog</h4>
+      <p>During the preparation of my bachelor's thesis and the application, I also used a similar HANA server for my backend services.
+        I mainly used it to publish the models of my data set and the results of the text analysis options,
+        which can be accessed at the following link: <a href="https://oktnb132.inf.elte.hu:51026/" target="_blank">https://oktnb132.inf.elte.hu:51026/</a>.</p>
+      <p style="text-align: right;"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleIntroduction = !articleIntroduction"><i class="bi bi-arrow-90deg-up"></i> Close</button></p>
+      </div>
+    </article><!-- Introduction -->
+
+    <hr>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="textAnalysis">Text Analysis</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> March 09, 2021</p>
+      <p *ngIf="!articleAnalysis">Text Analysis capabilities and possibilities in SAP HANA platform.</p>
+      <p *ngIf="!articleAnalysis"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleAnalysis = !articleAnalysis"><i class="bi bi-arrow-90deg-down"></i> Continue reading</button></p>
+      <div *ngIf="articleAnalysis">
+      <p></p>
+      <h4>Capabilities</h4>
+      <p>We are in world of google, where we are getting immediate results to our queries irrespective
+        of the fact whether we know what we are looking for or not. Similar functionality is achieved using
+        SAP HANA Full Text Search. TREX Engine/In-database Search engine which is one of the core component
+        of HANA used for search enablement, text analysis and mining. The picture below shows supported text capabilities in HANA platform.</p>
+      <div class="d-flex justify-content-center mb-4"><img class="img-fluid img-thumbnail" src="assets/sap/capabilities.png" width="300" height="350"/></div>
+      <h4>Possibilities</h4>
+      <p>Text Analysis powered by SAP HANA uses pre-processor server which applies full linguistic and statistical
+        techniques to extract and classify unstructured text into entities and domains.
+        The figure shows the SAP HANA Architecture Text Capabilities.</p>
+      <div class="d-flex justify-content-center mb-4"><img class="img-fluid img-thumbnail" src="assets/sap/structure.png" width="600" height="400"/></div>
+      <p>SAP HANA stores the information in index-specific tables.
+        Creating a full-text index with parameter <b>TEXT ANALYSIS ON</b> triggers the creation of a table named
+        <b>$TA_(index name)</b> containing linguistic or semantic analysis results.</p>
+      <p>Language modules use the following language processing technologies:</p>
+      <ul>
+        <li><span class="chip" style="background-color: darkcyan">Linguistic analysis</span> to handle natural language processing</li>
+        <li><span class="chip" style="background-color: crimson">Entity extraction</span> to handle named entity extraction</li>
+        <li><span class="chip" style="background-color: sandybrown">Fact extraction</span> to handle sentiment analysis, public sector events, and enterprise facts</li>
+        <li><span class="chip" style="background-color: royalblue">Grammatical role analysis</span> to handle functional syntactic roles in the sentence, such as subject or object (only in English)</li>
+      </ul>
+      <p style="text-align: right;"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleAnalysis = !articleAnalysis"><i class="bi bi-arrow-90deg-up"></i> Close</button></p>
+      </div>
+    </article><!-- Text Analysis -->
+
+    <hr>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="linguistic">Linguistic Analysis</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> March 12, 2021</p>
+      <p *ngIf="!articleLinguistic">Linguistic analysis refers to the scientific analysis of a language sample.</p>
+      <p *ngIf="!articleLinguistic"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleLinguistic = !articleLinguistic"><i class="bi bi-arrow-90deg-down"></i> Continue reading</button></p>
+      <div *ngIf="articleLinguistic">
+      <p></p>
+        <p>Linguistic analysis refers to the scientific <span class="chip" style="background-color: green">analysis of a language sample</span>.
+        It involves at least one of the five main branches of linguistics, which are phonology, morphology, syntax, semantics, and pragmatics.
+        In SAP HANA, there are 3 options for linguistic analysis:</p>
+      <ul>
+        <li><b>Basic</b> (LINGANALYSIS_BASIC)</li>
+        <li><b>Stems</b> (LINGANALYSIS_STEMS)</li>
+        <li><b>Full</b> (LINGANALYSIS_FULL)</li>
+      </ul>
+      <p>In my case, I tried the full option. This form supports <i>Tagging, Segmentation and Stemming</i>.
+        In addition to the normalized and stemmed forms, the <b>TA_TYPE</b> column will be populated with parts of speech.
+        This is the most detailed level of linguistic data available.</p>
+      <h4>The Result Tables</h4>
+      <div class="d-flex justify-content-around mt-4 mb-4">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showLinguisticTables(0)">Default Table <i *ngIf="!showLinguistic" class="bi bi-arrow-down"></i><i *ngIf="showLinguistic" class="bi bi-arrow-up"></i></button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showLinguisticTables(1)">Types Table <i *ngIf="!showLinguisticTypes" class="bi bi-arrow-down"></i><i *ngIf="showLinguisticTypes" class="bi bi-arrow-up"></i></button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showLinguisticTables(2)">Data Table <i *ngIf="!showLinguisticData" class="bi bi-arrow-down"></i><i *ngIf="showLinguisticData" class="bi bi-arrow-up"></i></button>
+      </div>
+      <div *ngIf="showLinguistic" class="mb-4">
+        <p>The default table shows the index columns obtained after analysis.
+          There is a lot of information to be extracted from them, but I will only present the first 50 rows.</p>
+        <div style="height: 400px;overflow: auto;">
+        <table class="table table-dark table-striped table-hover">
+          <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">taRule</th>
+            <th scope="col">taCounter</th>
+            <th scope="col">taToken</th>
+            <th scope="col">taLanguage</th>
+            <th scope="col">taType</th>
+            <th scope="col">taTypeExpanded</th>
+            <th scope="col">taNormalized</th>
+            <th scope="col">taStem</th>
+            <th scope="col">taParagraph</th>
+            <th scope="col">taSentence</th>
+            <th scope="col">taCreatedAt</th>
+            <th scope="col">taOffset</th>
+            <th scope="col">taParent</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let ling of linguistic">
+            <td>{{ ling.id }}</td>
+            <td>{{ ling.taRule }}</td>
+            <td>{{ ling.taCounter }}</td>
+            <td>{{ ling.taToken }}</td>
+            <td>{{ ling.taLanguage }}</td>
+            <td>{{ ling.taType }}</td>
+            <td>{{ ling.taTypeExpanded === null ? 'null' : ling.taTypeExpanded }}</td>
+            <td>{{ ling.taNormalized }}</td>
+            <td>{{ ling.taStem === null ? 'null' : ling.taStem }}</td>
+            <td>{{ ling.taParagraph }}</td>
+            <td>{{ ling.taSentence }}</td>
+            <td>{{ ling.taCreatedAt }}</td>
+            <td>{{ ling.taOffset }}</td>
+            <td>{{ ling.taParent === null ? 'null' : ling.taParent }}</td>
+          </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <div *ngIf="showLinguisticTypes" class="mb-4">
+        <p>The type table shows all the grammatical categories by which the linguistic analysis recognized the words.</p>
+        <div style="height: 400px;overflow: auto;">
+          <table class="table table-dark table-striped table-hover">
+            <thead>
+            <tr>
+              <th scope="col" class="text-center">taType</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let ling of linguisticTypes">
+              <td class="text-center">{{ ling.taType }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="showLinguisticData" class="mb-4">
+        <p>The data table is perhaps the most interesting, as we have filtered out the most important details
+          of the linguistic analysis from the many data. For each grammatical category, we selected 5 random words,
+          the normalized and stemmed types of which can be viewed.</p>
+        <div style="height: 400px;overflow: auto;">
+          <table class="table table-dark table-striped table-hover">
+            <thead>
+            <tr>
+              <th scope="col" class="text-center" style="width: 33.3%">taStem</th>
+              <th scope="col" class="text-center" style="width: 33.3%">taNormalized</th>
+              <th scope="col" class="text-center" style="width: 33.3%">taType</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let ling of linguisticData">
+              <td class="text-center" style="width: 33.3%">{{ ling.taStem }}</td>
+              <td class="text-center" style="width: 33.3%">{{ ling.taNormalized }}</td>
+              <td class="text-center" style="width: 33.3%">{{ ling.taType }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p style="text-align: right;"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleLinguistic = !articleLinguistic"><i class="bi bi-arrow-90deg-up"></i> Close</button></p>
+      </div>
+    </article><!-- Linguistic Analysis -->
+
+    <hr>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="extraction">Entity and Fact Extraction</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> March 21, 2021</p>
+      <p *ngIf="!articleExtraction">Entity extraction is a text analysis technique that uses Natural Language Processing (NLP).</p>
+      <p *ngIf="!articleExtraction"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleExtraction = !articleExtraction"><i class="bi bi-arrow-90deg-down"></i> Continue reading</button></p>
+      <div *ngIf="articleExtraction">
+      <p></p>
+        <p>Entity extraction is a text analysis technique that uses <span class="chip" style="background-color: coral">Natural Language Processing</span> (NLP) to
+          automatically pull out specific data from <span class="chip" style="background-color: dodgerblue">unstructured text</span>, and classifies it according to
+          <span class="chip" style="background-color: deeppink">predefined categories</span>.
+        These categories are named entities, the words or phrases that represent a noun.
+        In SAP HANA, you can use these options:</p>
+      <ul>
+        <li><b>Core</b> (EXTRACTION_CORE)</li>
+        <li><b>Core Voice Of Customer</b> (EXTRACTION_CORE_VOICEOFCUSTOMER)</li>
+        <li><b>Core Enterprise</b> (EXTRACTION_CORE_ENTERPRISE)</li>
+        <li><b>Core Public Sector</b> (EXTRACTION_CORE_PUBLIC_SECTOR)</li>
+      </ul>
+      <p>I focused on the second option. This form is to extracts additional entities and facts
+        beyond the core configuration to support sentiment and request analysis.
+        Also known as Sentiment Analysis which is the process of using rules to retrieve specific
+        information about customers’ sentiments and requests when processing and analyzing text.
+        These same rules also retrieve emoticons and profanities.</p>
+      <h4>The Result Tables</h4>
+      <div class="d-flex justify-content-around mt-4 mb-4">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showExtractionTables(0)">Default Table <i *ngIf="!showExtraction" class="bi bi-arrow-down"></i><i *ngIf="showExtraction" class="bi bi-arrow-up"></i></button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showExtractionTables(1)">Types Table <i *ngIf="!showExtractionTypes" class="bi bi-arrow-down"></i><i *ngIf="showExtractionTypes" class="bi bi-arrow-up"></i></button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showExtractionTables(2)">Data Table <i *ngIf="!showExtractionData" class="bi bi-arrow-down"></i><i *ngIf="showExtractionData" class="bi bi-arrow-up"></i></button>
+      </div>
+      <div *ngIf="showExtraction" class="mb-4">
+        <p>Both entity and fact extraction generates a lot of data, but I only brought the first 50 rows now.
+          You can see the basic table here. Perhaps the most important columns are taToken and taType.</p>
+        <div style="height: 400px;overflow: auto;">
+          <table class="table table-dark table-striped table-hover">
+            <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">taRule</th>
+              <th scope="col">taCounter</th>
+              <th scope="col">taToken</th>
+              <th scope="col">taLanguage</th>
+              <th scope="col">taType</th>
+              <th scope="col">taTypeExpanded</th>
+              <th scope="col">taNormalized</th>
+              <th scope="col">taStem</th>
+              <th scope="col">taParagraph</th>
+              <th scope="col">taSentence</th>
+              <th scope="col">taCreatedAt</th>
+              <th scope="col">taOffset</th>
+              <th scope="col">taParent</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let ext of extraction">
+              <td>{{ ext.id }}</td>
+              <td>{{ ext.taRule }}</td>
+              <td>{{ ext.taCounter }}</td>
+              <td>{{ ext.taToken }}</td>
+              <td>{{ ext.taLanguage }}</td>
+              <td>{{ ext.taType }}</td>
+              <td>{{ ext.taTypeExpanded === null ? 'null' : ext.taTypeExpanded }}</td>
+              <td>{{ ext.taNormalized === null ? 'null' : ext.taNormalized }}</td>
+              <td>{{ ext.taStem }}</td>
+              <td>{{ ext.taParagraph }}</td>
+              <td>{{ ext.taSentence }}</td>
+              <td>{{ ext.taCreatedAt }}</td>
+              <td>{{ ext.taOffset }}</td>
+              <td>{{ ext.taParent === null ? 'null' : ext.taParent }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="showExtractionTypes" class="mb-4">
+        <p>The type table contains the categories (entities, facts) based on which the text parser classified the tokens.</p>
+        <div style="height: 400px;overflow: auto;">
+          <table class="table table-dark table-striped table-hover">
+            <thead>
+            <tr>
+              <th scope="col" class="text-center">taType</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let ext of extractionTypes">
+              <td class="text-center">{{ ext.taType }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="showExtractionData" class="mb-4">
+        <p>In this table, we have collected a couple of the most interesting entities.</p>
+        <div style="height: 400px;overflow: auto;">
+          <table class="table table-dark table-striped table-hover">
+            <thead>
+            <tr>
+              <th scope="col" class="text-center" style="width: 50%">taToken</th>
+              <th scope="col" class="text-center" style="width: 50%">taType</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let ext of extractionData">
+              <td class="text-center" style="width: 50%">{{ ext.taToken }}</td>
+              <td class="text-center" style="width: 50%">{{ ext.taType }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p style="text-align: right;"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleExtraction = !articleExtraction"><i class="bi bi-arrow-90deg-up"></i> Close</button></p>
+      </div>
+    </article><!-- Entity and Fact Extraction -->
+
+    <hr>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="sentimentAnalysis">Sentiment Analysis</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> March 25, 2021</p>
+      <p *ngIf="!articleSentiment">Sentiment analysis is the use of natural language processing and much more.</p>
+      <p *ngIf="!articleSentiment"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleSentiment = !articleSentiment"><i class="bi bi-arrow-90deg-down"></i> Continue reading</button></p>
+      <div *ngIf="articleSentiment">
+      <p></p>
+        <p>Sentiment analysis (also known as <span class="chip" style="background-color: coral">opinion mining</span> or <span class="chip" style="background-color: royalblue">emotion AI</span>) is the use of natural language processing,
+        text analysis, computational linguistics, and biometrics to systematically identify, extract, quantify,
+          and study affective states and subjective information. Sentiment analysis is widely applied to <span class="chip" style="background-color: brown;">voice of the customer</span>
+        materials such as reviews and survey responses, online and social media, and healthcare materials for applications
+        that range from marketing to customer service to clinical medicine.</p>
+      <p>Thanks to SAP's effective entity and fact extraction method I could easily get 100 / 100 positive and negative words from my dataset.
+        Have a look at the tables or check them out in word cloud form on: <a href="http://localhost:4200/data-visualization#wordClouds">Word Clouds</a>.</p>
+      <div class="d-flex justify-content-around mt-4 mb-4">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showSentimentTables(0)">Positive Words <i *ngIf="!showPositiveWords" class="bi bi-arrow-down"></i><i *ngIf="showPositiveWords" class="bi bi-arrow-up"></i></button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showSentimentTables(1)">Negative Words <i *ngIf="!showNegativeWords" class="bi bi-arrow-down"></i><i *ngIf="showNegativeWords" class="bi bi-arrow-up"></i></button>
+      </div>
+      <div *ngIf="showPositiveWords" class="mb-4">
+        <div style="height: 400px;overflow: auto;">
+          <table class="table table-dark table-striped table-hover">
+            <thead>
+            <tr>
+              <th scope="col" class="text-center">Word</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let word of positiveWords">
+              <td class="text-center">{{ word }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="showNegativeWords" class="mb-4">
+        <div style="height: 400px;overflow: auto;">
+          <table class="table table-dark table-striped table-hover">
+            <thead>
+            <tr>
+              <th scope="col" class="text-center">Word</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let word of negativeWords">
+              <td class="text-center">{{ word }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p style="text-align: right;"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleSentiment = !articleSentiment"><i class="bi bi-arrow-90deg-up"></i> Close</button></p>
+      </div>
+    </article><!-- Sentiment Analysis -->
+
+    <hr>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="textMining">Text Mining</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> April 05, 2021</p>
+      <p *ngIf="!articleMining">Text Mining provides functionality to compare documents by examining the terms used within documents.</p>
+      <p *ngIf="!articleMining"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleMining = !articleMining"><i class="bi bi-arrow-90deg-down"></i> Continue reading</button></p>
+      <div *ngIf="articleMining">
+      <p></p>
+      <p>Text Mining provides functionality to compare documents by examining the terms used within documents.
+        Text mining benefits information determined by text analysis which is pre-requisite for text mining.
+        As mentioned in earlier blog Text analysis does linguistic analysis and extracts information embedded within a document
+        while Text mining makes <span class="chip" style="background-color: crimson">semantic determinations</span> about overall content of a document relative to other documents. </p>
+      <p style="text-align: right;"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleMining = !articleMining"><i class="bi bi-arrow-90deg-up"></i> Close</button></p>
+      </div>
+    </article><!-- Text Mining -->
+
+    <hr>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="wordPost">Rarest / Common Words</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> April 20, 2021</p>
+      <p *ngIf="!articleWords">Tables for most and least used words.</p>
+      <p *ngIf="!articleWords"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleWords = !articleWords"><i class="bi bi-arrow-90deg-down"></i> Continue reading</button></p>
+      <div *ngIf="articleWords">
+      <p></p>
+      <p>In the case of feedback, a collection of the words used most often as well as the least used may be particularly important.
+        Thanks to SAP’s efficient text mining method, I managed to win the top 100 such words. Look at the tables below or check them out as a word cloud:
+        <a href="http://localhost:4200/data-visualization#wordClouds">Word Clouds</a>.</p>
+      <div class="d-flex justify-content-around mt-4 mb-4">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showTextMiningTables(0)">Common Words <i *ngIf="!showCommonWords" class="bi bi-arrow-down"></i><i *ngIf="showCommonWords" class="bi bi-arrow-up"></i></button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showTextMiningTables(1)">Rarest Words <i *ngIf="!showRarestWords" class="bi bi-arrow-down"></i><i *ngIf="showRarestWords" class="bi bi-arrow-up"></i></button>
+      </div>
+      <div *ngIf="showCommonWords" class="mb-4">
+        <div style="height: 400px;overflow: auto;">
+          <table class="table table-dark table-striped table-hover">
+            <thead>
+            <tr>
+              <th scope="col" class="text-center">Word</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let word of commonWords">
+              <td class="text-center">{{ word }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="showRarestWords" class="mb-4">
+        <div style="height: 400px;overflow: auto;">
+          <table class="table table-dark table-striped table-hover">
+            <thead>
+            <tr>
+              <th scope="col" class="text-center">Word</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let word of rarestWords">
+              <td class="text-center">{{ word }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p style="text-align: right;"><button type="button" class="btn btn-outline-dark btn-sm" (click)="articleWords = !articleWords"><i class="bi bi-arrow-90deg-up"></i> Close</button></p>
+      </div>
+    </article><!-- Rarest / Common Words -->
+
+
+  </div>
+
+  <div class="col-md-3 mb-5">
+
+    <!-- Logo -->
+    <img src="assets/sap/logo.png" class="img-fluid mt-4 mb-4"/>
+
+    <!-- Posts -->
+    <div class="p-4 mb-3 border rounded">
+      <h4 class="fst-italic"><i class="bi bi-stickies-fill"></i> Posts</h4>
+      <ol class="list-unstyled mb-0">
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/sap#introduction" > Introduction</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/sap#textAnalysis" > Text Analysis</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/sap#linguistic" > Linguistic Analysis</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/sap#extraction" > Entity and Fact Extraction</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/sap#sentimentAnalysis" > Sentiment Analysis</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/sap#textMining" > Text Mining</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/sap#wordPost" > Rarest / Common Words</a></li>
+      </ol>
+    </div>
+
+    <!-- Useful Links -->
+    <div class="p-4 mb-3 border rounded">
+      <h4 class="fst-italic"><i class="bi bi-link-45deg"></i> Useful Links</h4>
+      <ol class="list-unstyled mb-0">
+        <li><i class="bi bi-arrow-right-short"></i><a href="https://oktnb132.inf.elte.hu:51026/" target="_blank"> SAP Backend Service</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="https://help.sap.com/viewer/62e301bb1872437cbb2a8c4209f74a65/2.0.03/en-US" target="_blank" > SAP TA Library</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="https://help.sap.com/viewer/c9a927c6404a46de8c6789dab28ed66d/2.0.00/en-US" target="_blank" > SAP TM Library</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="https://help.sap.com/viewer/2cfbc5cf2bc14f028cfbe2a2bba60a50/2.0.04/en-US/c9eeed704f3f4ec39441434db8a874ad.html" target="_blank"> SAP PAL Library</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/data-visualization" > Data Visualization</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/predictive-analytics" > Predictive Analytics</a></li>
+      </ol>
+    </div>
+
+  </div>
+
+
+
+</div>

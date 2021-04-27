@@ -1,3 +1,4 @@
+<!-- Banner -->
 <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark" style="margin-top: 3vh">
   <div class="col-md-10 px-0">
     <h1 class="display-4 fst-italic">Text Analysis Blog</h1>
@@ -13,6 +14,7 @@
   </div>
 </div>
 
+<!-- Carousel -->
 <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -35,10 +37,10 @@
           <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-white">
             <div class="col p-4 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary">Data Science</strong>
-              <h3 class="mb-0">Text Analysis</h3>
+              <h3 class="mb-0">Predictive Analytics</h3>
               <div class="mb-1 text-muted">Apr 06</div>
               <p class="mb-auto">Basic text analysis models, text classification and sentiment analysis.</p>
-              <a type="button" class="btn btn-outline-primary btn-sm site-link" routerLink="/text-analysis" (click)="activeLink($event)">Find out more <i class="bi bi-arrow-right"></i></a>
+              <a type="button" class="btn btn-outline-primary btn-sm site-link" routerLink="/predictive-analytics" (click)="activeLink($event)">Find out more <i class="bi bi-arrow-right"></i></a>
             </div>
             <div class="col-auto d-none d-lg-block">
               <img src="../../assets/home/cards/text-analysis-card.jpg" width="200" height="250"/>
@@ -91,343 +93,310 @@
 </div>
 
 <div class="row">
-  <div class="col-md-8">
+
+  <div class="col-md-9 mb-5">
+
+    <!-- Header -->
     <h3 class="pb-4 mb-4 fst-italic border-bottom">
-      Blogs
+      <div class="row">
+        <div class="col-8">Text Analysis Nowadays</div>
+        <div class="col-4 text-end"><span style="font-size: 50%;">Sort:
+          <span *ngIf="showAll">All</span>
+          <span *ngIf="showFeb && !showAll">February 2021</span>
+          <span *ngIf="showMar && !showAll">March 2021</span>
+          <span *ngIf="showApr && !showAll">April 2021</span>
+          <span *ngIf="showMay && !showAll">May 2021</span>
+        </span></div>
+      </div>
     </h3>
 
-    <article class="blog-post">
-      <h2 class="blog-post-title">Sample blog post</h2>
-      <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+    <article class="blog-post mb-4" *ngIf="showFeb"><!-- Blog-Post -->
+      <h2 class="blog-post-title">What is Text Analysis?</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> February 25, 2021</p>
+      <p *ngIf="!showArticle01">Text Analysis is a machine learning technique.</p>
+      <p *ngIf="!showArticle01"><button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle01 = !showArticle01"><i class="bi bi-arrow-90deg-down"></i> Continue reading</button></p>
+      <div *ngIf="showArticle01">
+      <img src="assets/home/banners/banner_01.png" class="img-fluid img-thumbnail" alt="What is Text Analysis?">
+      <p></p>
+      <p>Text analysis is a <span class="chip" style="background-color: cornflowerblue;">machine learning technique</span>
+        that allows us to extract specific information from a text, such as keywords, names, or company information.
+        We can even use it to categorize different emails or comments by topic or sentiment.</p>
+        <p></p>
+        <p>This method provides qualitative results, so it identifies important information from the text itself.
+          Take for example the database that the application uses.
+          We can categorize comments received for podcast channels based on words with positive or negative emotion.
+          Basically, the challenge in text analysis is <span class="chip"
+            style="background-color: lightcoral;">decoding the ambiguity of human language.</span></p>
+      <p></p>
+      <p style="text-align: center"><i>"If you torture the data long enough, it will confess to anything." - Ronald H. Coase</i></p>
+      <p style="text-align: right;"><button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle01 = !showArticle01"><i class="bi bi-arrow-90deg-up"></i> Close</button></p>
+      </div>
+    </article><!-- What is Text Analysis? -->
 
-      <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic
-        typography, images, and code are all supported.</p>
-      <hr>
-      <p>Yeah, she dances to her own beat. Oh, no. You could've been the greatest. 'Cause, baby, <a href="#">you're a
-        firework</a>. Maybe a reason why all the doors are closed. Open up your heart and just let it begin. So très
-        chic, yeah, she's a classic.</p>
-      <blockquote>
-        <p>Bikinis, zucchinis, Martinis, no weenies. I know there will be sacrifice but that's the price. <strong>This
-          is how we do it</strong>. I'm not sticking around to watch you go down. You think you're so rock and roll, but
-          you're really just a joke. I know one spark will shock the world, yeah yeah. Can't replace you with a million
-          rings.</p>
-      </blockquote>
-      <p>Trying to connect the dots, don't know what to tell my boss. Before you met me I was alright but things were
-        kinda heavy. You just gotta ignite the light and let it shine. Glitter all over the room <em>pink flamingos</em>
-        in the pool. </p>
-      <h2>Heading</h2>
-      <p>Suiting up for my crowning battle. If you only knew what the future holds. Bring the beat back. Peach-pink
-        lips, yeah, everybody stares.</p>
-      <h3>Sub-heading</h3>
-      <p>You give a hundred reasons why, and you say you're really gonna try. Straight stuntin' yeah we do it like that.
-        Calling out my name. ‘Cause I, I’m capable of anything.</p>
-      <pre><code>Example code block</code></pre>
-      <p>Before you met me I was alright but things were kinda heavy. You just gotta ignite the light and let it
-        shine.</p>
-      <h3>Sub-heading</h3>
-      <p>You got the finest architecture. Passport stamps, she's cosmopolitan. Fine, fresh, fierce, we got it on lock.
-        Never planned that one day I'd be losing you. She eats your heart out.</p>
+    <hr *ngIf="showFeb">
+
+    <article class="blog-post mb-4" *ngIf="showMar"><!-- Blog-Post -->
+      <h2 class="blog-post-title">Why Text Analysis?</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> March 09, 2021</p>
+      <p *ngIf="!showArticle02">Nowadays, words like data science, big data and AI are becoming more and more popular and trendy.</p>
+      <p *ngIf="!showArticle02"><button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle02 = !showArticle02"><i class="bi bi-arrow-90deg-down"></i> Continue reading</button></p>
+      <div *ngIf="showArticle02">
+      <p>Nowadays, words like data science, big data and AI are becoming more and more popular and trendy.
+        That’s why it’s worth getting to know and learn a little more about such technologies.
+        Text analysis is an extremely spectacular and playful way to learn about these.</p>
+        <p></p>
+        <h4>Advantages:</h4>
+        <ul>
+          <li>
+            It has a very <span class="chip" style="background-color: darkred;">wide range of possibilities</span>
+            in case of analyzing whole documents, single sentences or even sub-sentences.
+          </li>
+          <li>
+            It is <span class="chip" style="background-color: coral;">scalable</span>, because these
+            tools allows us to structure vast quantities of information in seconds and redirect extra resources to more
+            important tasks.
+          </li>
+          <li>
+            It happens in <span class="chip" style="background-color: green;">real-time</span> and
+            with perfectly parameterized models we can detect urgent issues from customer feedbacks and take action rather
+            sooner then later.
+          </li>
+          <li>
+            It delivers <span class="chip"
+            style="background-color: darkorchid;">consistent criteria</span> because they
+            work more accurately than humans ever could.
+          </li>
+        </ul>
+      <p></p>
+        <p style="text-align: right;"><button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle02 = !showArticle02"><i class="bi bi-arrow-90deg-up"></i> Close</button></p>
+      </div>
+    </article><!-- Why Text Analysis? -->
+
+    <hr *ngIf="showMar">
+
+    <article class="blog-post mb-4" *ngIf="showMar"><!-- Blog-Post -->
+      <h2 class="blog-post-title">Methods and Techniques</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> March 14, 2021</p>
+      <p *ngIf="!showArticle03">There are basic and more advanced text analysis techniques, each used for different purposes.</p>
+      <p *ngIf="!showArticle03"><button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle03 = !showArticle03"><i class="bi bi-arrow-90deg-down"></i> Continue reading</button></p>
+      <div *ngIf="showArticle03">
+      <p>There are basic and more advanced text analysis techniques, each used for different purposes.
+        In this case we will focus on the text classification, more precisely on the sentiment and topic analysis part.</p>
+      <h4>Techniques:</h4>
       <ul>
-        <li>Got a motel and built a fort out of sheets.</li>
-        <li>Your kiss is cosmic, every move is magic.</li>
-        <li>Suiting up for my crowning battle.</li>
+        <li>Word Frequency</li>
+        <li>Collocation</li>
+        <li>Concordance</li>
+        <li>Text Classification (<span class="chip" style="background-color: brown;">Topic Analysis</span>,
+          <span class="chip" style="background-color: dodgerblue;">Sentiment Analysis</span>, Intent
+          Detection)
+        </li>
+        <li>Text Extraction (Keyword Extraction, Named Entity Recognition)</li>
+        <li>Word Sense Disambiguation</li>
+        <li>Clustering</li>
       </ul>
-      <p>Takes you miles high, so high, 'cause she’s got that one international smile.</p>
-      <ol>
-        <li>Scared to rock the boat and make a mess.</li>
-        <li>I could have rewrite your addiction.</li>
-        <li>I know you get me so I let my walls come down.</li>
-      </ol>
-      <p>After a hurricane comes a rainbow.</p>
-    </article><!-- /.blog-post -->
+      <h5>Topic Analysis</h5>
+      <p>It can automatically organize text by subject or theme. Take the application database for example.
+        Podcast channels can be categorized, so we can already tag incoming comments based on those categories.</p>
+      <p>Let's see the comment: <i>"Very useful podcast, I can only recommend. I learned a lot about cryptocurrencies and
+        bitcoin mining."</i></p>
+      <p>The expected categories would probably be: <span class="chip" style="background-color: #0d6efd">business</span>,
+        <span class="chip" style="background-color: #0d6efd">finance</span>, <span class="chip" style="background-color: #0d6efd">technology</span>,
+        <span class="chip" style="background-color: #0d6efd">fintech</span></p>
+      <p>And if you can't believe it, try: <button mat-raised-button (click)="categoryPredict()" [disabled]="positiveLoading || negativeLoading">Analyze</button></p>
+      <p style="text-align: center">
+        <span *ngIf="category" class="chip" style="background-color: #0d6efd">{{ category }}</span>
+        <mat-progress-bar *ngIf="categoryLoading" mode="buffer"></mat-progress-bar>
+      </p>
+      <h5>Sentiment Analysis</h5>
+      <p>It uses powerful machine learning algorithms to automatically read and classify for opinion polarity (positive,
+        negative, neutral) and beyond, into the feelings and emotions of the writer, even context and sarcasm.</p>
+      <p>For example the input: <i>"I love this podcast, great quality, nice people, many laughs."</i></p>
+      <p>And the expected output would be: <span class="chip" style="background-color: green">positive</span></p>
+      <p>Try it: <button mat-raised-button (click)="positivePredict()" [disabled]="categoryLoading || negativeLoading">Analyze</button></p>
+      <p style="text-align: center">
+        <span *ngIf="positive" class="chip" style="background-color: green">{{ positive }}</span>
+        <mat-progress-bar *ngIf="positiveLoading" mode="buffer"></mat-progress-bar>
+      </p>
+      <p>And the following: <i>"Terrible podcast, don't listen to this. Lots of politics, annoying guests and false information."</i></p>
+      <p>Should be: <span class="chip" style="background-color: red">negative</span></p>
+      <p>Try it: <button mat-raised-button (click)="negativePredict()" [disabled]="positiveLoading || categoryLoading">Analyze</button></p>
+      <p style="text-align: center">
+        <span *ngIf="negative" class="chip" style="background-color: red">{{ negative }}</span>
+        <mat-progress-bar *ngIf="negativeLoading" mode="buffer"></mat-progress-bar>
+      </p>
+        <p style="text-align: right;"><button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle03 = !showArticle03"><i class="bi bi-arrow-90deg-up"></i> Close</button></p>
+      </div>
+    </article><!-- Methods and Techniques -->
 
-    <article class="blog-post">
-      <h2 class="blog-post-title">Another blog post</h2>
-      <p class="blog-post-meta">December 23, 2013 by <a href="#">Jacob</a></p>
+    <hr *ngIf="showMar">
 
-      <p>I am ready for the road less traveled. Already <a href="#">brushing off the dust</a>. Yeah, you're lucky if
-        you're on her plane. I used to bite my tongue and hold my breath. Uh, She’s a beast. I call her Karma (come
-        back). Black ray-bans, you know she's with the band. I can't sleep let's run away and don't ever look back,
-        don't ever look back.</p>
-      <blockquote>
-        <p>Growing fast into a <strong>bolt of lightning</strong>. Be careful Try not to lead her on</p>
-      </blockquote>
-      <p>I'm intrigued, for a peek, heard it's fascinating. Oh oh! Wanna be a victim ready for abduction. She's got that
-        international smile, oh yeah, she's got that one international smile. Do you ever feel, feel so paper thin. I’m
-        gon’ put her in a coma. Sun-kissed skin so hot we'll melt your popsicle.</p>
-      <p>This is transcendental, on another level, boy, you're my lucky star.</p>
-    </article><!-- /.blog-post -->
-
-    <article class="blog-post">
-      <h2 class="blog-post-title">New feature</h2>
-      <p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>
-
-      <p>From Tokyo to Mexico, to Rio. Yeah, you take me to utopia. I'm walking on air. We'd make out in your Mustang to
-        Radiohead. I mean the ones, I mean like she's the one. Sun-kissed skin so hot we'll melt your popsicle. Slow
-        cooking pancakes for my boy, still up, still fresh as a Daisy.</p>
+    <article class="blog-post mb-4" *ngIf="showApr"><!-- Blog-Post -->
+      <h2 class="blog-post-title">How does it work?</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> April 04, 2021</p>
+      <p *ngIf="!showArticle04">There are quite a few explanations for understanding AI and data science processes.</p>
+      <p *ngIf="!showArticle04"><button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle04 = !showArticle04"><i class="bi bi-arrow-90deg-down"></i> Continue reading</button></p>
+      <div *ngIf="showArticle04">
+      <img src="assets/home/banners/banner_02.png" class="img-fluid img-thumbnail" alt="How does it work?">
+      <p></p>
+      <p>Although there are quite a few explanations for understanding AI and data science processes, I have chosen two
+        interesting paths for interpretation.
+        First, let’s look at the <span class="chip" style="background-color: royalblue">OSEMN model</span>, which is extremely similar to cooking processes. (Try replacing the word data
+        with food.)
+      </p>
+      <h4>OSEMN:</h4>
       <ul>
-        <li>I hope you got a healthy appetite.</li>
-        <li>You're never gonna be unsatisfied.</li>
-        <li>Got a motel and built a fort out of sheets.</li>
+        <li><b>O</b>btain</li>
+        <ul class="listDescription">
+          <li>This is the phase when we collect the data we want to analyze from some source.</li>
+        </ul>
+        <li><b>S</b>crub</li>
+        <ul class="listDescription">
+          <li>Here we prepare the data for further processes. We clean them from missing data, false values, bad formats,
+            etc...
+          </li>
+        </ul>
+        <li><b>E</b>xplore</li>
+        <ul class="listDescription">
+          <li>In this case, we interpret the data set to be processed, create visualizations and statistics.</li>
+        </ul>
+        <li><b>M</b>odel</li>
+        <ul class="listDescription">
+          <li>This is the main phase, the part when we produce the model whether clustering, classification or regression,
+            etc. by.
+          </li>
+        </ul>
+        <li>i<b>N</b>terpret</li>
+        <ul class="listDescription">
+          <li>The last part is when we draw conclusions from the data and evaluate and communicate the results.</li>
+        </ul>
       </ul>
-      <p>Don't need apologies. Boy, you're an alien your touch so foreign, it's <em>supernatural</em>, extraterrestrial.
-        Talk about our future like we had a clue. I can feel a phoenix inside of me.</p>
-    </article><!-- /.blog-post -->
+      <p>Another approach might be this quote:</p>
+      <p style="text-align: center"><i>"A computer program is said to learn to perform a task T from experience E". - Tom Mitchell</i></p>
+      <p>In other words, if we want text analysis software to perform desired tasks,
+        we need to teach machine learning algorithms how to analyze, understand and derive meaning from text.
+        It's very similar to the way humans learn how to differentiate between topics, objects, and emotions.</p>
+        <p style="text-align: right;"><button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle04 = !showArticle04"><i class="bi bi-arrow-90deg-up"></i> Close</button></p>
+      </div>
+    </article><!-- How does it work? -->
 
-    <nav class="blog-pagination" aria-label="Pagination">
-      <a class="btn btn-outline-primary" href="#">Older</a>
-      <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
-    </nav>
+    <hr *ngIf="showApr">
+
+    <article class="blog-post mb-4" *ngIf="showApr"><!-- Blog-Post -->
+      <h2 class="blog-post-title">Use Cases</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> April 20, 2021</p>
+      <p *ngIf="!showArticle05">About 80% of business data is textual.</p>
+      <p *ngIf="!showArticle05"><button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle05 = !showArticle05"><i class="bi bi-arrow-90deg-down"></i> Continue reading</button></p>
+      <div *ngIf="showArticle05">
+      <img src="assets/home/banners/banner_03.png" class="img-fluid img-thumbnail" alt="Use Cases">
+      <p></p>
+
+        <p>About 80% of business data is textual. It is present everywhere, from <span class="chip" style="background-color: blueviolet">business processes</span> to product feedback to
+        online customer interactions. Automated, real-time text analysis can help us maximize efficiency, reduce repetitive tasks, and better understand
+        customer intentions. It is widely used in these areas:
+      </p>
+      <h4>Areas:</h4>
+      <ul>
+        <li>Social Media Monitoring</li>
+        <li>Brand Monitoring</li>
+        <li>Customer Service</li>
+        <li>Voice of Customer (VoC) & Customer Feedback</li>
+        <li>Business Intelligence</li>
+        <li>Sales and Marketing</li>
+        <li>Product Analytics</li>
+      </ul>
+        <p style="text-align: right;"><button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle05 = !showArticle05"><i class="bi bi-arrow-90deg-up"></i> Close</button></p>
+      </div>
+    </article><!-- Use Cases -->
+
+    <hr *ngIf="showApr">
+
+    <article class="blog-post mb-4" *ngIf="showMay"><!-- Blog-Post -->
+      <h2 class="blog-post-title">Resources</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> May 03, 2021</p>
+      <p *ngIf="!showArticle06">There are a number of valuable resources out there to help you get started.</p>
+      <p *ngIf="!showArticle06"><button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle06 = !showArticle06"><i class="bi bi-arrow-90deg-down"></i> Continue reading</button></p>
+      <div *ngIf="showArticle06">
+      <img src="assets/home/banners/banner_04.png" class="img-fluid img-thumbnail" alt="Resources">
+      <p></p>
+      <p>There are a number of valuable resources out there to help you get started with all that text analysis has to
+        offer. Personally, I took inspirations from this website <a target="_blank" href="https://monkeylearn.com/text-analysis/">MonkeyLearn - The only guide you'll ever need</a>.
+      </p>
+      <h4>Text Analysis APIs</h4>
+      <p>You can use open-source libraries or SaaS APIs to build a text analysis solution that fits your needs.
+        Open-source libraries require a lot of time and technical know-how, while SaaS tools can often be put to work right
+        away and require little to no coding experience.</p>
+      <h5>Open Source Libraries:</h5>
+      <ul>
+        <li>Python</li>
+        <li>NLTK</li>
+        <li>SpaCy</li>
+        <li>Scikit-learn</li>
+        <li>TensorFlow</li>
+        <li>PyTorch</li>
+        <li>Keras</li>
+        <li>R</li>
+        <li>Java</li>
+      </ul>
+      <h5>SaaS APIs:</h5>
+      <ul>
+        <li>MonkeyLearn</li>
+        <li>Google Cloud NLP</li>
+        <li>IBM Watson</li>
+        <li>Lexalytics</li>
+        <li>MeaningCloud</li>
+        <li>Amazon Comprehend</li>
+        <li>Aylien</li>
+      </ul>
+        <p style="text-align: right;"><button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle06 = !showArticle06"><i class="bi bi-arrow-90deg-up"></i> Close</button></p>
+      </div>
+    </article><!-- Resources -->
 
   </div>
 
-  <div class="col-md-4">
-    <div class="p-4 mb-3 bg-light rounded">
-      <h4 class="fst-italic">About</h4>
-      <p class="mb-0">Saw you downtown singing the Blues. Watch you circle the drain. Why don't you let me stop by?
-        Heavy is the head that <em>wears the crown</em>. Yes, we make angels cry, raining down on earth from up above.
+  <div class="col-md-3">
+
+    <!-- About -->
+    <div class="p-4 mb-3 bg-light border rounded shadow-sm">
+      <h4 class="fst-italic"><i class="bi bi-person-circle"></i> About</h4>
+      <p class="mb-0">Hi! My name is Péter Pukánszky.</p>
+        <p>I am a computer science student at <a target="_blank" href="https://www.inf.elte.hu/">ELTE-IK</a> and I would like to present a small part of the possibilities provided by text analysis in a form of a blog application.
       </p>
     </div>
 
-    <div class="p-4">
-      <h4 class="fst-italic">Archives</h4>
+    <!-- Archives -->
+    <div class="p-4 mb-3 border rounded">
+      <h4 class="fst-italic"><i class="bi bi-server"></i> Archives</h4>
       <ol class="list-unstyled mb-0">
-        <li><a href="#">March 2014</a></li>
-        <li><a href="#">February 2014</a></li>
-        <li><a href="#">January 2014</a></li>
-        <li><a href="#">December 2013</a></li>
-        <li><a href="#">November 2013</a></li>
-        <li><a href="#">October 2013</a></li>
-        <li><a href="#">September 2013</a></li>
-        <li><a href="#">August 2013</a></li>
-        <li><a href="#">July 2013</a></li>
-        <li><a href="#">June 2013</a></li>
-        <li><a href="#">May 2013</a></li>
-        <li><a href="#">April 2013</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="#" onclick="return false;" (click)="sort('All')"> All</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="#" onclick="return false;" (click)="sort('Feb')"> February 2021</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="#" onclick="return false;" (click)="sort('Mar')"> March 2021</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="#" onclick="return false;" (click)="sort('Apr')"> April 2021</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="#" onclick="return false;" (click)="sort('May')"> May 2021</a></li>
       </ol>
     </div>
 
-    <div class="p-4">
-      <h4 class="fst-italic">Elsewhere</h4>
-      <ol class="list-unstyled">
-        <li><a href="#">GitHub</a></li>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">Facebook</a></li>
-      </ol>
+    <!-- Elsewhere -->
+    <div class="p-4 border rounded">
+      <h4 class="fst-italic"><i class="bi bi-search"></i> Elsewhere</h4>
+      <div class="input-group mb-2" style="margin-top: 2vh">
+        <input id="google" type="text" class="form-control" placeholder="Search in Google">
+        <button class="btn btn-outline-dark" type="submit" (click)="searchGoogle()"><i class="bi bi-google"></i></button>
+      </div>
+      <div class="input-group mb-2" style="margin-top: 2vh">
+        <input id="facebook" type="text" class="form-control" placeholder="Search in Facebook">
+        <button class="btn btn-outline-dark" type="submit" (click)="searchFacebook()"><i class="bi bi-facebook"></i></button>
+      </div>
+      <div class="input-group mb-2" style="margin-top: 2vh">
+        <input id="twitter" type="text" class="form-control" placeholder="Search in Twitter">
+        <button class="btn btn-outline-dark" type="submit" (click)="searchTwitter()"><i class="bi bi-twitter"></i></button>
+      </div>
+      <div class="input-group mb-2" style="margin-top: 2vh">
+        <input id="github" type="text" class="form-control" placeholder="Search in GitHub">
+        <button class="btn btn-outline-dark" type="submit" (click)="searchGitHub()"><i class="bi bi-github"></i></button>
+      </div>
     </div>
+
   </div>
 
-</div><!-- /.row -->
-<!--<img id="homeBanner" src="assets/banner.png" alt="Home Banner"/>
-<div class="contentContainer">
-  <p>Today, millions of <span
-    style="background-color: sandybrown;padding-left: 3px;padding-right: 3px;">textual data</span> flow into the
-    Internet
-    every second in the form of emails, comments, product feedback, or social media chats.
-    For companies, there is a huge potential for innovation in this data sets in order to advance their economic or even
-    technological benefits.
-    But nowadays, manually analyzing such an amount of text data is not worth it and a waste of time.
-    This is when the possibilities of
-    <span style="background-color: mediumseagreen;padding-left: 3px;padding-right: 3px;">AI solutions</span>
-    like <span style="background-color: darkorchid;padding-left: 3px;padding-right: 3px;">text analysis</span> come into
-    play.</p>
-  <p>In the context of this application, I would like to present a small part of the possibilities provided by text
-    analysis.
-    The application will briefly talk about
-    <a href="http://localhost:4200/python">Python</a> and
-    <a href="http://localhost:4200/sap">SAP HANA</a> environments,
-    <a href="http://localhost:4200/text-analysis">business opportunities</a> and
-    <a href="http://localhost:4200/data-visualization">data visualization</a>.
-    Down below you can read more about the following topics:</p>
-  <ul>
-    <li>What is Text Analysis?</li>
-    <li>Why Text Analysis?</li>
-    <li>Methods & Techniques</li>
-    <li>How does it work?</li>
-    <li>Use Cases</li>
-    <li>Resources</li>
-  </ul>
 </div>
-<mat-divider></mat-divider>
-<div class="contentContainer">
-  <h2>What is Text Analysis?</h2>
-  <img id="homeOne" src="assets/home_01.png" alt="What is Text Analysis?"/>
-  <p>Text analysis is a <span style="background-color: cornflowerblue;padding-left: 3px;padding-right: 3px;">machine learning technique</span>
-    that allows us to extract specific information from a text, such as keywords, names, or company information.
-    We can even use it to categorize different emails or comments by topic or sentiment.</p>
-  <p>This method provides qualitative results, so it identifies important information from the text itself.
-    Take for example the database that the application uses.
-    We can categorize comments received for podcast channels based on words with positive or negative emotion.
-    Basically, the challenge in text analysis is <span
-      style="background-color: lightcoral;padding-left: 3px;padding-right: 3px;">decoding the ambiguity of human language.</span>
-  </p>
-  <div class="quote"><i>"If you torture the data long enough, it will confess to anything."</i> - Ronald H. Coase</div>
-</div>
-<mat-divider></mat-divider>
-<div class="contentContainer">
-  <h2>Why Text Analysis?</h2>
-  <p>Nowadays, words like data science, big data and AI are becoming more and more popular and trendy.
-    That’s why it’s worth getting to know and learn a little more about such technologies.
-    Text analysis is an extremely spectacular and playful way to learn about these.
-  </p>
-  <ul>
-    <li>
-      It has a very <span style="background-color: darkred;padding-left: 3px;padding-right: 3px;">wide range of possibilities</span>
-      in case of analyzing whole documents, single sentences or even sub-sentences.
-    </li>
-    <li>
-      It is <span style="background-color: coral;padding-left: 3px;padding-right: 3px;">scalable</span>, because these
-      tools allows us to structure vast quantities of information in seconds and redirect extra resources to more
-      important tasks.
-    </li>
-    <li>
-      It happens in <span style="background-color: green;padding-left: 3px;padding-right: 3px;">real-time</span> and
-      with perfectly parameterized models we can detect urgent issues from customer feedbacks and take action rather
-      sooner then later.
-    </li>
-    <li>
-      It delivers <span
-      style="background-color: darkorchid;padding-left: 3px;padding-right: 3px;">consistent criteria</span> because they
-      work more accurately than humans ever could.
-    </li>
-  </ul>
-</div>
-<mat-divider></mat-divider>
-<div class="contentContainer">
-  <h2>Methods & Techniques</h2>
-  <p>There are basic and more advanced text analysis techniques, each used for different purposes. (See the list down
-    below.)
-    In this case we will focus on the text classification, more precisely on the sentiment and topic analysis part.
-  </p>
-  <ul>
-    <li>Word Frequency</li>
-    <li>Collocation</li>
-    <li>Concordance</li>
-    <li>Text Classification (<span style="background-color: brown;padding-left: 3px;padding-right: 3px;">Topic Analysis</span>,
-      <span style="background-color: dodgerblue;padding-left: 3px;padding-right: 3px;">Sentiment Analysis</span>, Intent
-      Detection)
-    </li>
-    <li>Text Extraction (Keyword Extraction, Named Entity Recognition)</li>
-    <li>Word Sense Disambiguation</li>
-    <li>Clustering</li>
-  </ul>
-  <h4>Topic Analysis</h4>
-  <p>It can automatically organize text by subject or theme. Take the application database for example.
-    Podcast channels can be categorized, so we can already tag incoming comments based on those categories.</p>
-  <p>Let's see the comment: <i>"Very useful podcast, I can only recommend. I learned a lot about cryptocurrencies and
-    bitcoin mining."</i></p>
-  <p>The expected categories would probably be: <span style="color: dodgerblue">business, finance, technology, fintech</span></p>
-  <p>And if you can't believe it, try: <button mat-raised-button (click)="categoryPredict()">Click</button></p>
-  <div *ngIf="category" class="predictResult"> {{ category }}</div>
-  <mat-progress-bar *ngIf="categoryLoading" mode="buffer"></mat-progress-bar>
-  <h4>Sentiment Analysis</h4>
-  <p>It uses powerful machine learning algorithms to automatically read and classify for opinion polarity (positive,
-    negative, neutral)
-    and beyond, into the feelings and emotions of the writer, even context and sarcasm.</p>
-  <p>For example the input: <i>"I love this podcast, great quality, nice people, many laughs."</i></p>
-  <p>And the expected output would be: <span style="color: greenyellow">positive</span></p>
-  <p>Try it: <button mat-raised-button (click)="positivePredict()">Click</button></p>
-  <div *ngIf="positive" class="predictResult"> {{ positive }}</div>
-  <mat-progress-bar *ngIf="positiveLoading" mode="buffer"></mat-progress-bar>
-  <p>And the following: "Terrible podcast, don't listen to this. Lots of politics, annoying guests and false information."</p>
-  <p>Should be: <span style="color: red">negative</span></p>
-  <p>Check it: <button mat-raised-button (click)="negativePredict()">Click</button></p>
-  <div *ngIf="negative" class="predictResult"> {{ negative }}</div>
-  <mat-progress-bar *ngIf="negativeLoading" mode="buffer"></mat-progress-bar>
-</div>
-<mat-divider></mat-divider>
-<div class="contentContainer">
-  <h2>How does it work?</h2>
-  <img id="homeTwo" src="assets/home_02.png" alt="How does it work?"/>
-  <p>Although there are quite a few explanations for understanding AI and data science processes, I have chosen two
-    interesting paths for interpretation.
-    First, let’s look at the OSEMN model, which is extremely similar to cooking processes. (Try replacing the word data
-    with food.)
-  </p>
-  <ul>
-    <li>Obtain</li>
-    <ul class="listDescription">
-      <li>This is the phase when we collect the data we want to analyze from some source.</li>
-    </ul>
-    <li>Scrub</li>
-    <ul class="listDescription">
-      <li>Here we prepare the data for further processes. We clean them from missing data, false values, bad formats,
-        etc...
-      </li>
-    </ul>
-    <li>Explore</li>
-    <ul class="listDescription">
-      <li>In this case, we interpret the data set to be processed, create visualizations and statistics.</li>
-    </ul>
-    <li>Model</li>
-    <ul class="listDescription">
-      <li>This is the main phase, the part when we produce the model whether clustering, classification or regression,
-        etc. by.
-      </li>
-    </ul>
-    <li>iNterpret</li>
-    <ul class="listDescription">
-      <li>The last part is when we draw conclusions from the data and evaluate and communicate the results.</li>
-    </ul>
-  </ul>
-  <p>Another approach might be this quote:</p>
-  <div class="quote"><i>"A computer program is said to learn to perform a task T from experience E".</i> - Tom Mitchell
-  </div>
-  <p>In other words, if we want text analysis software to perform desired tasks,
-    we need to teach machine learning algorithms how to analyze, understand and derive meaning from text.
-    It's very similar to the way humans learn how to differentiate between topics, objects, and emotions.</p>
-</div>
-<mat-divider></mat-divider>
-<div class="contentContainer">
-  <h2>Usecases</h2>
-  <img id="homeThree" src="assets/home_03.png" alt="Usecases"/>
-  <p>About 80% of business data is textual. It is present everywhere, from business processes to product feedback to
-    online customer interactions.
-    Automated, real-time text analysis can help us maximize efficiency, reduce repetitive tasks, and better understand
-    customer intentions.
-    It is widely used in these areas:
-  </p>
-  <ul>
-    <li>Social Media Monitoring</li>
-    <li>Brand Monitoring</li>
-    <li>Customer Service</li>
-    <li>Voice of Customer (VoC) & Customer Feedback</li>
-    <li>Business Intelligence</li>
-    <li>Sales and Marketing</li>
-    <li>Product Analytics</li>
-  </ul>
-</div>
-<mat-divider></mat-divider>
-<div class="contentContainer">
-  <h2>Resources</h2>
-  <img id="homeFour" src="assets/home_04.png" alt="Resources"/>
-  <p>There are a number of valuable resources out there to help you get started with all that text analysis has to
-    offer. Personally, I took inspirations from this website <a href="https://monkeylearn.com/text-analysis/">MonkeyLearn - The only guide you'll ever need</a>.
-  </p>
-  <h4>Text Analysis APIs</h4>
-  <p>You can use open-source libraries or SaaS APIs to build a text analysis solution that fits your needs.
-    Open-source libraries require a lot of time and technical know-how, while SaaS tools can often be put to work right
-    away and require little to no coding experience.</p>
-  <p>Open Source Libraries</p>
-  <ul>
-    <li>Python</li>
-    <li>NLTK</li>
-    <li>SpaCy</li>
-    <li>Scikit-learn</li>
-    <li>TensorFlow</li>
-    <li>PyTorch</li>
-    <li>Keras</li>
-    <li>R</li>
-    <li>Java</li>
-  </ul>
-  <p>SaaS APIs</p>
-  <ul>
-    <li>MonkeyLearn</li>
-    <li>Google Cloud NLP</li>
-    <li>IBM Watson</li>
-    <li>Lexalytics</li>
-    <li>MeaningCloud</li>
-    <li>Amazon Comprehend</li>
-    <li>Aylien</li>
-  </ul>
-</div>-->

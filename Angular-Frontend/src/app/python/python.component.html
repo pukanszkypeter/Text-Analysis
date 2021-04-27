@@ -1,0 +1,227 @@
+<!-- Banner -->
+<div class="p-4 p-md-5 mb-4 text-white rounded bg-dark" style="margin-top: 3vh">
+  <div class="col-md-10 px-0">
+    <h1 class="display-4 fst-italic">Python</h1>
+    <p class="lead my-3">Python is an interpreted high-level
+      general-purpose <span class="chip" style="background-color: darkgreen">programming language</span>.
+      Python's design philosophy emphasizes <span class="chip"
+                                                  style="background-color: blueviolet">code readability</span> with its
+      notable use of significant indentation.
+      Its language constructs as well as its <span class="chip" style="background-color: crimson">object-oriented</span>
+      approach aim to help programmers write clear,
+      logical code for small and large-scale projects.</p>
+  </div>
+</div>
+
+<!-- Home Button -->
+<div class="row mb-4">
+  <div class="col-md-12">
+    <a routerLink="/home" type="button" class="btn btn-outline-primary btn-sm" (click)="activeLink(0)"><i
+      class="bi bi-arrow-left"></i> Back to Home</a>
+  </div>
+</div>
+
+<div class="row mb-4">
+
+  <div class="col-md-9 mb-5">
+
+    <h3 class="pb-4 mb-4 fst-italic border-bottom">Python</h3>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="introduction">Introduction</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> March 03, 2021</p>
+      <p *ngIf="!showArticle01">Python is an interpreted high-level general-purpose programming language.</p>
+      <p *ngIf="!showArticle01">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle01 = !showArticle01"><i
+          class="bi bi-arrow-90deg-down"></i> Continue reading
+        </button>
+      </p>
+      <div *ngIf="showArticle01">
+        <p></p>
+        <p>Python is an interpreted high-level
+          general-purpose <span class="chip" style="background-color: darkgreen">programming language</span>.
+          Python's design philosophy emphasizes <span class="chip"
+                                                      style="background-color: blueviolet">code readability</span> with its
+          notable use of significant indentation.
+          Its language constructs as well as its <span class="chip" style="background-color: crimson">object-oriented</span>
+          approach aim to help programmers write clear,
+          logical code for small and large-scale projects.</p>
+        <p class="text-center mb-2"><img src="assets/python/logo.png" class="img-fluid img-thumbnail" width="250" height="250" /></p>
+        <h4>Role in the Blog</h4>
+        <p>During the preparation of my bachelor's thesis and the application, I mainly used Python for the backend processes.
+          It's very effective for heavy data mining models or lightweight web servers. Checkout my Flask server: <a href="http://localhost:5000/" target="_blank">http://localhost:5000</a>.</p>
+        <p style="text-align: right;">
+          <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle01 = !showArticle01"><i
+            class="bi bi-arrow-90deg-up"></i> Close
+          </button>
+        </p>
+      </div>
+    </article><!-- Introduction -->
+
+    <hr>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="flask">Flask Web Server</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> March 18, 2021</p>
+      <p *ngIf="!showArticle02">Flask is a micro web framework written in Python.</p>
+      <p *ngIf="!showArticle02">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle02 = !showArticle02"><i
+          class="bi bi-arrow-90deg-down"></i> Continue reading
+        </button>
+      </p>
+      <div *ngIf="showArticle02">
+        <p></p>
+        <p>Flask is a <span class="chip" style="background-color: coral">micro web framework</span> written in Python. It is classified as a microframework because it does not require particular tools or libraries.
+          It has no database abstraction layer, form validation, or any other components where pre-existing third-party libraries provide common functions.
+          However, Flask supports extensions that can add application features as if they were implemented in Flask itself. Extensions exist for object-relational mappers,
+          form validation, upload handling, various open authentication technologies and several common framework related tools.</p>
+        <p>Applications that use the Flask framework include <a href="https://hu.pinterest.com/" target="_blank">Pinterest</a> and <a href="https://hu.linkedin.com/" target="_blank">LinkedIn</a>.</p>
+        <p class="text-center"><img src="assets/python/flask_logo.png" class="img-fluid img-thumbnail" width="400" height="200"/></p>
+        <h4>Role in the Blog</h4>
+        <p>I used the Flask web framework for the Python backend because you can write a simple api with it very quickly.</p>
+        <p>Home page: <a href="http://localhost:5000/" target="_blank">http://localhost:5000/</a></p>
+        <h4>Example</h4>
+        <p>The following code shows a simple web application that displays <b>"Hello World!"</b> when visited:</p>
+        <p><code>from flask import Flask</code></p>
+        <p><code>app = Flask(__name__)</code></p>
+        <p></p>
+        <p><code>@app.route("/")</code></p>
+        <p><code>def hello():  return "Hello World"</code></p>
+        <p></p>
+        <p><code>if __name__ == "__main__":  app.run(debug=False)</code></p>
+        <p style="text-align: right;">
+          <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle02 = !showArticle02"><i
+            class="bi bi-arrow-90deg-up"></i> Close
+          </button>
+        </p>
+      </div>
+    </article><!-- Flask Web Server -->
+
+    <hr>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="jupyter">Jupyter Notebook</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> April 02, 2021</p>
+      <p *ngIf="!showArticle03">Jupyter Notebook is a web-based interactive computational environment for creating Jupyter notebook documents.</p>
+      <p *ngIf="!showArticle03">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle03 = !showArticle03"><i
+          class="bi bi-arrow-90deg-down"></i> Continue reading
+        </button>
+      </p>
+      <div *ngIf="showArticle03">
+        <p></p>
+        <h4>Anaconda</h4>
+        <p>Anaconda is a distribution of the Python and R programming languages for <span class="chip" style="background-color: dodgerblue">scientific computing</span> (data science, machine learning applications,
+          large-scale data processing, predictive analytics, etc.), that aims to simplify package management and deployment.
+          The distribution includes data-science packages suitable for Windows, Linux, and macOS. It is developed and maintained by Anaconda, Inc.,
+          which was founded by Peter Wang and Travis Oliphant in 2012. Learn more on <a href="https://www.anaconda.com/" target="_blank">Anaconda</a> or <a href="https://en.wikipedia.org/wiki/Anaconda_(Python_distribution)" target="_blank">Wikipedia</a>.</p>
+        <h4>Jupyter Notebook</h4>
+        <p>Jupyter Notebook is a <span class="chip" style="background-color: coral">web-based</span>  <span class="chip" style="background-color: green">interactive</span> computational environment for creating Jupyter notebook documents.
+          The "notebook" term can colloquially make reference to many different entities, mainly the Jupyter web application,
+          Jupyter Python web server, or Jupyter document format depending on context. A Jupyter Notebook document is a JSON document,
+          following a versioned schema, containing an ordered list of input/output cells which can contain code, text (using Markdown),
+          mathematics, plots and rich media, usually ending with the ".ipynb" extension. Learn more on <a href="https://jupyter.org/" target="_blank">Jupyter</a> or <a href="https://en.wikipedia.org/wiki/Project_Jupyter" target="_blank">Wikipedia</a>.</p>
+        <p class="text-center"><img src="assets/python/jupyter_logo.png" class="img-fluid img-thumbnail" height="350" width="200"/></p>
+        <h4>Role in the Blog</h4>
+        <p>All database queries, statistics, visualizations, and predictive analytics and models were calculated in Jupyter notebooks,
+          which I later implemented or used on the Flask web server. You can download or pull my notebooks from the application's <a href="https://github.com/pukanszkypeter/Text-Analysis" target="_blank">Git</a>.</p>
+        <p style="text-align: right;">
+          <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle03 = !showArticle03"><i
+            class="bi bi-arrow-90deg-up"></i> Close
+          </button>
+        </p>
+      </div>
+    </article><!-- Jupyter Notebook -->
+
+    <hr>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="visualization">Data Visualization</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> April 10, 2021</p>
+      <p *ngIf="!showArticle04">Redirect to the appropriate page.</p>
+      <p *ngIf="!showArticle04">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle04 = !showArticle04"><i
+          class="bi bi-arrow-90deg-down"></i> Continue reading
+        </button>
+      </p>
+      <div *ngIf="showArticle04">
+        <p></p>
+        <p>You can learn more about this on the following page: <a routerLink="/data-visualization" type="button" class="btn btn-outline-primary btn-sm" (click)="activeLink(1)">Data Visualization <i
+          class="bi bi-arrow-right"></i></a></p>
+        <p style="text-align: right;">
+          <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle04 = !showArticle04"><i
+            class="bi bi-arrow-90deg-up"></i> Close
+          </button>
+        </p>
+      </div>
+    </article><!-- Data Visualization -->
+
+    <hr>
+
+    <article class="blog-post mb-4"><!-- Blog-Post -->
+      <h2 class="blog-post-title" id="predictive">Predictive Analytics</h2>
+      <p class="blog-post-meta"><i class="bi bi-calendar"></i> April 22, 2021</p>
+      <p *ngIf="!showArticle05">Redirect to the appropriate page.</p>
+      <p *ngIf="!showArticle05">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle05 = !showArticle05"><i
+          class="bi bi-arrow-90deg-down"></i> Continue reading
+        </button>
+      </p>
+      <div *ngIf="showArticle05">
+        <p></p>
+        <p>You can learn more about this on the following page: <a routerLink="/predictive-analytics" type="button" class="btn btn-outline-primary btn-sm" (click)="activeLink(2)">Predictive Analytics <i
+          class="bi bi-arrow-right"></i></a></p>
+        <p style="text-align: right;">
+          <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle05 = !showArticle05"><i
+            class="bi bi-arrow-90deg-up"></i> Close
+          </button>
+        </p>
+      </div>
+    </article><!-- Predictive Analytics -->
+
+  </div>
+
+  <div class="col-md-3 mb-5">
+
+    <!-- Logo -->
+    <p class="text-center"><img src="assets/python/logo.png" class="img-fluid mb-3" height="250" width="250"/></p>
+
+    <!-- Posts -->
+    <div class="p-4 mb-3 border rounded">
+      <h4 class="fst-italic"><i class="bi bi-stickies-fill"></i> Posts</h4>
+      <ol class="list-unstyled mb-0">
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/python#introduction"> Introduction</a>
+        </li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/python#flask"> Flask Web Server</a>
+        </li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/python#jupyter"> Jupyter Notebook</a>
+        </li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/python#visualization"> Data
+          Visualization</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/python#predictive"> Predictive
+          Analytics</a></li>
+      </ol>
+    </div>
+
+    <!-- Useful Links -->
+    <div class="p-4 mb-3 border rounded">
+      <h4 class="fst-italic"><i class="bi bi-link-45deg"></i> Useful Links</h4>
+      <ol class="list-unstyled mb-0">
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:5000/" target="_blank"> Flask Backend
+          Service</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="https://flask.palletsprojects.com/en/1.1.x/"
+                                                      target="_blank"> Flask Documentation</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="https://www.anaconda.com/" target="_blank"> Anaconda</a>
+        </li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="https://jupyter.org/" target="_blank"> Jupyter</a>
+        </li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/data-visualization"> Data
+          Visualization</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/predictive-analytics"> Predictive
+          Analytics</a></li>
+      </ol>
+    </div>
+
+  </div>
+
+</div>

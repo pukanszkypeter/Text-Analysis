@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {PythonPodcastService} from '../services/python-podcast.service';
 import {FormControl, Validators} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatSelectionList} from '@angular/material/list';
 
 
 @Component({
@@ -12,11 +14,14 @@ import {FormControl, Validators} from '@angular/forms';
 export class TextAnalysisComponent implements OnInit {
 
   joker: any; // -> DTO
-  categories: string[];
+  serverRT: number;
+  categories: string[] = [];
 
   // FULL CATEGORY PREDICTION - DATA
   fullOutput: string;
   fullSpinner: boolean;
+  fullSuccess = false;
+  fullError = false;
   fullFormControl = new FormControl('', [
     Validators.required
   ]);
@@ -26,10 +31,13 @@ export class TextAnalysisComponent implements OnInit {
   partialB = false;
   partialC = false;
   partialD = false;
+  partialE = false;
   trainOutput: string;
-  modelTrained = true;
+  modelTrained = false;
   partialOutput: string;
   partialSpinner: boolean;
+  partialSuccess = false;
+  partialError = false;
   partialFormControl = new FormControl('', [
     Validators.required
   ]);
@@ -37,12 +45,20 @@ export class TextAnalysisComponent implements OnInit {
   // SENTIMENT ANALYSIS - DATA
   sentimentOutput: string;
   sentimentSpinner: boolean;
+  sentimentSuccess = false;
+  sentimentError = false;
   sentimentFormControl = new FormControl('', [
     Validators.required
   ]);
 
+  // Aritcles
+  showArticle01 = false;
+  showArticle02 = false;
+  showArticle03 = false;
 
-  constructor(private pythonPodcastService: PythonPodcastService) {
+
+  // tslint:disable-next-line:variable-name
+  constructor(private pythonPodcastService: PythonPodcastService, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -50,18 +66,38 @@ export class TextAnalysisComponent implements OnInit {
     const link = document.getElementById('text-analysis');
     link.classList.add('active');
 
-    // Get podcast categories
-    this.pythonPodcastService.getCategoriesDistinct().subscribe(res => {
-      this.joker = res;
-      this.categories = this.joker.categories;
-    }, err => {
-      this.categories = ['Could not reach the API and load categories.'];
+    // Get Podcast Categories
+    this.pythonPodcastService.getCategories().subscribe(res => {
+      this.joker = res.categories;
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.joker.length; i++) {
+        this.categories.push(this.joker[i][1]);
+      }
     });
 
   }
 
+  // Active Link
+  activeLink(): void {
+    const current = document.getElementsByClassName('active');
+    current.item(0).classList.remove('active');
+    document.getElementById('home').classList.add('active');
+  }
+
+  // Snack Bar for Server Response Time
+  openSnackBar(): void {
+    this._snackBar.open('Server Respone Time: ' + this.serverRT.toFixed(2).toString() + ' sec', 'Close', {
+      duration: 5000,
+      horizontalPosition: 'end',
+      verticalPosition: 'bottom'
+    });
+  }
+
   // FULL CATEGORY PREDICTION - LOGIC
   fullCategoryPredict(input: HTMLInputElement): void {
+    const startTime = new Date().getTime() / 1000;
+    this.fullSuccess = false;
+    this.fullError = false;
     if (!this.fullFormControl.touched) {
       this.fullFormControl.markAllAsTouched();
     }
@@ -76,52 +112,55 @@ export class TextAnalysisComponent implements OnInit {
       this.pythonPodcastService.fullCategoryPredict(`{ "input": "${input.value}" }`).subscribe(res => {
         this.joker = res;
         this.fullOutput = this.joker.output;
+        this.fullSuccess = true;
         this.fullSpinner = false;
+        const endTime = new Date().getTime() / 1000;
+        this.serverRT = (endTime - startTime);
+        this.openSnackBar();
       }, err => {
+        this.fullError = true;
         this.fullSpinner = false;
-        this.fullOutput = 'error';
       });
     }
   }
 
-  // FULL CATEGORY PREDICTION - INFO
-  fullInfoPanel(): void {
-    // TODO
-    console.log('Coming soon...');
-  }
-
   // PARTIAL CATEGORY PREDICTION - TRAIN
-  trainModel(): void {
-    this.modelTrained = true;
+  trainModel(genres: MatSelectionList): void {
+    this.modelTrained = false;
+    this.partialE = false;
     if (this.partialA) { this.partialA = false; }
-    const length = document.getElementsByClassName('mat-checkbox-checked').length;
+    const length = genres.selectedOptions.selected.length;
     if (length < 2 ) {
       if (this.partialB) { this.partialB = false; }
       this.partialA = true;
     } else if (2 <= length  && length <= 5) {
+      const startTime = new Date().getTime() / 1000;
       this.partialD = true;
       this.partialA = false;
       this.partialB = false;
-      const elems = document.getElementsByClassName('mat-checkbox-checked');
-      let input = '{ "categories": [';
+      const elems = genres.selectedOptions.selected;
+      let input = '{ "categories": "';
       for (let i = 0; i < length; i++) {
-        const categoryId = elems.item(i).id.slice(13);
-        const id = Number(categoryId) - 1;
-        if (i === length - 1) {
-          input += `"${this.categories[id]}"`;
-        } else {
-          input += `"${this.categories[id]}", `;
-        }
+        input += `${elems[i]._text.nativeElement.innerText} `;
       }
-      input += '] }';
+      input += '" }';
       this.pythonPodcastService.trainModel(input).subscribe( res => {
         this.partialD = false;
         this.joker = res;
         this.trainOutput = this.joker.output;
         this.partialC = true;
-        this.modelTrained = false;
+        this.modelTrained = true;
+        const endTime = new Date().getTime() / 1000;
+        this.serverRT = (endTime - startTime);
+        this.openSnackBar();
+        genres.deselectAll();
       }, err => {
-        console.log(err);
+        this.partialD = false;
+        this.partialE = true;
+        const endTime = new Date().getTime() / 1000;
+        this.serverRT = (endTime - startTime);
+        this.openSnackBar();
+        genres.deselectAll();
       });
     } else {
       if (this.partialA) { this.partialA = false; }
@@ -131,6 +170,9 @@ export class TextAnalysisComponent implements OnInit {
 
   // PARTIAL CATEGORY PREDICTION - PREDICT
   partialCategoryPredict(input: HTMLInputElement): void {
+    const startTime = new Date().getTime() / 1000;
+    this.partialSuccess = false;
+    this.partialError = false;
     if (!this.partialFormControl.touched) {
       this.partialFormControl.markAllAsTouched();
     }
@@ -145,22 +187,23 @@ export class TextAnalysisComponent implements OnInit {
       this.pythonPodcastService.partialCategoryPredict(`{ "input": "${input.value}" }`).subscribe(res => {
         this.joker = res;
         this.partialOutput = this.joker.output;
+        this.partialSuccess = true;
         this.partialSpinner = false;
+        const endTime = new Date().getTime() / 1000;
+        this.serverRT = (endTime - startTime);
+        this.openSnackBar();
       }, err => {
         this.partialSpinner = false;
-        this.partialOutput = 'error';
+        this.partialError = true;
       });
     }
   }
 
-  // PARTIAL CATEGORY PREDICTION - INFO
-  partialInfoPanel(): void {
-    // TODO
-    console.log('Coming soon...');
-  }
-
   // SENTIMENT ANALYSIS
   sentimentAnalysis(input: HTMLInputElement): void {
+    const startTime = new Date().getTime() / 1000;
+    this.sentimentSuccess = false;
+    this.sentimentError = false;
     if (!this.sentimentFormControl.touched) {
       this.sentimentFormControl.markAllAsTouched();
     }
@@ -176,17 +219,15 @@ export class TextAnalysisComponent implements OnInit {
         this.joker = res;
         this.sentimentOutput = this.joker.output;
         this.sentimentSpinner = false;
+        this.sentimentSuccess = true;
+        const endTime = new Date().getTime() / 1000;
+        this.serverRT = (endTime - startTime);
+        this.openSnackBar();
       }, err => {
         this.sentimentSpinner = false;
-        this.sentimentOutput = 'error';
+        this.sentimentError = true;
       });
     }
-  }
-
-  // SENTIMENT ANALYSIS - INFO
-  sentimentInfoPanel(): void {
-    // TODO
-    console.log('Coming soon...');
   }
 
 }

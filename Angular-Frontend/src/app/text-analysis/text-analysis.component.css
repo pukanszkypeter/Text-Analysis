@@ -1,5 +1,66 @@
-/* COMMON STYLES */
+.chip {
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  color: white;
+}
 
+h1, h2, h3, h4, h5, h6, i {
+  font-family: 'Playfair Display', serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffdb4d;
+}
+
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #0d6efd!important;
+}
+
+::ng-deep .mat-form-field-underline {
+  background-color: black !important;
+}
+
+::ng-deep .mat-form-field-label {
+  color: black !important;
+}
+
+::ng-deep mat-hint {
+  color: black!important;
+}
+
+::ng-deep .mat-form-field-infix {
+  width: 400px!important;
+}
+
+mat-selection-list {
+  height: 300px;
+  overflow: auto;
+}
+
+::ng-deep .mat-list-option {
+  color: black!important;
+  text-align: center;
+  background-color: white;
+}
+
+::ng-deep .mat-list-option:hover {
+  background: rgb(245,245,245,0.8)!important;
+}
+
+::ng-deep .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-checked {
+  background-color: #0d6efd!important;
+}
+
+::ng-deep .mat-pseudo-checkbox {
+  border-color: black!important;
+}
+
+/*
 mat-list-item {
   margin: 20px 0px 20px 0px;
 }
@@ -66,8 +127,6 @@ mat-hint {
   float: right;
 }
 
-/* FULL CATEGORY PREDICTION STYLES */
-
 ul#fullCategories {
   height: 100px;
   font-size: 15px;
@@ -109,8 +168,6 @@ div#fullInfoPanel {
   width: 96%;
   margin-top: 200px;
 }
-
-/* PARTIAL CATEGORY PREDICTION STYLES */
 
 .mat-card#partialCard {
   height: 800px;
@@ -194,8 +251,6 @@ div#partialInfoPanel {
   margin-top: 95px;
 }
 
-/* SENTIMENT ANALYSIS STYLES */
-
 div#sentimentSpacer {
   position: absolute;
   margin-top: 20px;
@@ -207,3 +262,4 @@ div#sentimentInfoPanel {
   width: 96%;
   margin-top: 165px;
 }
+*/

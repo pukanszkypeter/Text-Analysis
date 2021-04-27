@@ -1,5 +1,7 @@
 <div class="container-fluid">
-  <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #1E90FF">
+
+  <!-- Navbar -->
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #0d6efd">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="/home" (click)="activeLink($event)"><img src="assets/main-logo.svg" alt="Main Logo" width="35" height="35"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,18 +17,16 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-            id="environments" (click)="activeLink($event)">
+               id="environments">
               Environments
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item dropdown-color" routerLink="/sap">SAP</a></li>
-              <li><a class="dropdown-item dropdown-color" routerLink="/python">Python</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item dropdown-color">Conclusion</a></li>
+              <li><a class="dropdown-item dropdown-color" routerLink="/sap" (click)="dropdownLink()">SAP</a></li>
+              <li><a class="dropdown-item dropdown-color" routerLink="/python" (click)="dropdownLink()">Python</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="text-analysis" routerLink="/text-analysis" (click)="activeLink($event)">Text Analysis</a>
+            <a class="nav-link" id="text-analysis" routerLink="/predictive-analytics" (click)="activeLink($event)">Predictive Analytics</a>
           </li>
         </ul>
         <div class="d-flex flex-row align-items-center">
@@ -37,13 +37,18 @@
       </div>
     </div>
   </nav>
+
+  <!-- SPA (Pages) -->
   <div class="container">
   <router-outlet></router-outlet>
   </div>
+
+  <!-- Footer -->
   <footer class="blog-footer">
     <p>Text Analysis Blog built for <a class="footer-link" target="_blank" href="https://www.inf.elte.hu/">ELTE-IK</a> bachelor's thesis by <a class="footer-link" target="_blank" href="https://github.com/pukanszkypeter/">@pukanszkypeter</a>.</p>
     <p>
-      <a class="footer-link" href="javascript:window.location.href=window.location.href">Back to top</a>
+      <a class="footer-link" href="javascript:window.location.href=window.location.href">Back to Top</a>
     </p>
   </footer>
+
 </div>

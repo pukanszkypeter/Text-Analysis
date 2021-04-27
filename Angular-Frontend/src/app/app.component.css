@@ -37,7 +37,7 @@ mat-slider {
 }
 
 ::ng-deep .mat-slider.mat-slider-horizontal {
-  min-width: 5vw;
+  min-width: 100px;
 }
 
 ::ng-deep .mat-slider-thumb {
@@ -68,5 +68,5 @@ mat-slider {
 }
 
 .footer-link {
-  color: #ffdb4d !important;
+  color: #0d6efd !important;
 }

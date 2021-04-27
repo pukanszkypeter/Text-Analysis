@@ -1,7 +1,8 @@
-namespace my.podcasts;
+namespace my.SAPBackend;
 
 entity categories {
-  key podcast_id : String not null;
+  key id : Integer;
+  podcast_id : String not null;
   category : String not null;
 }
 
@@ -14,7 +15,8 @@ entity podcasts {
 }
 
 entity reviews {
-  key podcast_id : String not null;
+  key id : Integer not null;
+  podcast_id : String not null;
   title : String not null;
   content : String not null;
   rating : Integer not null;
@@ -27,7 +29,7 @@ entity runs {
   reviews_added : Integer not null;
 }
 
-entity ext_core_voc {
+entity extraction_core_voc {
 	key id : Integer not null;
 	ta_rule : String not null;
 	ta_counter : Integer not null;
@@ -44,16 +46,16 @@ entity ext_core_voc {
 	ta_parent : Integer;
 }
 
-entity ext_core_voc_data {
+entity extraction_core_voc_data {
 	key ta_token : String;
 	ta_type : String not null;
 }
 
-entity ext_core_voc_types {
+entity extraction_core_voc_types {
 	key ta_type : String;
 }
 
-entity ling_full {
+entity linguistic_full {
 	key id : Integer not null;
 	ta_rule : String not null;
 	ta_counter : Integer not null;
@@ -70,21 +72,21 @@ entity ling_full {
 	ta_parent : Integer;
 }
 
-entity ling_full_data {
-	key ta_stem : String not null;
-	ta_normalized : String not null;
+entity linguistic_full_data {
+	ta_stem : String not null;
+	key ta_normalized : String not null;
 	ta_type : String not null;
 }
 
-entity ling_full_types {
+entity linguistic_full_types {
 	key ta_type : String;
 }
 
-entity pos_words {
+entity positive_words {
 	key word : String;
 }
 
-entity neg_words {
+entity negative_words {
 	key word : String;
 }
 
