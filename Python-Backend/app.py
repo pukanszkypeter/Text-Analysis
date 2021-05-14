@@ -1,6 +1,5 @@
 # Webserver
 from flask import Flask, jsonify, request
-import json
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 # Database
