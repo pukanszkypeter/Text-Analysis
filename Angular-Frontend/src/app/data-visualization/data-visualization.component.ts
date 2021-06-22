@@ -14,6 +14,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
+export class ChartObject {
+  name: string;
+  value: number;
+}
 
 @Component({
   selector: 'app-data-visualization',
@@ -86,6 +90,15 @@ export class DataVisualizationComponent implements OnInit {
   bestCategories = [];
   showBestCategories = false;
 
+  pieChartData: any[];
+  pieChartDataFetched = false;
+  verticalChartData: any[];
+  verticalChartDataFetched = false;
+  lineChartData: any[];
+  lineChartDataFetched = false;
+  horizontalChartData: any[];
+  horizontalChartDataFetched = false;
+
   // Word Clouds
   positiveCloud = false;
   negativeCloud = false;
@@ -99,7 +112,7 @@ export class DataVisualizationComponent implements OnInit {
   showArticle04 = false;
 
   // tslint:disable-next-line:variable-name max-line-length
-  constructor(private pythonPodcastService: PythonPodcastService, private sapPodcastService: SapPodcastService, private _formBuilder: FormBuilder, private _snackBar: MatSnackBar) { }
+  constructor(private pythonPodcastService: PythonPodcastService, private sapPodcastService: SapPodcastService, private _formBuilder: FormBuilder, private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
 
@@ -300,10 +313,16 @@ export class DataVisualizationComponent implements OnInit {
     this.showSumCategories = true; this.showSumRatings = false; this.showAvgRatingsPerYear = false; this.showBestCategories = false;
     this.sumCategories = [];
     this.pythonPodcastService.getSumCategories().subscribe(res => {
+      this.pieChartData = [];
       // tslint:disable-next-line:prefer-for-of
       for ( let i = 0; i < res.statistics.length; i++ ) {
         this.sumCategories.push(res.statistics[i]);
+        const pie = new ChartObject();
+        pie.name = res.statistics[i][0];
+        pie.value = res.statistics[i][1];
+        this.pieChartData.push(pie);
       }
+      this.pieChartDataFetched = true;
       this.statisticsLoading = false;
       const endTime = new Date().getTime() / 1000;
       this.serverRT = (endTime - startTime);
@@ -317,10 +336,16 @@ export class DataVisualizationComponent implements OnInit {
     this.showSumCategories = false; this.showSumRatings = true; this.showAvgRatingsPerYear = false; this.showBestCategories = false;
     this.sumRatings = [];
     this.pythonPodcastService.getSumRatings().subscribe(res => {
+      this.verticalChartData = [];
       // tslint:disable-next-line:prefer-for-of
       for ( let i = 0; i < res.statistics.length; i++ ) {
         this.sumRatings.push(res.statistics[i]);
+        const pie = new ChartObject();
+        pie.name = res.statistics[i][0];
+        pie.value = res.statistics[i][1];
+        this.verticalChartData.push(pie);
       }
+      this.verticalChartDataFetched = true;
       this.statisticsLoading = false;
       const endTime = new Date().getTime() / 1000;
       this.serverRT = (endTime - startTime);
@@ -333,11 +358,18 @@ export class DataVisualizationComponent implements OnInit {
     this.statisticsLoading = true;
     this.showSumCategories = false; this.showSumRatings = false; this.showAvgRatingsPerYear = true; this.showBestCategories = false;
     this.avgRatingsPerYear = [];
+    this.lineChartData = [];
+    this.lineChartData = [{name: 'Average rating', series: []}];
     this.pythonPodcastService.getRatingsPerYear().subscribe(res => {
       // tslint:disable-next-line:prefer-for-of
       for ( let i = 0; i < res.statistics.length; i++ ) {
         this.avgRatingsPerYear.push(res.statistics[i]);
+        const pie = new ChartObject();
+        pie.name = res.statistics[i][0];
+        pie.value = res.statistics[i][1];
+        this.lineChartData[0].series.push(pie);
       }
+      this.lineChartDataFetched = true;
       this.statisticsLoading = false;
       const endTime = new Date().getTime() / 1000;
       this.serverRT = (endTime - startTime);
@@ -350,11 +382,17 @@ export class DataVisualizationComponent implements OnInit {
     this.statisticsLoading = true;
     this.showSumCategories = false; this.showSumRatings = false; this.showAvgRatingsPerYear = false; this.showBestCategories = true;
     this.bestCategories = [];
+    this.horizontalChartData = [];
     this.pythonPodcastService.getBestCategories().subscribe(res => {
       // tslint:disable-next-line:prefer-for-of
       for ( let i = 0; i < res.statistics.length; i++ ) {
         this.bestCategories.push(res.statistics[i]);
+        const pie = new ChartObject();
+        pie.name = res.statistics[i][0];
+        pie.value = res.statistics[i][1];
+        this.horizontalChartData.push(pie);
       }
+      this.horizontalChartDataFetched = true;
       this.statisticsLoading = false;
       const endTime = new Date().getTime() / 1000;
       this.serverRT = (endTime - startTime);

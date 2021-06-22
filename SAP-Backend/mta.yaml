@@ -1,5 +1,6 @@
 ID: SAP_Backend
 _schema-version: "2.1"
+description: SAP Backend for Text Analysis Project
 version: 0.0.1
 modules:
   - name: SAP_Backend-db
@@ -7,7 +8,7 @@ modules:
     path: db
     parameters:
       memory: 256M
-      disk-quota: 256M
+      disk-quota: 512M
     requires:
       - name: SAP_Backend-db-hdi-container
   - name: SAP_Backend-srv
@@ -15,7 +16,7 @@ modules:
     path: srv
     parameters:
       memory: 512M
-      disk-quota: 256M
+      disk-quota: 512M
     provides:
       - name: srv_api
         properties:

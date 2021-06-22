@@ -32,6 +32,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatSelectModule,
     MatStepperModule,
     MatSliderModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,3 +6,6 @@
 
 # Jupyter Checkpoints
 .ipynb_checkpoints/
+
+# Pycache Files
+*.pyc

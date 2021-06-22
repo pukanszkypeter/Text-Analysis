@@ -3,13 +3,12 @@
     "description": "Generated from ../package.json, do not change!",
     "version": "1.0.0",
     "dependencies": {
-        "@sap/cds": "^3.18.1",
+        "@sap/cds": "^4.5.1",
         "express": "^4.17.1",
-        "hdb": "^0.18.3"
+        "@sap/hana-client": "^2.7.21"
     },
     "engines": {
-        "node": "^8.9",
-        "npm": "^6"
+        "node": "^10 || ^12"
     },
     "devDependencies": {},
     "scripts": {

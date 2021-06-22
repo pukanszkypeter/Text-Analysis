@@ -38,7 +38,9 @@
       </p>
       <div *ngIf="showArticle01">
         <p></p>
-        <p>In this section, I would like to present the <span class="chip" style="background-color: crimson">source data</span>, which I will use later for text analysis.
+        <p>In this section, I would like to present the <span class="chip"
+                                                              style="background-color: crimson">source data</span>,
+          which I will use later for text analysis.
           The data set consists of 4 tables, which can be viewed in more detail below.
           The public data set is also available at the following link:
           <a href="https://www.kaggle.com/thoughtvector/podcastreviews" target="_blank">Podcast Reviews</a>.</p>
@@ -98,7 +100,8 @@
 
                   <ng-container matColumnDef="podcastId">
                     <th mat-header-cell *matHeaderCellDef style="width: 10%;"> Podcast ID</th>
-                    <td mat-cell *matCellDef="let element" style="width: 10%;"> {{element.podcastId | slice:0:5 }}... </td>
+                    <td mat-cell *matCellDef="let element" style="width: 10%;"> {{element.podcastId | slice:0:5 }}...
+                    </td>
                   </ng-container>
                   <tr mat-header-row *matHeaderRowDef="podcastsColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: podcastsColumns;"></tr>
@@ -113,7 +116,8 @@
                        style="width: 100%">
                   <ng-container matColumnDef="podcastId">
                     <th mat-header-cell *matHeaderCellDef style="width: 15%;"> Podcast ID</th>
-                    <td mat-cell *matCellDef="let element" style="width: 15%;"> {{element.podcastId | slice:0:5}}... </td>
+                    <td mat-cell *matCellDef="let element" style="width: 15%;"> {{element.podcastId | slice:0:5}}...
+                    </td>
                   </ng-container>
                   <ng-container matColumnDef="title">
                     <th mat-header-cell *matHeaderCellDef style="width: 40%;"> Title</th>
@@ -321,21 +325,37 @@
     <article class="blog-post mb-4"><!-- Blog-Post -->
       <h2 class="blog-post-title" id="statistics">Statistics</h2>
       <p class="blog-post-meta"><i class="bi bi-calendar"></i> April 05, 2021</p>
-      <p *ngIf="!showArticle03">Statistics is the discipline that concerns the collection, organization, analysis, interpretation, and presentation of data.</p>
+      <p *ngIf="!showArticle03">Statistics is the discipline that concerns the collection, organization, analysis,
+        interpretation, and presentation of data.</p>
       <p *ngIf="!showArticle03">
         <button type="button" class="btn btn-outline-dark btn-sm" (click)="showArticle03 = !showArticle03"><i
           class="bi bi-arrow-90deg-down"></i> Continue reading
         </button>
       </p>
       <div *ngIf="showArticle03">
-        <p>Statistics is the discipline that concerns the collection, organization, analysis, interpretation, and <span class="chip" style="background-color: blueviolet">presentation of data</span>.
-          In applying statistics to a scientific, industrial, or social problem, it is conventional to begin with a statistical population or a statistical model to be studied.
-          For the sake of simplicity, I have now only brought tables which you can access by clicking on the links below.</p>
+        <p>Statistics is the discipline that concerns the collection, organization, analysis, interpretation, and <span
+          class="chip" style="background-color: blueviolet">presentation of data</span>.
+          In applying statistics to a scientific, industrial, or social problem, it is conventional to begin with a
+          statistical population or a statistical model to be studied.
+          For the sake of simplicity, I have now only brought tables which you can access by clicking on the links
+          below.</p>
         <ul>
-          <li>The most common and least common categories. <button type="button" class="btn btn-primary btn-sm" (click)="loadSumCategories()"><i class="bi bi-download"></i></button></li>
-          <li>Distribution of different star ratings. <button type="button" class="btn btn-primary btn-sm" (click)="loadSumRatings()"><i class="bi bi-download"></i></button></li>
-          <li>Annual average ratings. <button type="button" class="btn btn-primary btn-sm" (click)="loadAvgRatingsPerYear()"><i class="bi bi-download"></i></button></li>
-          <li>Average ratings for each category in descending order. <button type="button" class="btn btn-primary btn-sm" (click)="loadBestCategories()"><i class="bi bi-download"></i></button></li>
+          <li>The most common and least common categories.
+            <button type="button" class="btn btn-primary btn-sm" (click)="loadSumCategories()"><i
+              class="bi bi-download"></i></button>
+          </li>
+          <li>Distribution of different star ratings.
+            <button type="button" class="btn btn-primary btn-sm" (click)="loadSumRatings()"><i
+              class="bi bi-download"></i></button>
+          </li>
+          <li>Annual average ratings.
+            <button type="button" class="btn btn-primary btn-sm" (click)="loadAvgRatingsPerYear()"><i
+              class="bi bi-download"></i></button>
+          </li>
+          <li>Average ratings for each category in descending order.
+            <button type="button" class="btn btn-primary btn-sm" (click)="loadBestCategories()"><i
+              class="bi bi-download"></i></button>
+          </li>
         </ul>
         <h4>Table</h4>
         <p></p>
@@ -357,6 +377,16 @@
               </tbody>
             </table>
           </div>
+          <div class="d-flex justify-content-center" *ngIf="pieChartDataFetched">
+            <ngx-charts-pie-chart
+              [view]="[700, 500]"
+              [results]="pieChartData"
+              [gradient]="true"
+              [labels]="true"
+              [maxLabelLength]="30"
+            >
+            </ngx-charts-pie-chart>
+          </div>
         </div>
         <div *ngIf="showSumRatings" class="mb-2">
           <div class="table-container mb-3">
@@ -374,6 +404,20 @@
               </tr>
               </tbody>
             </table>
+          </div>
+          <div class="d-flex justify-content-center" *ngIf="verticalChartDataFetched">
+            <ngx-charts-bar-vertical
+              [view]="[500, 300]"
+              [results]="verticalChartData"
+              [gradient]="true"
+              [xAxis]="true"
+              [yAxis]="true"
+              [showXAxisLabel]="true"
+              [showYAxisLabel]="true"
+              [xAxisLabel]="'Ratings by stars'"
+              [yAxisLabel]="'Number of ratings'"
+            >
+            </ngx-charts-bar-vertical>
           </div>
         </div>
         <div *ngIf="showAvgRatingsPerYear" class="mb-2">
@@ -393,6 +437,21 @@
               </tbody>
             </table>
           </div>
+          <div class="d-flex justify-content-center" *ngIf="lineChartDataFetched">
+            <ngx-charts-line-chart
+              [view]="[1000, 400]"
+              [results]="lineChartData"
+              [xAxis]="true"
+              [yAxis]="true"
+              [showXAxisLabel]="true"
+              [showYAxisLabel]="true"
+              [xAxisLabel]="'Years'"
+              [yAxisLabel]="'Average'"
+              [yScaleMax]="5"
+              [yScaleMin]="4"
+            >
+            </ngx-charts-line-chart>
+          </div>
         </div>
         <div *ngIf="showBestCategories" class="mb-2">
           <div class="table-container mb-3">
@@ -400,7 +459,8 @@
               <thead>
               <tr>
                 <th scope="col" class="text-center" style="width: 33.3%">Category</th>
-                <th scope="col" class="text-center" style="width: 33.3%">Average Rating <i class="bi bi-arrow-down"></i></th>
+                <th scope="col" class="text-center" style="width: 33.3%">Average Rating <i class="bi bi-arrow-down"></i>
+                </th>
                 <th scope="col" class="text-center" style="width: 33.3%">Sum</th>
               </tr>
               </thead>
@@ -412,6 +472,22 @@
               </tr>
               </tbody>
             </table>
+          </div>
+          <div class="d-flex justify-content-center" *ngIf="horizontalChartDataFetched">
+            <ngx-charts-bar-horizontal
+              [view]="[600, 800]"
+              [results]="horizontalChartData"
+              [xAxis]="true"
+              [yAxis]="true"
+              [showXAxisLabel]="true"
+              [showYAxisLabel]="true"
+              [xAxisLabel]="'Average Rating'"
+              [yAxisLabel]="'Podcast Category'"
+              [showDataLabel]="true"
+              [xScaleMax]="5"
+              [xScaleMin]="4"
+            >
+            </ngx-charts-bar-horizontal>
           </div>
         </div>
         <p style="text-align: right;">
@@ -435,10 +511,13 @@
       </p>
       <div *ngIf="showArticle04">
         <p></p>
-        <p>Word clouds are an excellent form of <span class="chip" style="background-color: brown">visualizing text data</span>.
+        <p>Word clouds are an excellent form of <span class="chip"
+                                                      style="background-color: brown">visualizing text data</span>.
           They can identify the most used words within a document.
-          I used it in this case for sentiment analysis and text mining, where I took measurements on a two-dimensional scale, more
-          specifically <strong>positive and negative</strong> feelings and most <strong>common and rarest</strong> words.
+          I used it in this case for sentiment analysis and text mining, where I took measurements on a two-dimensional
+          scale, more
+          specifically <strong>positive and negative</strong> feelings and most <strong>common and rarest</strong>
+          words.
           I did the calculations in a Jupyter Notebook, based on the following link: <a
             href="https://towardsdatascience.com/simple-wordcloud-in-python-2ae54a9f58e5" target="_blank">Simple Word
             Cloud in Python</a>,
@@ -495,10 +574,14 @@
     <div class="p-4 mb-3 border rounded">
       <h4 class="fst-italic"><i class="bi bi-stickies-fill"></i> Posts</h4>
       <ol class="list-unstyled mb-0">
-        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/data-visualization#sourceData"> Source Data</a></li>
-        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/data-visualization#podcasts"> Podcasts</a></li>
-        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/data-visualization#statistics"> Statistics</a></li>
-        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/data-visualization#wordClouds"> Word Clouds</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/data-visualization#sourceData"> Source
+          Data</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/data-visualization#podcasts">
+          Podcasts</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/data-visualization#statistics">
+          Statistics</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/data-visualization#wordClouds"> Word
+          Clouds</a></li>
       </ol>
     </div>
 
@@ -506,10 +589,15 @@
     <div class="p-4 mb-3 border rounded">
       <h4 class="fst-italic"><i class="bi bi-link-45deg"></i> Useful Links</h4>
       <ol class="list-unstyled mb-0">
-        <li><i class="bi bi-arrow-right-short"></i><a href="https://oktnb132.inf.elte.hu:51026/" target="_blank"> SAP Backend Service</a></li>
-        <li><i class="bi bi-arrow-right-short"></i><a href="https://www.kaggle.com/thoughtvector/podcastreviews" target="_blank"> Kaggle - Data Set</a></li>
-        <li><i class="bi bi-arrow-right-short"></i><a href="https://towardsdatascience.com/simple-wordcloud-in-python-2ae54a9f58e5" target="_blank"> Simple Word Cloud in Python</a></li>
-        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/predictive-analytics"> Predictive Analytics</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="https://oktnb132.inf.elte.hu:51026/" target="_blank"> SAP
+          Backend Service</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="https://www.kaggle.com/thoughtvector/podcastreviews"
+                                                      target="_blank"> Kaggle - Data Set</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a
+          href="https://towardsdatascience.com/simple-wordcloud-in-python-2ae54a9f58e5" target="_blank"> Simple Word
+          Cloud in Python</a></li>
+        <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/predictive-analytics"> Predictive
+          Analytics</a></li>
         <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/sap"> SAP - Environment</a></li>
         <li><i class="bi bi-arrow-right-short"></i><a href="http://localhost:4200/python"> Python - Environment</a></li>
       </ol>
